@@ -9,10 +9,9 @@ import com.example.apexdiceroll.data.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class ViewModel(application: Application) : AndroidViewModel(application) {
-    private val _uiState = MutableStateFlow(UiState())
-
     private fun getAllLegends(): List<Legend> {
         return listOf(
             Legend("Bloodhound", R.drawable.bloodhound, LegendClass.Recon),
@@ -43,6 +42,33 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         )
     }
 
+    private fun randomiseLegendLoadout() : List<Legend> {
+        val availableLegendIndices = legendRoster.toList()
+        val legendLoadout = mutableListOf<Legend>()
+
+        for (priority in 0..2) {
+            val generatedLegend = availableLegendIndices.random()
+            legendLoadout.add(generatedLegend)
+        }
+
+        return legendLoadout.toList()
+    }
+
+    private fun fetchLegendLoadout() : List<Legend> {
+        return randomiseLegendLoadout()
+    }
+
+    private val _uiState = MutableStateFlow(UiState(fetchLegendLoadout()))
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
     val legendRoster: List<Legend> = getAllLegends()
+
+    fun RollDice() {
+        val generatedLegends = randomiseLegendLoadout()
+
+        _uiState.update { currentState ->
+            currentState.copy(
+                generatedLegends = generatedLegends
+            )
+        }
+    }
 }
