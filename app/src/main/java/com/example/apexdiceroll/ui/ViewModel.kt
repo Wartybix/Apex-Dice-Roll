@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.asStateFlow
 class ViewModel(application: Application) : AndroidViewModel(application) {
     private val _uiState = MutableStateFlow(UiState())
 
-    private fun getLegendRoster(): List<Legend> {
+    private fun getAllLegends(): List<Legend> {
         return listOf(
             Legend("Bloodhound", R.drawable.bloodhound, LegendClass.Recon),
             Legend("Gibraltar", R.drawable.gibraltar, LegendClass.Support),
@@ -44,5 +44,5 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
-    val legendRoster: List<Legend> = getLegendRoster()
+    val legendRoster: List<Legend> = getAllLegends()
 }
