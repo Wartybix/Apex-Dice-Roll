@@ -1,21 +1,14 @@
 package com.example.apexdiceroll.ui
 
-import android.renderscript.Long3
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.snapshots.SnapshotStateList
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.LegendClass
-import androidx.compose.foundation.lazy.items
 
 @Composable
 fun LegendCarousel(
