@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Apex Dice Roll</string>
+    <string name="priority_no">Priority %1$s</string>
 </resources>
