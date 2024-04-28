@@ -58,7 +58,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         return randomiseLegendLoadout()
     }
 
-    private val _uiState = MutableStateFlow(UiState(fetchLegendLoadout()))
+    private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
     val legendRoster: List<Legend> = getAllLegends()
 
