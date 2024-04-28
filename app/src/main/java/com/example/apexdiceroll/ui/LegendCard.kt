@@ -12,10 +12,12 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.imageResource
@@ -33,7 +35,15 @@ fun LegendCard(
     @DrawableRes classIcon: Int,
     @DrawableRes legendIcon: Int
 ) {
-    Card {
+    val cardColour = if (priorityNo == 1)
+        MaterialTheme.colorScheme.surfaceVariant
+    else
+        MaterialTheme.colorScheme.surface
+
+    Surface(
+        shape = CardDefaults.shape,
+        color = cardColour
+    ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -72,11 +82,22 @@ fun LegendCard(
 
 @Preview
 @Composable
-fun LegendCardPreview() {
+fun PriorityLegendCardPreview() {
     LegendCard(
         priorityNo = 1,
         legendName = "Valkyrie",
         legendIcon = R.drawable.valk,
+        classIcon = R.drawable.class_skirmisher
+    )
+}
+
+@Preview
+@Composable
+fun SecondaryLegendCardPreview() {
+    LegendCard(
+        priorityNo = 2,
+        legendName = "Mad Maggie",
+        legendIcon = R.drawable.mad_maggie,
         classIcon = R.drawable.class_skirmisher
     )
 }
