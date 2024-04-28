@@ -93,6 +93,6 @@ fun SecondaryLegendCardPreview() {
         priorityNo = 2,
         legendName = "Mad Maggie",
         legendIcon = R.drawable.mad_maggie,
-        classIcon = R.drawable.class_skirmisher
+        classIcon = R.drawable.class_assault
     )
 }
