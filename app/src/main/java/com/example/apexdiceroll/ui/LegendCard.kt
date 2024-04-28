@@ -28,7 +28,8 @@ fun LegendCard(
     priorityNo: Int,
     legendName: String,
     @DrawableRes classIcon: Int,
-    @DrawableRes legendIcon: Int
+    @DrawableRes legendIcon: Int,
+    modifier: Modifier = Modifier
 ) {
     val cardColour = if (priorityNo == 1)
         MaterialTheme.colorScheme.surfaceVariant
@@ -37,7 +38,8 @@ fun LegendCard(
 
     Surface(
         shape = CardDefaults.shape,
-        color = cardColour
+        color = cardColour,
+        modifier = modifier
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
