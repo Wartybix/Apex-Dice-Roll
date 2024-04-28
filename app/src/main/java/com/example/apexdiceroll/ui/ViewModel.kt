@@ -43,12 +43,13 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun randomiseLegendLoadout() : List<Legend> {
-        val availableLegendIndices = legendRoster.toList()
+        val availableLegends = legendRoster.toMutableList()
         val legendLoadout = mutableListOf<Legend>()
 
         for (priority in 0..2) {
-            val generatedLegend = availableLegendIndices.random()
+            val generatedLegend = availableLegends.random()
             legendLoadout.add(generatedLegend)
+            availableLegends.remove(generatedLegend)
         }
 
         return legendLoadout.toList()
