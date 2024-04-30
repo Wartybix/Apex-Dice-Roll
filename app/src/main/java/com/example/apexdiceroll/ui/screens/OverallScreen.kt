@@ -1,13 +1,13 @@
 package com.example.apexdiceroll.ui.screens
 
-import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.apexdiceroll.data.Screen
 import com.example.apexdiceroll.ui.ViewModel
 import com.example.apexdiceroll.ui.components.NavBar
+import com.example.apexdiceroll.ui.components.TopAppBar
 
 @Composable
 fun OverallScreen(
@@ -15,24 +15,29 @@ fun OverallScreen(
 ) {
     val uiState = viewModel.uiState.collectAsState().value
 
-    Column {
-        when (uiState.currentScreen) {
-            Screen.DiceRoll -> {
-                DiceRollScreen(
-                    generatedLegends = uiState.generatedLegends,
-                    modifier = Modifier.weight(1f),
-                    onReroll = { viewModel.rollDice() },
-                    selectedGameMode = uiState.selectedGameMode,
-                    onGameModeSwitch = { viewModel.switchGameMode(it) }
-                )
+    Scaffold(
+        topBar = { TopAppBar() },
+        content = { it ->
+            when (uiState.currentScreen) {
+                Screen.DiceRoll -> {
+                    DiceRollScreen(
+                        generatedLegends = uiState.generatedLegends,
+                        onReroll = { viewModel.rollDice() },
+                        selectedGameMode = uiState.selectedGameMode,
+                        onGameModeSwitch = { viewModel.switchGameMode(it) },
+                        paddingValues = it
+                    )
+                }
+
+                Screen.LegendRoster -> { /*TODO*/ }
+
+                Screen.WinHistory -> { /*TODO*/ }
             }
-
-            Screen.LegendRoster -> { /*TODO*/ }
-            Screen.WinHistory -> { /*TODO*/ }
+        },
+        bottomBar = {
+            NavBar(screen = uiState.currentScreen, onClick = { newScreen ->
+                viewModel.switchScreen(newScreen)
+            })
         }
-
-        NavBar(screen = uiState.currentScreen, onClick = { newScreen ->
-            viewModel.switchScreen(newScreen)
-        })
-    }
+    )
 }
