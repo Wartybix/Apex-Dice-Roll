@@ -26,7 +26,7 @@ fun GameModeSwitcher(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Game Mode", style = MaterialTheme.typography.titleSmall)
+        Text(text = "Game Mode", style = MaterialTheme.typography.titleMedium)
         val gameModes = GameMode.entries
 
         SingleChoiceSegmentedButtonRow(

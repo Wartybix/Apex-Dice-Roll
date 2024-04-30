@@ -30,10 +30,11 @@ fun DiceRollScreen(
     modifier: Modifier = Modifier
 ) {
     val horizontalPadding = 24.dp
+    val verticalPadding = 32.dp
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
+        modifier = modifier.padding(vertical = verticalPadding)
     ) {
         GameModeSwitcher(
             selectedGameMode = selectedGameMode,
