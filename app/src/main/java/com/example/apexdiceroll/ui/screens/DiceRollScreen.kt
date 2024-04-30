@@ -2,10 +2,8 @@ package com.example.apexdiceroll.ui.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.LegendClass
