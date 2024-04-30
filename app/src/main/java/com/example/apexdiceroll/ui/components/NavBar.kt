@@ -13,6 +13,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.apexdiceroll.R
@@ -22,45 +23,53 @@ import com.example.apexdiceroll.ui.theme.ApexDiceRollTheme
 @Composable
 fun NavBar(
     screen: Screen,
+    onClick: (Screen) -> Unit,
     modifier: Modifier = Modifier
 ) {
     NavigationBar(
         modifier = modifier
     ) {
-        NavigationBarItem(
-            selected = screen == Screen.DiceRoll,
-            onClick = { /*TODO*/ },
-            icon = {
-                if (screen == Screen.DiceRoll)
-                    Icon(imageVector = Icons.Filled.Casino, contentDescription = null)
-                else
-                    Icon(imageVector = Icons.Outlined.Casino, contentDescription = null)
-            },
-            label = { Text(stringResource(R.string.dice_roll)) }
+
+        @Composable
+        fun ApexDiceRollItem(
+            destinationScreen: Screen,
+            filledIcon: ImageVector,
+            outlinedIcon: ImageVector,
+            label: String
+        ) {
+            var isSelected = screen == destinationScreen
+            var iconImageVector = if (isSelected)
+                filledIcon
+            else
+                outlinedIcon
+
+            NavigationBarItem(
+                selected = isSelected,
+                onClick = { onClick(destinationScreen) },
+                icon = { Icon(imageVector = iconImageVector, contentDescription = null) },
+                label = { Text(label) }
+            )
+        }
+        
+        ApexDiceRollItem(
+            destinationScreen = Screen.DiceRoll,
+            filledIcon = Icons.Filled.Casino,
+            outlinedIcon = Icons.Outlined.Casino,
+            label = stringResource(R.string.dice_roll)
         )
 
-        NavigationBarItem(
-            selected = screen == Screen.LegendRoster,
-            onClick = { /*TODO*/ },
-            icon = {
-                if (screen == Screen.LegendRoster)
-                    Icon(imageVector = Icons.Filled.People, contentDescription = null)
-                else
-                    Icon(imageVector = Icons.Outlined.People, contentDescription = null)
-            },
-            label = { Text(stringResource(R.string.legend_roster)) }
+        ApexDiceRollItem(
+            destinationScreen = Screen.LegendRoster,
+            filledIcon = Icons.Filled.People,
+            outlinedIcon = Icons.Outlined.People,
+            label = stringResource(R.string.legend_roster)
         )
 
-        NavigationBarItem(
-            selected = screen == Screen.WinHistory,
-            onClick = { /*TODO*/ },
-            icon = {
-                if (screen == Screen.LegendRoster)
-                    Icon(imageVector = Icons.Filled.History, contentDescription = null)
-                else
-                    Icon(imageVector = Icons.Outlined.History, contentDescription = null)
-            },
-            label = { Text(stringResource(R.string.win_history)) }
+        ApexDiceRollItem(
+            destinationScreen = Screen.WinHistory,
+            filledIcon = Icons.Filled.History,
+            outlinedIcon = Icons.Outlined.History,
+            label = stringResource(R.string.win_history)
         )
     }
 }
@@ -69,7 +78,7 @@ fun NavBar(
 @Composable
 fun NavBarPreviewDiceRoll() {
     ApexDiceRollTheme {
-        NavBar(screen = Screen.DiceRoll)
+        NavBar(screen = Screen.DiceRoll, onClick = {})
     }
 }
 
@@ -77,6 +86,6 @@ fun NavBarPreviewDiceRoll() {
 @Composable
 fun NavBarPreviewRoster() {
     ApexDiceRollTheme {
-        NavBar(screen = Screen.LegendRoster)
+        NavBar(screen = Screen.LegendRoster, onClick = {})
     }
 }
