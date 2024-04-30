@@ -67,7 +67,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         fetchLegendLoadout()
     }
 
-    fun RollDice() {
+    fun rollDice() {
         val generatedLegends = randomiseLegendLoadout()
 
         _uiState.update { currentState ->

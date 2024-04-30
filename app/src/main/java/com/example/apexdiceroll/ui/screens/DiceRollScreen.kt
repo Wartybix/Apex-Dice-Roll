@@ -17,7 +17,7 @@ fun MainScreen(
     Column {
         LegendCarousel(legendLoadout = uiState.generatedLegends)
         RerollButton {
-            viewModel.RollDice()
+            viewModel.rollDice()
         }
     }
 
