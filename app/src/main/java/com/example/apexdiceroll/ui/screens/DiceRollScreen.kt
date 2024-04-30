@@ -35,7 +35,7 @@ fun DiceRollScreen(
     paddingValues: PaddingValues = PaddingValues()
 ) {
     val horizontalPadding = 24.dp
-    val verticalPadding = 32.dp
+    val verticalPadding = 16.dp
 
     val startPadding = horizontalPadding + paddingValues.calculateStartPadding(LayoutDirection.Ltr)
     val topPadding = verticalPadding + paddingValues.calculateTopPadding()

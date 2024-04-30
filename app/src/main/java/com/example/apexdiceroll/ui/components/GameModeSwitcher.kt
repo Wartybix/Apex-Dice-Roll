@@ -1,7 +1,9 @@
 package com.example.apexdiceroll.ui.components
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SegmentedButton
@@ -13,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.apexdiceroll.data.GameMode
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -27,6 +30,9 @@ fun GameModeSwitcher(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Game Mode", style = MaterialTheme.typography.titleMedium)
+
+        Spacer(Modifier.size(8.dp))
+
         val gameModes = GameMode.entries
 
         SingleChoiceSegmentedButtonRow(
