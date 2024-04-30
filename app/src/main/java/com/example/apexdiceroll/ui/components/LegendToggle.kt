@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -17,6 +18,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.apexdiceroll.data.LegendClass
+import com.example.apexdiceroll.ui.theme.ApexDiceRollTheme
 
 @Composable
 fun LegendToggle(
@@ -51,5 +53,15 @@ fun LegendToggle(
 @Preview
 @Composable
 fun LegendTogglePreview() {
-    LegendToggle(legendName = "Bangalore", legendClass = LegendClass.Assault, wins = 9, selected = true, onToggle = {})
+    ApexDiceRollTheme {
+        Surface {
+            LegendToggle(
+                legendName = "Bangalore",
+                legendClass = LegendClass.Assault,
+                wins = 9,
+                selected = true,
+                onToggle = {}
+            )
+        }
+    }
 }
