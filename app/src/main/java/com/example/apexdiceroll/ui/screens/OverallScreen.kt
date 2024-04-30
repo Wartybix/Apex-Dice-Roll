@@ -1,7 +1,6 @@
 package com.example.apexdiceroll.ui.screens
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -17,12 +16,21 @@ fun OverallScreen(
     val uiState = viewModel.uiState.collectAsState().value
 
     Column {
-        DiceRollScreen(
-            generatedLegends = uiState.generatedLegends,
-            modifier = Modifier.weight(1f),
-            onReroll = {}
-        )
+        when (uiState.currentScreen) {
+            Screen.DiceRoll -> {
+                DiceRollScreen(
+                    generatedLegends = uiState.generatedLegends,
+                    modifier = Modifier.weight(1f),
+                    onReroll = {}
+                )
+            }
 
-        NavBar(screen = Screen.DiceRoll, onClick = {})
+            Screen.LegendRoster -> { /*TODO*/ }
+            Screen.WinHistory -> { /*TODO*/ }
+        }
+
+        NavBar(screen = uiState.currentScreen, onClick = { newScreen ->
+            viewModel.switchScreen(newScreen)
+        })
     }
 }

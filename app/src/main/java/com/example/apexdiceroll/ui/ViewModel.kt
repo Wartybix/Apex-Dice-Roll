@@ -1,10 +1,12 @@
 package com.example.apexdiceroll.ui
 
 import android.app.Application
+import androidx.compose.runtime.currentRecomposeScope
 import androidx.lifecycle.AndroidViewModel
 import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.LegendClass
+import com.example.apexdiceroll.data.Screen
 import com.example.apexdiceroll.data.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -65,6 +67,14 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         fetchLegendLoadout()
+    }
+
+    fun switchScreen(newScreen: Screen) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                currentScreen = newScreen
+            )
+        }
     }
 
     fun rollDice() {
