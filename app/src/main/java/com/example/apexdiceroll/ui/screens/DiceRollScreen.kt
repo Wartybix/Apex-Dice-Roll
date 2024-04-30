@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -54,16 +55,18 @@ fun DiceRollScreen(
 @Composable
 fun DiceRollScreenPreview() {
     ApexDiceRollTheme {
-        DiceRollScreen(
-            generatedLegends = listOf(
-                Legend("Valkyrie", R.drawable.valk, LegendClass.Skirmisher),
-                Legend("Mad Maggie", R.drawable.mad_maggie, LegendClass.Assault),
-                Legend("Newcastle", R.drawable.newcastle, LegendClass.Support)
-            ),
-            onReroll = {},
-            selectedGameMode = GameMode.BR,
-            onGameModeSwitch = {}
-        )
+        Surface {
+            DiceRollScreen(
+                generatedLegends = listOf(
+                    Legend("Valkyrie", R.drawable.valk, LegendClass.Skirmisher),
+                    Legend("Mad Maggie", R.drawable.mad_maggie, LegendClass.Assault),
+                    Legend("Newcastle", R.drawable.newcastle, LegendClass.Support)
+                ),
+                onReroll = {},
+                selectedGameMode = GameMode.BR,
+                onGameModeSwitch = {}
+            )
+        }
     }
 }
 
@@ -71,15 +74,17 @@ fun DiceRollScreenPreview() {
 @Composable
 fun DiceRollScreenPreviewDark() {
     ApexDiceRollTheme {
-        DiceRollScreen(
-            generatedLegends = listOf(
-                Legend("Valkyrie", R.drawable.valk, LegendClass.Skirmisher),
-                Legend("Mad Maggie", R.drawable.mad_maggie, LegendClass.Assault),
-                Legend("Newcastle", R.drawable.newcastle, LegendClass.Support)
-            ),
-            onReroll = {},
-            selectedGameMode = GameMode.BR,
-            onGameModeSwitch = {}
-        )
+        Surface {
+            DiceRollScreen(
+                generatedLegends = listOf(
+                    Legend("Valkyrie", R.drawable.valk, LegendClass.Skirmisher),
+                    Legend("Mad Maggie", R.drawable.mad_maggie, LegendClass.Assault),
+                    Legend("Newcastle", R.drawable.newcastle, LegendClass.Support)
+                ),
+                onReroll = {},
+                selectedGameMode = GameMode.BR,
+                onGameModeSwitch = {}
+            )
+        }
     }
 }
