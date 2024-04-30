@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Apex Dice Roll</string>
     <string name="priority_no">Priority %1$s</string>
+    <string name="legend_roster">Legend Roster</string>
+    <string name="dice_roll">Dice Roll</string>
+    <string name="win_history">Win History</string>
 </resources>
