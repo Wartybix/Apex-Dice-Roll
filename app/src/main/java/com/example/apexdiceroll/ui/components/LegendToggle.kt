@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
@@ -31,7 +32,9 @@ fun LegendToggle(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .fillMaxWidth(),
     ) {
         Icon(
             imageVector = ImageVector.vectorResource(legendClass.icon),
@@ -39,12 +42,14 @@ fun LegendToggle(
             modifier = Modifier.size(24.dp)
         )
 
-        Spacer(modifier = Modifier.size(8.dp))
+        Spacer(modifier = Modifier.size(16.dp))
 
         Column {
             Text(text = legendName, style = MaterialTheme.typography.titleMedium)
-            Text(text = "$wins wins")
+            Text(text = "$wins wins", style = MaterialTheme.typography.bodyMedium)
         }
+
+        Spacer(modifier = Modifier.weight(1f))
 
         Checkbox(checked = selected, onCheckedChange = onToggle)
     }
