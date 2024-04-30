@@ -55,13 +55,17 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         return legendLoadout.toList()
     }
 
-    private fun fetchLegendLoadout() : List<Legend> {
-        return randomiseLegendLoadout()
+    private fun fetchLegendLoadout() {
+        uiState.value.generatedLegends = randomiseLegendLoadout()
     }
 
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
     val legendRoster: List<Legend> = getAllLegends()
+
+    init {
+        fetchLegendLoadout()
+    }
 
     fun RollDice() {
         val generatedLegends = randomiseLegendLoadout()
