@@ -20,8 +20,10 @@ import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.GameMode
 import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.LegendClass
+import com.example.apexdiceroll.data.MixtapeLoadout
 import com.example.apexdiceroll.ui.components.GameModeSwitcher
 import com.example.apexdiceroll.ui.components.LegendCarousel
+import com.example.apexdiceroll.ui.components.MixtapeLoadoutDisplay
 import com.example.apexdiceroll.ui.components.RerollButton
 import com.example.apexdiceroll.ui.theme.ApexDiceRollTheme
 
@@ -55,6 +57,11 @@ fun DiceRollScreen(
         )
         Spacer(Modifier.size(32.dp))
         LegendCarousel(legendLoadout = generatedLegends)
+        Spacer(Modifier.size(32.dp))
+        MixtapeLoadoutDisplay(
+            selectedLoadout = MixtapeLoadout.Specialist,
+            modifier = Modifier.padding(start = startPadding, end = endPadding)
+        )
         Spacer(Modifier.weight(1f))
         RerollButton(onClick = onReroll)
     }
