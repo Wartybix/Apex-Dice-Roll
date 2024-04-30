@@ -21,7 +21,7 @@ fun OverallScreen(
                 DiceRollScreen(
                     generatedLegends = uiState.generatedLegends,
                     modifier = Modifier.weight(1f),
-                    onReroll = {},
+                    onReroll = { viewModel.rollDice() },
                     selectedGameMode = uiState.selectedGameMode,
                     onGameModeSwitch = { viewModel.switchGameMode(it) }
                 )

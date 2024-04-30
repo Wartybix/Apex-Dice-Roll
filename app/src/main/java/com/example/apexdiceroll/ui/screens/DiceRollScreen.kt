@@ -45,9 +45,7 @@ fun DiceRollScreen(
         Spacer(Modifier.size(32.dp))
         LegendCarousel(legendLoadout = generatedLegends)
         Spacer(Modifier.weight(1f))
-        RerollButton {
-            onReroll
-        }
+        RerollButton(onClick = onReroll)
     }
 }
 
