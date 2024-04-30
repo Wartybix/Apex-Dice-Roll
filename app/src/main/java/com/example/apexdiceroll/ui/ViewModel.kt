@@ -1,9 +1,9 @@
 package com.example.apexdiceroll.ui
 
 import android.app.Application
-import androidx.compose.runtime.currentRecomposeScope
 import androidx.lifecycle.AndroidViewModel
 import com.example.apexdiceroll.R
+import com.example.apexdiceroll.data.GameMode
 import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.LegendClass
 import com.example.apexdiceroll.data.Screen
@@ -73,6 +73,14 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         _uiState.update { currentState ->
             currentState.copy(
                 currentScreen = newScreen
+            )
+        }
+    }
+
+    fun switchGameMode(newGameMode: GameMode) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                selectedGameMode = newGameMode
             )
         }
     }

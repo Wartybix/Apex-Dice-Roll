@@ -22,13 +22,15 @@ fun GameModeSwitcher(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Game Mode", style = MaterialTheme.typography.titleSmall)
         val gameModes = GameMode.entries
 
-        SingleChoiceSegmentedButtonRow {
+        SingleChoiceSegmentedButtonRow(
+            modifier = Modifier.fillMaxWidth()
+        ) {
             gameModes.forEachIndexed { index, gameMode ->
                 SegmentedButton(
                     selected = gameMode == selectedGameMode,
