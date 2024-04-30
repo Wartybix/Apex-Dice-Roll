@@ -1,4 +1,4 @@
-package com.example.apexdiceroll.ui
+package com.example.apexdiceroll.ui.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image

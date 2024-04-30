@@ -1,4 +1,4 @@
-package com.example.apexdiceroll.ui
+package com.example.apexdiceroll.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row

@@ -1,4 +1,4 @@
-package com.example.apexdiceroll.ui
+package com.example.apexdiceroll.ui.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyRow
