@@ -33,7 +33,9 @@ fun OverallScreen(
                     )
                 }
 
-                Screen.LegendRoster -> { /*TODO*/ }
+                Screen.LegendRoster -> {
+                    RosterScreen(legends = viewModel.legendRoster, paddingValues = it)
+                }
 
                 Screen.WinHistory -> { /*TODO*/ }
             }
