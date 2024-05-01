@@ -1,6 +1,8 @@
 package com.example.apexdiceroll.ui
 
 import android.app.Application
+import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.AndroidViewModel
 import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.GameMode
@@ -66,9 +68,13 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         uiState.value.generatedLegends = randomiseLegendLoadout()
     }
 
+    private fun fetchSelectedLegends() {
+
+    }
+
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
-    val legendRoster: List<Legend> = getAllLegends()
+    val legendRoster: SnapshotStateList<Legend> = getAllLegends().toMutableStateList()
 
     init {
         fetchLegendLoadout()

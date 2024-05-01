@@ -30,7 +30,7 @@ fun ItemToggle(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .padding(horizontal = 16.dp, vertical = 16.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
     ) {
         Icon(
             imageVector = icon,
@@ -50,7 +50,9 @@ fun ItemToggle(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        Checkbox(checked = selected, onCheckedChange = onToggle)
+        Checkbox(checked = selected, onCheckedChange = {
+            onToggle(!selected)
+        })
     }
 
 }

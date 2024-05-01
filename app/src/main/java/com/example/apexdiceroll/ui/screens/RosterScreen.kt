@@ -1,5 +1,6 @@
 package com.example.apexdiceroll.ui.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -9,6 +10,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,7 +23,7 @@ import com.example.apexdiceroll.ui.components.SelectAllToggle
 
 @Composable
 fun RosterScreen(
-    legends: List<Legend>,
+    legends: SnapshotStateList<Legend>,
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues()
 ) {
@@ -40,9 +43,9 @@ fun RosterScreen(
                 LegendToggle(
                     legendName = legend.name,
                     legendClass = legend.legendClass,
-                    wins = 0, //TODO Fix dummy value
-                    selected = true, //TODO Fix dummy value
-                    onToggle = {}, //TODO Fix dummy value,
+                    wins = legend.wins,
+                    selected = legend.selected,
+                    onToggle = { legend.selected = it },
                     modifier = Modifier.padding(cardPadding)
                 )
             }
@@ -61,11 +64,13 @@ fun RosterScreen(
 
 }
 
+@SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
 fun RosterScreenPreview() {
-    RosterScreen(legends = listOf(
+    RosterScreen(legends = mutableStateListOf(
         Legend(name = "Revenant", icon = R.drawable.revenant, legendClass = LegendClass.Assault),
         Legend(name = "Pathfinder", icon = R.drawable.pathfinder, legendClass = LegendClass.Skirmisher)
-    ))
+    )
+    )
 }
