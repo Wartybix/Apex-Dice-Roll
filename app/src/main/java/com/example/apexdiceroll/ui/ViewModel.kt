@@ -74,7 +74,9 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
-    val legendRoster: SnapshotStateList<Legend> = getAllLegends().toMutableStateList()
+    private val _legendRoster: SnapshotStateList<Legend> = getAllLegends().toMutableStateList()
+    val legendRoster: List<Legend>
+        get() = _legendRoster
 
     init {
         fetchLegendLoadout()
