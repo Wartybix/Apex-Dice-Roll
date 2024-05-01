@@ -2,7 +2,6 @@ package com.example.apexdiceroll.ui.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SelectAll
-import androidx.compose.material3.ElevatedCard
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -15,16 +14,14 @@ fun SelectAllToggle(
     selected: Boolean,
     onToggle: (Boolean) -> Unit
 ) {
-    ElevatedCard(modifier = modifier) {
-        ItemToggle(
-            title = stringResource(id = R.string.select_all),
-            icon = Icons.Default.SelectAll,
-            iconDescription = null,
-            selected = selected,
-            onToggle = onToggle
-        )
-    }
-
+    ItemToggle(
+        title = stringResource(id = R.string.select_all),
+        icon = Icons.Default.SelectAll,
+        iconDescription = null,
+        selected = selected,
+        onToggle = onToggle,
+        modifier = modifier
+    )
 }
 
 @Preview

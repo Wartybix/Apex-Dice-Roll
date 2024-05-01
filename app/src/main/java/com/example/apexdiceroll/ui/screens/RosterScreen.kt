@@ -1,16 +1,13 @@
 package com.example.apexdiceroll.ui.screens
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,15 +26,12 @@ fun RosterScreen(
     Column(
         modifier = modifier.padding(paddingValues)
     ) {
-        val cardPadding = PaddingValues(horizontal = 24.dp)
-
         LazyColumn(
-            modifier = modifier.weight(1f),
-            contentPadding = PaddingValues(vertical = 16.dp)
+            modifier = modifier.weight(1f)
         ) {
             itemsIndexed(legends) { index, legend ->
                 if (index != 0) {
-                    Spacer(modifier = Modifier.size(16.dp))
+                    HorizontalDivider()
                 }
                 LegendToggle(
                     legendName = legend.name,
@@ -45,7 +39,7 @@ fun RosterScreen(
                     wins = legend.wins,
                     selected = legend.selected,
                     onToggle = { legend.selected = it },
-                    modifier = Modifier.padding(cardPadding)
+                    modifier = Modifier
                 )
             }
         }
@@ -56,20 +50,20 @@ fun RosterScreen(
             selected = true, //TODO fix dummy value
             onToggle = {}, //TODO fix dummy value,
             modifier = Modifier
-                .padding(cardPadding)
                 .padding(vertical = 16.dp)
         )
     }
 
 }
 
-@SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
 fun RosterScreenPreview() {
-    RosterScreen(legends = mutableStateListOf(
-        Legend(name = "Revenant", icon = R.drawable.revenant, legendClass = LegendClass.Assault),
-        Legend(name = "Pathfinder", icon = R.drawable.pathfinder, legendClass = LegendClass.Skirmisher)
-    )
-    )
+    Surface {
+        RosterScreen(legends = listOf(
+            Legend(name = "Revenant", icon = R.drawable.revenant, legendClass = LegendClass.Assault),
+            Legend(name = "Pathfinder", icon = R.drawable.pathfinder, legendClass = LegendClass.Skirmisher)
+        )
+        )
+    }
 }

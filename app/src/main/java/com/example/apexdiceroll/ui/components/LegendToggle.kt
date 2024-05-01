@@ -1,6 +1,5 @@
 package com.example.apexdiceroll.ui.components
 
-import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -19,18 +18,17 @@ fun LegendToggle(
     selected: Boolean,
     onToggle: (Boolean) -> Unit
 ) {
-    Card(modifier = modifier) {
-        val plural = if (wins == 1) "" else "s"
+    val plural = if (wins == 1) "" else "s"
 
-        ItemToggle(
-            title = legendName,
-            subtitle = stringResource(R.string.apex_wins, wins, plural),
-            icon = ImageVector.vectorResource(legendClass.icon),
-            iconDescription = legendClass.className,
-            selected = selected,
-            onToggle = onToggle
-        )
-    }
+    ItemToggle(
+        title = legendName,
+        subtitle = stringResource(R.string.apex_wins, wins, plural),
+        icon = ImageVector.vectorResource(legendClass.icon),
+        iconDescription = legendClass.className,
+        selected = selected,
+        onToggle = onToggle,
+        modifier = modifier
+    )
 }
 
 @Preview
