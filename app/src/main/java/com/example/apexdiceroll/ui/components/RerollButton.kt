@@ -14,7 +14,8 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun RerollButton(
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Button(onClick = onClick) {
         Icon(

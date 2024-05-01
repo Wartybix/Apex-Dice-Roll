@@ -7,8 +7,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -43,11 +46,13 @@ fun DiceRollScreen(
     val startPadding = horizontalPadding + paddingValues.calculateStartPadding(LayoutDirection.Ltr)
     val topPadding = verticalPadding + paddingValues.calculateTopPadding()
     val endPadding = horizontalPadding + paddingValues.calculateEndPadding(LayoutDirection.Ltr)
-    val bottomPadding = verticalPadding + paddingValues.calculateBottomPadding()
+    val bottomPadding = verticalPadding + 8.dp + paddingValues.calculateBottomPadding()
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.padding(top = topPadding, bottom = bottomPadding)
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
+            .padding(top = topPadding, bottom = bottomPadding)
     ) {
         GameModeSwitcher(
             selectedGameMode = selectedGameMode,
@@ -65,7 +70,7 @@ fun DiceRollScreen(
                 modifier = Modifier.padding(start = startPadding, end = endPadding)
             )
         }
-        Spacer(Modifier.weight(1f))
+        Spacer(Modifier.height(32.dp))
         RerollButton(onClick = onReroll)
     }
 }
