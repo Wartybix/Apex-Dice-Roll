@@ -92,11 +92,12 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
 
     fun rollDice() {
         val generatedLegends = randomiseLegendLoadout()
+        val mixtapeLoadout = randomiseMixtapeLoadout()
 
         _uiState.update { currentState ->
             currentState.copy(
                 generatedLegends = generatedLegends,
-                mixtapeLoadout = randomiseMixtapeLoadout()
+                mixtapeLoadout = mixtapeLoadout
             )
         }
     }
