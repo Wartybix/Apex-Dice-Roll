@@ -79,9 +79,16 @@ fun MixtapeLoadoutDisplay(
 
 @Preview
 @Composable
-fun MixtapeLoadoutDisplayPreview() {
+fun MixtapeLoadoutDisplayPreviewSpecialist() {
     Surface {
         MixtapeLoadoutDisplay(MixtapeLoadout.Specialist)
     }
+}
 
+@Preview
+@Composable
+fun MixtapeLoadoutDisplayPreviewCQ() {
+    Surface {
+        MixtapeLoadoutDisplay(MixtapeLoadout.CloseQuarters)
+    }
 }
