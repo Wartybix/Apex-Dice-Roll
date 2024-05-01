@@ -58,10 +58,12 @@ fun DiceRollScreen(
         Spacer(Modifier.size(32.dp))
         LegendCarousel(legendLoadout = generatedLegends)
         Spacer(Modifier.size(32.dp))
-        MixtapeLoadoutDisplay(
-            selectedLoadout = MixtapeLoadout.Specialist,
-            modifier = Modifier.padding(start = startPadding, end = endPadding)
-        )
+        if (selectedGameMode == GameMode.Mixtape) {
+            MixtapeLoadoutDisplay(
+                selectedLoadout = MixtapeLoadout.Specialist,
+                modifier = Modifier.padding(start = startPadding, end = endPadding)
+            )
+        }
         Spacer(Modifier.weight(1f))
         RerollButton(onClick = onReroll)
     }
