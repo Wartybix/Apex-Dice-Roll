@@ -46,7 +46,8 @@ fun LegendCard(
         ) {
             Image(
                 bitmap = ImageBitmap.imageResource(id = legendIcon),
-                contentDescription = null
+                contentDescription = null,
+                modifier = Modifier.size(256.dp)
             )
 
             Spacer(modifier = Modifier.size(16.dp))
