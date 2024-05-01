@@ -1,9 +1,11 @@
 package com.example.apexdiceroll.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Checkbox
@@ -14,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -29,7 +32,14 @@ fun ItemToggle(
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
+            .clickable(
+                role = Role.Checkbox,
+                onClick = {
+                    onToggle(!selected)
+                }
+            )
             .padding(horizontal = 16.dp, vertical = 12.dp)
+            .heightIn(min = 48.dp)
             .fillMaxWidth()
     ) {
         Icon(
@@ -50,9 +60,7 @@ fun ItemToggle(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        Checkbox(checked = selected, onCheckedChange = {
-            onToggle(!selected)
-        })
+        Checkbox(checked = selected, onCheckedChange = null)
     }
 
 }
