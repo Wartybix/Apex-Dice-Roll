@@ -37,8 +37,8 @@ fun NavBar(
             outlinedIcon: ImageVector,
             label: String
         ) {
-            var isSelected = screen == destinationScreen
-            var iconImageVector = if (isSelected)
+            val isSelected = screen == destinationScreen
+            val iconImageVector = if (isSelected)
                 filledIcon
             else
                 outlinedIcon
