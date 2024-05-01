@@ -49,6 +49,7 @@ fun RosterScreen(
         }
 
         HorizontalDivider()
+
         SelectAllToggle(
             selected = true, //TODO fix dummy value
             onToggle = {}, //TODO fix dummy value,
