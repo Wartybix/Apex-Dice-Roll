@@ -20,9 +20,11 @@ fun LegendToggle(
     onToggle: (Boolean) -> Unit
 ) {
     Card(modifier = modifier) {
+        val plural = if (wins == 1) "" else "s"
+
         ItemToggle(
             title = legendName,
-            subtitle = stringResource(R.string.apex_wins, wins),
+            subtitle = stringResource(R.string.apex_wins, wins, plural),
             icon = ImageVector.vectorResource(legendClass.icon),
             iconDescription = legendClass.className,
             selected = selected,
