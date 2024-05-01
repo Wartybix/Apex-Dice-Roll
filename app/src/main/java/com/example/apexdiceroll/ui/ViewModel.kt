@@ -6,6 +6,7 @@ import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.GameMode
 import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.LegendClass
+import com.example.apexdiceroll.data.MixtapeLoadout
 import com.example.apexdiceroll.data.Screen
 import com.example.apexdiceroll.data.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -57,6 +58,10 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         return legendLoadout.toList()
     }
 
+    private fun randomiseMixtapeLoadout() : MixtapeLoadout {
+        return MixtapeLoadout.entries.random()
+    }
+
     private fun fetchLegendLoadout() {
         uiState.value.generatedLegends = randomiseLegendLoadout()
     }
@@ -90,7 +95,8 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
 
         _uiState.update { currentState ->
             currentState.copy(
-                generatedLegends = generatedLegends
+                generatedLegends = generatedLegends,
+                mixtapeLoadout = randomiseMixtapeLoadout()
             )
         }
     }

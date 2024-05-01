@@ -22,6 +22,7 @@ fun OverallScreen(
                 Screen.DiceRoll -> {
                     DiceRollScreen(
                         generatedLegends = uiState.generatedLegends,
+                        generatedMixtapeLoadout = uiState.mixtapeLoadout,
                         onReroll = { viewModel.rollDice() },
                         selectedGameMode = uiState.selectedGameMode,
                         onGameModeSwitch = { viewModel.switchGameMode(it) },

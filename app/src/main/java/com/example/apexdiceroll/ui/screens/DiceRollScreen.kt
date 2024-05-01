@@ -30,6 +30,7 @@ import com.example.apexdiceroll.ui.theme.ApexDiceRollTheme
 @Composable
 fun DiceRollScreen(
     generatedLegends: List<Legend>,
+    generatedMixtapeLoadout: MixtapeLoadout,
     selectedGameMode: GameMode,
     onGameModeSwitch: (GameMode) -> Unit,
     onReroll: () -> Unit,
@@ -60,7 +61,7 @@ fun DiceRollScreen(
         Spacer(Modifier.size(32.dp))
         if (selectedGameMode == GameMode.Mixtape) {
             MixtapeLoadoutDisplay(
-                selectedLoadout = MixtapeLoadout.Specialist,
+                selectedLoadout = generatedMixtapeLoadout,
                 modifier = Modifier.padding(start = startPadding, end = endPadding)
             )
         }
@@ -82,7 +83,8 @@ fun DiceRollScreenPreview() {
                 ),
                 onReroll = {},
                 selectedGameMode = GameMode.BR,
-                onGameModeSwitch = {}
+                onGameModeSwitch = {},
+                generatedMixtapeLoadout = MixtapeLoadout.CloseQuarters
             )
         }
     }
@@ -101,7 +103,8 @@ fun DiceRollScreenPreviewDark() {
                 ),
                 onReroll = {},
                 selectedGameMode = GameMode.BR,
-                onGameModeSwitch = {}
+                onGameModeSwitch = {},
+                generatedMixtapeLoadout = MixtapeLoadout.CloseQuarters
             )
         }
     }
