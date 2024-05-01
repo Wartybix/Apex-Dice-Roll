@@ -1,6 +1,8 @@
 package com.example.apexdiceroll.ui.screens
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.HorizontalDivider
@@ -18,24 +20,34 @@ fun RosterScreen(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues()
 ) {
-    LazyColumn(
-        modifier = modifier,
-        contentPadding = paddingValues
+    Column(
+        modifier = modifier.padding(paddingValues)
     ) {
-        itemsIndexed(legends) { index, legend ->
-            if (index != 0) {
-                HorizontalDivider()
-            }
+        LazyColumn(
+            modifier = modifier.weight(1f)
+        ) {
+            itemsIndexed(legends) { index, legend ->
+                if (index != 0) {
+                    HorizontalDivider()
+                }
 
-            LegendToggle(
-                legendName = legend.name,
-                legendClass = legend.legendClass,
-                wins = 0, //TODO Fix dummy value
-                selected = true, //TODO Fix dummy value
-                onToggle = {} //TODO Fix dummy value
-            )
+                LegendToggle(
+                    legendName = legend.name,
+                    legendClass = legend.legendClass,
+                    wins = 0, //TODO Fix dummy value
+                    selected = true, //TODO Fix dummy value
+                    onToggle = {} //TODO Fix dummy value
+                )
+            }
         }
+
+        HorizontalDivider()
+        LegendToggle(
+            selected = true, //TODO fix dummy value
+            onToggle = {} //TODO fix dummy value
+        )
     }
+
 }
 
 @Preview
