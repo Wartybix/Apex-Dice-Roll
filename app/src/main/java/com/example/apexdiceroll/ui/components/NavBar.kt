@@ -62,7 +62,7 @@ fun NavBar(
             destinationScreen = Screen.LegendRoster,
             filledIcon = Icons.Filled.People,
             outlinedIcon = Icons.Outlined.People,
-            label = stringResource(R.string.legend_roster)
+            label = stringResource(R.string.roster)
         )
 
         ApexDiceRollItem(
