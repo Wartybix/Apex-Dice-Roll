@@ -2,7 +2,7 @@ package com.example.apexdiceroll.ui.components
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,11 +26,9 @@ fun LegendCarousel(
         contentPadding = PaddingValues(horizontal = 24.dp),
         state = carouselState
     ) {
-        items(legendLoadout.indices.toList()) { item ->
-            val legend = legendLoadout[item]
-
+        itemsIndexed(legendLoadout) { index, legend ->
             LegendCard(
-                priorityNo = item + 1,
+                priorityNo = index + 1,
                 legendName = legend.name,
                 classIcon = legend.legendClass.icon,
                 legendIcon = legend.icon,
