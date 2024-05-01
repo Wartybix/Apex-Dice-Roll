@@ -25,7 +25,10 @@ fun OverallScreen(
                         generatedMixtapeLoadout = uiState.mixtapeLoadout,
                         onReroll = { viewModel.rollDice() },
                         selectedGameMode = uiState.selectedGameMode,
-                        onGameModeSwitch = { viewModel.switchGameMode(it) },
+                        onGameModeSwitch = {
+                            viewModel.switchGameMode(it)
+                            viewModel.rollDice()
+                        },
                         paddingValues = it
                     )
                 }

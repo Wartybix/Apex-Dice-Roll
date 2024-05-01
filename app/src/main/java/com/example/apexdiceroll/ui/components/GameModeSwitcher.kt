@@ -41,7 +41,11 @@ fun GameModeSwitcher(
             gameModes.forEachIndexed { index, gameMode ->
                 SegmentedButton(
                     selected = gameMode == selectedGameMode,
-                    onClick = { onSwitch(gameMode) },
+                    onClick = {
+                        if (gameMode != selectedGameMode) {
+                            onSwitch(gameMode)
+                        }
+                    },
                     shape = SegmentedButtonDefaults.itemShape(index = index, count = gameModes.size)
                 ) {
                     Text(text = gameMode.modeName)
