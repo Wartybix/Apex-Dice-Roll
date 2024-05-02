@@ -38,7 +38,7 @@ fun ItemToggle(
                     onToggle(!selected)
                 }
             )
-            .padding(horizontal = 16.dp, vertical = 12.dp)
+            .padding(horizontal = 24.dp, vertical = 12.dp)
             .heightIn(min = 48.dp)
             .fillMaxWidth()
     ) {
