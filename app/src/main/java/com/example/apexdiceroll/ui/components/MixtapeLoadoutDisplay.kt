@@ -11,6 +11,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -25,8 +28,8 @@ fun MixtapeLoadoutDisplay(
     selectedLoadout: MixtapeLoadout,
     modifier: Modifier = Modifier
 ) {
-    val loadouts = MixtapeLoadout.entries
-    val padding = 8.dp
+    val loadouts by remember { mutableStateOf(MixtapeLoadout.entries) }
+    val padding by remember { mutableStateOf(8.dp) }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally

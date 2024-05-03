@@ -14,6 +14,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,13 +43,25 @@ fun DiceRollScreen(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues()
 ) {
-    val horizontalPadding = 24.dp
-    val verticalPadding = 16.dp
+    val horizontalPadding by remember { mutableStateOf(24.dp) }
+    val verticalPadding by remember { mutableStateOf(16.dp) }
 
-    val startPadding = horizontalPadding + paddingValues.calculateStartPadding(LayoutDirection.Ltr)
-    val topPadding = verticalPadding + paddingValues.calculateTopPadding()
-    val endPadding = horizontalPadding + paddingValues.calculateEndPadding(LayoutDirection.Ltr)
-    val bottomPadding = verticalPadding + 8.dp + paddingValues.calculateBottomPadding()
+    val startPadding by remember {
+        mutableStateOf(
+            horizontalPadding + paddingValues.calculateStartPadding(LayoutDirection.Ltr)
+        )
+    }
+    val topPadding by remember {
+        mutableStateOf(verticalPadding + paddingValues.calculateTopPadding())
+    }
+    val endPadding by remember {
+        mutableStateOf(
+            horizontalPadding + paddingValues.calculateEndPadding(LayoutDirection.Ltr)
+        )
+    }
+    val bottomPadding by remember {
+        mutableStateOf(verticalPadding + 8.dp + paddingValues.calculateBottomPadding())
+    }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
