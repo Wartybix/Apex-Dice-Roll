@@ -48,13 +48,21 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun randomiseLegendLoadout() : List<Legend> {
-        val availableLegends = legendRoster.toMutableList()
         val legendLoadout = mutableListOf<Legend>()
 
         for (priority in 0..2) {
-            val generatedLegend = availableLegends.random()
+            val availableLegends = legendRoster.filterNot { it in legendLoadout }
+            val availableSelectedLegends = availableLegends.filter { it.selected }
+
+            val legendPool = if (availableSelectedLegends.any()) {
+                availableSelectedLegends
+            }
+            else {
+                availableLegends
+            }
+
+            val generatedLegend = legendPool.random()
             legendLoadout.add(generatedLegend)
-            availableLegends.remove(generatedLegend)
         }
 
         return legendLoadout.toList()
@@ -68,7 +76,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         uiState.value.generatedLegends = randomiseLegendLoadout()
     }
 
-    private fun fetchSelectedLegends() {
+    private fun loadSelectedLegends() {
 
     }
 
