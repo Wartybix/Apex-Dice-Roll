@@ -9,7 +9,7 @@ import androidx.compose.runtime.setValue
 data class Legend(
     val name: String,
     @DrawableRes val icon: Int,
-    var legendClass: LegendClass,
+    val legendClass: LegendClass,
 ) {
     var selected by mutableStateOf(true)
     var wins by mutableIntStateOf(0)
