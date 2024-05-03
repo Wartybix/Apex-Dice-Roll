@@ -1,4 +1,4 @@
-package com.example.apexdiceroll.ui.components
+package com.example.apexdiceroll.ui.components.diceroll_screen
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size

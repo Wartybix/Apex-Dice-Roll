@@ -6,8 +6,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.apexdiceroll.data.Screen
 import com.example.apexdiceroll.ui.ViewModel
-import com.example.apexdiceroll.ui.components.NavBar
-import com.example.apexdiceroll.ui.components.TopAppBar
+import com.example.apexdiceroll.ui.components.overall_screen.NavBar
+import com.example.apexdiceroll.ui.components.overall_screen.TopAppBar
 
 @Composable
 fun OverallScreen(

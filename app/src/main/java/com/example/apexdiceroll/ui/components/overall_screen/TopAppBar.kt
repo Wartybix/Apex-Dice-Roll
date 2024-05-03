@@ -1,4 +1,4 @@
-package com.example.apexdiceroll.ui.components
+package com.example.apexdiceroll.ui.components.overall_screen
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.CenterAlignedTopAppBar

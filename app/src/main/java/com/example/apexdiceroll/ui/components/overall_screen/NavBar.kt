@@ -1,4 +1,4 @@
-package com.example.apexdiceroll.ui.components
+package com.example.apexdiceroll.ui.components.overall_screen
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Casino

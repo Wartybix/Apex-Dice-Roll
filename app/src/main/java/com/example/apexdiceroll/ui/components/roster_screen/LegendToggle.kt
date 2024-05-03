@@ -1,4 +1,4 @@
-package com.example.apexdiceroll.ui.components
+package com.example.apexdiceroll.ui.components.roster_screen
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue

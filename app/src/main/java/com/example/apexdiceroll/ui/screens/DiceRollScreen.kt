@@ -27,10 +27,10 @@ import com.example.apexdiceroll.data.GameMode
 import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.LegendClass
 import com.example.apexdiceroll.data.MixtapeLoadout
-import com.example.apexdiceroll.ui.components.GameModeSwitcher
-import com.example.apexdiceroll.ui.components.LegendCarousel
-import com.example.apexdiceroll.ui.components.MixtapeLoadoutDisplay
-import com.example.apexdiceroll.ui.components.RerollButton
+import com.example.apexdiceroll.ui.components.diceroll_screen.GameModeSwitcher
+import com.example.apexdiceroll.ui.components.diceroll_screen.legend_display.LegendCarousel
+import com.example.apexdiceroll.ui.components.diceroll_screen.MixtapeLoadoutDisplay
+import com.example.apexdiceroll.ui.components.diceroll_screen.RerollButton
 import com.example.apexdiceroll.ui.theme.ApexDiceRollTheme
 
 @Composable

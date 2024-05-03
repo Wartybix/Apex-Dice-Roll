@@ -1,4 +1,4 @@
-package com.example.apexdiceroll.ui.components
+package com.example.apexdiceroll.ui.components.roster_screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column

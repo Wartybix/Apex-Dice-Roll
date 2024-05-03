@@ -10,13 +10,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.LegendClass
 import com.example.apexdiceroll.data.LegendsSelected
-import com.example.apexdiceroll.ui.components.LegendToggle
-import com.example.apexdiceroll.ui.components.SelectAllToggle
+import com.example.apexdiceroll.ui.components.roster_screen.LegendToggle
+import com.example.apexdiceroll.ui.components.roster_screen.SelectAllToggle
 
 @Composable
 fun RosterScreen(
