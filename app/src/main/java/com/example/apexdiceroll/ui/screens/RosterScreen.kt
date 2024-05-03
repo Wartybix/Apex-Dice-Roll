@@ -14,12 +14,15 @@ import androidx.compose.ui.unit.dp
 import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.LegendClass
+import com.example.apexdiceroll.data.LegendsSelected
 import com.example.apexdiceroll.ui.components.LegendToggle
 import com.example.apexdiceroll.ui.components.SelectAllToggle
 
 @Composable
 fun RosterScreen(
     legends: List<Legend>,
+    legendsSelectionStatus: LegendsSelected,
+    onToggleAll: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues()
 ) {
@@ -47,8 +50,8 @@ fun RosterScreen(
         HorizontalDivider()
 
         SelectAllToggle(
-            selected = true, //TODO fix dummy value
-            onToggle = {}, //TODO fix dummy value,
+            selectionStatus = legendsSelectionStatus,
+            onToggle = onToggleAll,
             modifier = Modifier
                 .padding(vertical = 16.dp)
         )
@@ -60,10 +63,21 @@ fun RosterScreen(
 @Composable
 fun RosterScreenPreview() {
     Surface {
-        RosterScreen(legends = listOf(
-            Legend(name = "Revenant", icon = R.drawable.revenant, legendClass = LegendClass.Assault),
-            Legend(name = "Pathfinder", icon = R.drawable.pathfinder, legendClass = LegendClass.Skirmisher)
-        )
+        RosterScreen(
+            legends = listOf(
+                Legend(
+                    name = "Revenant",
+                    icon = R.drawable.revenant,
+                    legendClass = LegendClass.Assault
+                ),
+                Legend(
+                    name = "Pathfinder",
+                    icon = R.drawable.pathfinder,
+                    legendClass = LegendClass.Skirmisher
+                )
+            ),
+            legendsSelectionStatus = LegendsSelected.ALL,
+            onToggleAll = {}
         )
     }
 }

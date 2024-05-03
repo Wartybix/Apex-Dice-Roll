@@ -2,23 +2,25 @@ package com.example.apexdiceroll.ui.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SelectAll
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.apexdiceroll.R
+import com.example.apexdiceroll.data.LegendsSelected
 
 @Composable
 fun SelectAllToggle(
     modifier: Modifier = Modifier,
-    selected: Boolean,
+    selectionStatus: LegendsSelected,
     onToggle: (Boolean) -> Unit
 ) {
     ItemToggle(
         title = stringResource(id = R.string.select_all),
         icon = Icons.Default.SelectAll,
         iconDescription = null,
-        selected = selected,
+        selected = selectionStatus.value,
         onToggle = onToggle,
         modifier = modifier
     )
@@ -26,6 +28,24 @@ fun SelectAllToggle(
 
 @Preview
 @Composable
+fun SelectAllTogglePreviewAll() {
+    Surface {
+        SelectAllToggle(selectionStatus = LegendsSelected.ALL, onToggle = {})
+    }
+}
+
+@Preview
+@Composable
+fun SelectAllTogglePreviewSome() {
+    Surface {
+        SelectAllToggle(selectionStatus = LegendsSelected.SOME, onToggle = {})
+    }
+}
+
+@Preview
+@Composable
 fun SelectAllTogglePreview() {
-    SelectAllToggle(selected = true, onToggle = {})
+    Surface {
+        SelectAllToggle(selectionStatus = LegendsSelected.NONE, onToggle = {})
+    }
 }

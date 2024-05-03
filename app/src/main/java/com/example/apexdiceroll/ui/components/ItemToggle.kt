@@ -8,16 +8,21 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TriStateCheckbox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.state.ToggleableState
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.apexdiceroll.R
 
 @Composable
 fun ItemToggle(
@@ -25,7 +30,7 @@ fun ItemToggle(
     icon: ImageVector,
     iconDescription: String?,
     subtitle: String? = null,
-    selected: Boolean,
+    selected: Boolean?,
     onToggle: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -35,7 +40,7 @@ fun ItemToggle(
             .clickable(
                 role = Role.Checkbox,
                 onClick = {
-                    onToggle(!selected)
+                    onToggle(if (selected == null) true else !selected)
                 }
             )
             .padding(horizontal = 24.dp, vertical = 12.dp)
@@ -60,7 +65,28 @@ fun ItemToggle(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        Checkbox(checked = selected, onCheckedChange = null)
+        TriStateCheckbox(
+            state = when (selected) {
+                true -> ToggleableState.On
+                false -> ToggleableState.Off
+                else -> ToggleableState.Indeterminate
+            },
+            onClick = null
+        )
+    }
+
+}
+
+@Preview
+@Composable
+fun ItemTogglePreview() {
+    Surface {
+        ItemToggle(title = "Hello World",
+            icon = ImageVector.vectorResource(R.drawable.class_skirmisher),
+            iconDescription = null,
+            selected = true,
+            onToggle = {}
+        )
     }
 
 }

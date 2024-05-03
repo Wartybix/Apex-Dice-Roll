@@ -34,7 +34,11 @@ fun OverallScreen(
                 }
 
                 Screen.LegendRoster -> {
-                    RosterScreen(legends = viewModel.legendRoster, paddingValues = it)
+                    RosterScreen(
+                        legends = viewModel.legendRoster,
+                        legendsSelectionStatus = viewModel.getRosterSelectionStatus(),
+                        onToggleAll = { viewModel.rosterToggleAll(it) },
+                        paddingValues = it)
                 }
 
                 Screen.WinHistory -> { /*TODO*/ }

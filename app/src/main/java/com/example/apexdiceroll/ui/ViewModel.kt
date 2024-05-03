@@ -8,6 +8,7 @@ import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.GameMode
 import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.LegendClass
+import com.example.apexdiceroll.data.LegendsSelected
 import com.example.apexdiceroll.data.MixtapeLoadout
 import com.example.apexdiceroll.data.Screen
 import com.example.apexdiceroll.data.UiState
@@ -115,6 +116,20 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
                 generatedLegends = generatedLegends,
                 mixtapeLoadout = mixtapeLoadout
             )
+        }
+    }
+
+    fun rosterToggleAll(value: Boolean) {
+        legendRoster.forEach { it.selected = value }
+    }
+
+    fun getRosterSelectionStatus() : LegendsSelected {
+        return if (legendRoster.all { it.selected } ) {
+            LegendsSelected.ALL
+        } else if (legendRoster.any { it.selected }) {
+            LegendsSelected.SOME
+        } else {
+            LegendsSelected.NONE
         }
     }
 }
