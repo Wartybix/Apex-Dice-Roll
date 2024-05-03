@@ -17,7 +17,7 @@ fun RerollButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Button(onClick = onClick) {
+    Button(onClick = onClick, modifier = modifier) {
         Icon(
             imageVector = Icons.Outlined.Casino,
             contentDescription = null,

@@ -1,6 +1,9 @@
 package com.example.apexdiceroll.ui.components
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -18,7 +21,7 @@ fun LegendToggle(
     selected: Boolean,
     onToggle: (Boolean) -> Unit
 ) {
-    val plural = if (wins == 1) "" else "s"
+    val plural by remember { mutableStateOf(if (wins == 1) "" else "s") }
 
     ItemToggle(
         title = legendName,
