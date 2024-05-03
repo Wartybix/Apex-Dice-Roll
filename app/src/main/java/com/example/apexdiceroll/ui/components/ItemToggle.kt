@@ -24,6 +24,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.apexdiceroll.R
 
+//TODO put loading icons in a coroutine.
+
 @Composable
 fun ItemToggle(
     modifier: Modifier = Modifier,
