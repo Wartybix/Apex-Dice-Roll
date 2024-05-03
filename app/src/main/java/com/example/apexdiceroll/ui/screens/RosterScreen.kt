@@ -41,8 +41,7 @@ fun RosterScreen(
                     legendClass = legend.legendClass,
                     wins = legend.wins,
                     selected = legend.selected,
-                    onToggle = { legend.selected = it },
-                    modifier = Modifier
+                    onToggle = { legend.selected = it }
                 )
             }
         }
@@ -51,9 +50,7 @@ fun RosterScreen(
 
         SelectAllToggle(
             selectionStatus = legendsSelectionStatus,
-            onToggle = onToggleAll,
-            modifier = Modifier
-                .padding(vertical = 16.dp)
+            onToggle = onToggleAll
         )
     }
 

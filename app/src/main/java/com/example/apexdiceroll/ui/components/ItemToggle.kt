@@ -26,17 +26,17 @@ import com.example.apexdiceroll.R
 
 @Composable
 fun ItemToggle(
+    modifier: Modifier = Modifier,
     title: String,
     icon: ImageVector,
     iconDescription: String?,
     subtitle: String? = null,
     selected: Boolean?,
-    onToggle: (Boolean) -> Unit,
-    modifier: Modifier = Modifier
+    onToggle: (Boolean) -> Unit
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier
+        modifier = modifier
             .clickable(
                 role = Role.Checkbox,
                 onClick = {
