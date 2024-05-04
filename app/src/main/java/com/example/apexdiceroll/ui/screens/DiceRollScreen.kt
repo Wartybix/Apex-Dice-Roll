@@ -46,7 +46,6 @@ fun DiceRollScreen(
     paddingValues: PaddingValues = PaddingValues()
 ) {
     val horizontalPadding by remember { mutableStateOf(24.dp) }
-    val verticalPadding by remember { mutableStateOf(16.dp) }
 
     val startPadding by remember {
         mutableStateOf(
@@ -54,7 +53,7 @@ fun DiceRollScreen(
         )
     }
     val topPadding by remember {
-        mutableStateOf(verticalPadding + paddingValues.calculateTopPadding())
+        mutableStateOf(16.dp + paddingValues.calculateTopPadding())
     }
     val endPadding by remember {
         mutableStateOf(
@@ -62,7 +61,7 @@ fun DiceRollScreen(
         )
     }
     val bottomPadding by remember {
-        mutableStateOf(verticalPadding + paddingValues.calculateBottomPadding())
+        mutableStateOf(32.dp + paddingValues.calculateBottomPadding())
     }
 
     Column(

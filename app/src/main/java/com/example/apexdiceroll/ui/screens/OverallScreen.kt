@@ -1,14 +1,24 @@
 package com.example.apexdiceroll.ui.screens
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Sync
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.Screen
@@ -22,12 +32,20 @@ fun OverallScreen(
 ) {
     val uiState = viewModel.uiState.collectAsState().value
 
+    val localDensity = LocalDensity.current
+    var fabHeight by remember { mutableStateOf(0.dp) }
+
     Scaffold(
         topBar = { TopAppBar() },
         floatingActionButton = {
             when (uiState.currentScreen) {
                 Screen.DiceRoll -> {
-                    FloatingActionButton(onClick = { viewModel.rollDice() }) {
+                    FloatingActionButton(
+                        onClick = { viewModel.rollDice() },
+                        modifier = Modifier.onGloballyPositioned { coordinates ->
+                            fabHeight = with (localDensity) { coordinates.size.height.toDp() }
+                        }
+                    ) {
                         Icon(imageVector = Icons.Default.Sync, contentDescription = "Re-Roll")
                     }
                 }
@@ -47,7 +65,8 @@ fun OverallScreen(
                             viewModel.switchGameMode(it)
                             viewModel.rollDice()
                         },
-                        paddingValues = it
+                        paddingValues = it,
+                        modifier = Modifier.padding(bottom = fabHeight)
                     )
                 }
 
