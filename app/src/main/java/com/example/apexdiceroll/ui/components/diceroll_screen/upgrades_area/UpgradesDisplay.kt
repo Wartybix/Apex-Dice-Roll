@@ -20,19 +20,11 @@ fun UpgradesDisplay(
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        Surface(
-            shape = MaterialTheme.shapes.large,
-            color = MaterialTheme.colorScheme.surfaceContainer
-        ) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                (2..3).forEach {
-                    if (it != 2) {
-                        Spacer(modifier = Modifier.size(16.dp))
-                    }
-                    UpgradeTier(tier = it, upgradeSelection = UpgradeSelection.LEFT)
-                }
+        (2..3).forEach {
+            if (it != 2) {
+                Spacer(modifier = Modifier.size(8.dp))
             }
-
+            UpgradeTier(tier = it, upgradeSelection = UpgradeSelection.LEFT)
         }
     }
 

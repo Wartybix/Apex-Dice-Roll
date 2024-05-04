@@ -109,7 +109,7 @@ fun UpgradeTier(
         )
         Surface(
             shape = MaterialTheme.shapes.medium,
-            modifier = Modifier.padding(horizontal = 16.dp),
+            modifier = Modifier.padding(horizontal = 8.dp),
             color = containerColor,
             contentColor = onContainerColor
         ) {
