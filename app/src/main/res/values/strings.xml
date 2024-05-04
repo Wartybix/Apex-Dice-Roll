@@ -7,4 +7,5 @@
     <string name="mixtape_loadout">Mixtape Loadout</string>
     <string name="select_all">Select All</string>
     <string name="apex_wins">%1$s Apex win%2$s</string>
+    <string name="wins">Wins</string>
 </resources>

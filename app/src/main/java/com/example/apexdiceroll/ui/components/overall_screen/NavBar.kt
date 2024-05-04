@@ -2,10 +2,10 @@ package com.example.apexdiceroll.ui.components.overall_screen
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Casino
-import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.People
 import androidx.compose.material.icons.outlined.Casino
-import androidx.compose.material.icons.outlined.History
+import androidx.compose.material.icons.outlined.EmojiEvents
 import androidx.compose.material.icons.outlined.People
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -67,9 +67,9 @@ fun NavBar(
 
         ApexDiceRollItem(
             destinationScreen = Screen.WinHistory,
-            filledIcon = Icons.Filled.History,
-            outlinedIcon = Icons.Outlined.History,
-            label = stringResource(R.string.win_history)
+            filledIcon = Icons.Filled.EmojiEvents,
+            outlinedIcon = Icons.Outlined.EmojiEvents,
+            label = stringResource(R.string.wins)
         )
     }
 }
