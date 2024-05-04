@@ -51,9 +51,9 @@ fun MixtapeLoadoutDisplay(
                     ) {
                         Text(
                             text = selectedLoadout.loadoutName,
-                            style = MaterialTheme.typography.titleLarge,
+                            style = MaterialTheme.typography.titleMedium,
                             textAlign = TextAlign.Center,
-                            modifier = Modifier.padding(16.dp)
+                            modifier = Modifier.padding(8.dp)
                         )
                     }
                 }
