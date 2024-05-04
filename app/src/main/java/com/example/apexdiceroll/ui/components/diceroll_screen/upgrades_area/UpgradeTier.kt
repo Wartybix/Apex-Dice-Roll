@@ -68,7 +68,7 @@ fun UpgradeTier(
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
             ) {
                 Text("LVL $tier", style = MaterialTheme.typography.labelSmall)
                 Icon(
