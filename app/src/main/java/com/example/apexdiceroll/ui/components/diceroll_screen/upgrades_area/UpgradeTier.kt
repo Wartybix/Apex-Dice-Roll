@@ -24,30 +24,8 @@ import androidx.compose.ui.unit.dp
 import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.UpgradeSelection
 import com.example.apexdiceroll.ui.theme.ApexDiceRollTheme
-import com.example.apexdiceroll.ui.theme.commonContainerDark
-import com.example.apexdiceroll.ui.theme.commonContainerLight
-import com.example.apexdiceroll.ui.theme.commonDark
-import com.example.apexdiceroll.ui.theme.commonLight
-import com.example.apexdiceroll.ui.theme.epicContainerDark
-import com.example.apexdiceroll.ui.theme.epicContainerLight
-import com.example.apexdiceroll.ui.theme.epicDark
-import com.example.apexdiceroll.ui.theme.epicLight
-import com.example.apexdiceroll.ui.theme.onCommonContainerDark
-import com.example.apexdiceroll.ui.theme.onCommonContainerLight
-import com.example.apexdiceroll.ui.theme.onCommonDark
-import com.example.apexdiceroll.ui.theme.onCommonLight
-import com.example.apexdiceroll.ui.theme.onEpicContainerDark
-import com.example.apexdiceroll.ui.theme.onEpicContainerLight
-import com.example.apexdiceroll.ui.theme.onEpicDark
-import com.example.apexdiceroll.ui.theme.onEpicLight
-import com.example.apexdiceroll.ui.theme.onRareContainerDark
-import com.example.apexdiceroll.ui.theme.onRareContainerLight
-import com.example.apexdiceroll.ui.theme.onRareDark
-import com.example.apexdiceroll.ui.theme.onRareLight
-import com.example.apexdiceroll.ui.theme.rareContainerDark
-import com.example.apexdiceroll.ui.theme.rareContainerLight
-import com.example.apexdiceroll.ui.theme.rareDark
-import com.example.apexdiceroll.ui.theme.rareLight
+import com.example.apexdiceroll.ui.theme.extendedDark
+import com.example.apexdiceroll.ui.theme.extendedLight
 
 @Composable
 fun UpgradeTier(
@@ -57,42 +35,17 @@ fun UpgradeTier(
 ) {
     val darkTheme = isSystemInDarkTheme()
 
-    val chipColor by remember {
-        mutableStateOf(
-            when (tier) {
-                2 -> if (darkTheme) rareDark else rareLight
-                3 -> if (darkTheme) epicDark else epicLight
-                else -> if (darkTheme) commonDark else commonLight
-            }
-        )
-    }
+    val colorFamily by remember { mutableStateOf(if (darkTheme) extendedDark else extendedLight) }
 
-    val tickColor by remember {
+    val rarity by remember {
         mutableStateOf(
             when (tier) {
-                2 -> if (darkTheme) onRareDark else onRareLight
-                3 -> if (darkTheme) onEpicDark else onEpicLight
-                else -> if (darkTheme) onCommonDark else onCommonLight
-            }
-        )
-    }
-
-    val containerColor by remember {
-        mutableStateOf(
-            when (tier) {
-                2 -> if (darkTheme) rareContainerDark else rareContainerLight
-                3 -> if (darkTheme) epicContainerDark else epicContainerLight
-                else -> if (darkTheme) commonContainerDark else commonContainerLight
-            }
-        )
-    }
-
-    val onContainerColor by remember {
-        mutableStateOf(
-            when (tier) {
-                2 -> if (darkTheme) onRareContainerDark else onRareContainerLight
-                3 -> if (darkTheme) onEpicContainerDark else onEpicContainerLight
-                else -> if (darkTheme) onCommonContainerDark else onCommonContainerLight
+                1 -> colorFamily.common
+                2 -> colorFamily.rare
+                3 -> colorFamily.epic
+                4 -> colorFamily.legendary
+                5 -> colorFamily.mythic
+                else -> colorFamily.common
             }
         )
     }
@@ -101,8 +54,8 @@ fun UpgradeTier(
 
     Row(modifier = modifier.height(IntrinsicSize.Min), verticalAlignment = Alignment.CenterVertically) {
         Upgrade(
-            matchSurfaceColour = chipColor,
-            matchOnSurfaceColor = tickColor,
+            matchSurfaceColour = rarity.color,
+            matchOnSurfaceColor = rarity.onColor,
             currentSelection = upgradeSelection,
             desiredSelection = UpgradeSelection.LEFT,
             modifier = Modifier.weight(1f)
@@ -110,8 +63,8 @@ fun UpgradeTier(
         Surface(
             shape = MaterialTheme.shapes.medium,
             modifier = Modifier.padding(horizontal = 8.dp),
-            color = containerColor,
-            contentColor = onContainerColor
+            color = rarity.colorContainer,
+            contentColor = rarity.onColorContainer
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -126,8 +79,8 @@ fun UpgradeTier(
             }
         }
         Upgrade(
-            matchSurfaceColour = chipColor,
-            matchOnSurfaceColor = tickColor,
+            matchSurfaceColour = rarity.color,
+            matchOnSurfaceColor = rarity.onColor,
             currentSelection = upgradeSelection,
             desiredSelection = UpgradeSelection.RIGHT,
             modifier = Modifier.weight(1f)
@@ -139,6 +92,6 @@ fun UpgradeTier(
 @Composable
 fun UpgradeTierPreview() {
     ApexDiceRollTheme {
-        UpgradeTier(tier = 3, upgradeSelection = UpgradeSelection.RIGHT)
+        UpgradeTier(tier = 2, upgradeSelection = UpgradeSelection.RIGHT)
     }
 }
