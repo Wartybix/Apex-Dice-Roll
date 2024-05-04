@@ -31,6 +31,7 @@ import com.example.apexdiceroll.ui.components.diceroll_screen.GameModeSwitcher
 import com.example.apexdiceroll.ui.components.diceroll_screen.legend_display.LegendCarousel
 import com.example.apexdiceroll.ui.components.diceroll_screen.MixtapeLoadoutDisplay
 import com.example.apexdiceroll.ui.components.diceroll_screen.RerollButton
+import com.example.apexdiceroll.ui.components.diceroll_screen.upgrades_area.UpgradesDisplay
 import com.example.apexdiceroll.ui.theme.ApexDiceRollTheme
 
 @Composable
@@ -79,11 +80,18 @@ fun DiceRollScreen(
         Spacer(Modifier.size(32.dp))
         LegendCarousel(legendLoadout = generatedLegends)
         Spacer(Modifier.size(32.dp))
-        if (selectedGameMode == GameMode.Mixtape) {
-            MixtapeLoadoutDisplay(
-                selectedLoadout = generatedMixtapeLoadout,
-                modifier = Modifier.padding(start = startPadding, end = endPadding)
-            )
+        when (selectedGameMode) {
+            GameMode.BR -> {
+                UpgradesDisplay(
+                    modifier = Modifier.padding(start = startPadding, end = endPadding)
+                )
+            }
+            GameMode.Mixtape -> {
+                MixtapeLoadoutDisplay(
+                    selectedLoadout = generatedMixtapeLoadout,
+                    modifier = Modifier.padding(start = startPadding, end = endPadding)
+                )
+            }
         }
         Spacer(Modifier.height(32.dp))
         RerollButton(onClick = onReroll)
