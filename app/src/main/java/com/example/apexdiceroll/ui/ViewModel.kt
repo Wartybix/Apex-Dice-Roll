@@ -85,7 +85,15 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun fetchLegendLoadout() {
-        uiState.value.generatedLegends = randomiseLegendLoadout()
+        uiState.value.generatedLegends = randomiseLegendLoadout() //TODO add IO
+    }
+
+    private fun fetchMixtapeLoadout() {
+        uiState.value.mixtapeLoadout = randomiseMixtapeLoadout() //TODO add IO
+    }
+
+    private fun fetchLegendUpgrades() {
+        uiState.value.legendUpgrades = randomiseLegendUpgrades() //TODO add IO
     }
 
     private val _uiState = MutableStateFlow(UiState())
@@ -96,6 +104,9 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         fetchLegendLoadout()
+        fetchLegendUpgrades()
+        fetchMixtapeLoadout()
+        //TODO do only one of the two lines above depending on selected game mode.
     }
 
     fun switchScreen(newScreen: Screen) {
