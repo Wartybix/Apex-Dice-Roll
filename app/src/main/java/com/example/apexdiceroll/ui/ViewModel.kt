@@ -12,6 +12,7 @@ import com.example.apexdiceroll.data.LegendsSelected
 import com.example.apexdiceroll.data.MixtapeLoadout
 import com.example.apexdiceroll.data.Screen
 import com.example.apexdiceroll.data.UiState
+import com.example.apexdiceroll.data.UpgradeSelection
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -73,6 +74,16 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         return MixtapeLoadout.entries.random()
     }
 
+    private fun randomiseLegendUpgrades() : List<UpgradeSelection> {
+        val legendUpgrades = mutableListOf<UpgradeSelection>()
+
+        for (rarity in (2..3)) {
+            legendUpgrades.add(UpgradeSelection.entries.random())
+        }
+
+        return legendUpgrades.toList()
+    }
+
     private fun fetchLegendLoadout() {
         uiState.value.generatedLegends = randomiseLegendLoadout()
     }
@@ -110,11 +121,14 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     fun rollDice() {
         val generatedLegends = randomiseLegendLoadout()
         val mixtapeLoadout = randomiseMixtapeLoadout()
+        val legendUpgrades = randomiseLegendUpgrades()
+        //TODO ensure only processing for selected game mode is done.
 
         _uiState.update { currentState ->
             currentState.copy(
                 generatedLegends = generatedLegends,
-                mixtapeLoadout = mixtapeLoadout
+                mixtapeLoadout = mixtapeLoadout,
+                legendUpgrades = legendUpgrades
             )
         }
     }

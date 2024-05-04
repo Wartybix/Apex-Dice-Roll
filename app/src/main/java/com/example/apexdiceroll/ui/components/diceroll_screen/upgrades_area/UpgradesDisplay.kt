@@ -17,14 +17,15 @@ import com.example.apexdiceroll.data.UpgradeSelection
 
 @Composable
 fun UpgradesDisplay(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    data: List<UpgradeSelection>
 ) {
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        (2..3).forEach {
-            if (it != 2) {
+        (data).forEachIndexed { index, upgrade ->
+            if (index != 0) {
                 Spacer(modifier = Modifier.size(8.dp))
             }
-            UpgradeTier(tier = it, upgradeSelection = UpgradeSelection.LEFT)
+            UpgradeTier(tier = index + 2, upgradeSelection = upgrade)
         }
     }
 
@@ -34,7 +35,7 @@ fun UpgradesDisplay(
 @Composable
 fun UpgradesDisplayPreview() {
     Surface {
-        UpgradesDisplay()
+        UpgradesDisplay(data = listOf(UpgradeSelection.LEFT, UpgradeSelection.RIGHT))
     }
 
 }
