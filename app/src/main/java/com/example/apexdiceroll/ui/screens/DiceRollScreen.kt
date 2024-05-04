@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -32,7 +31,6 @@ import com.example.apexdiceroll.data.UpgradeSelection
 import com.example.apexdiceroll.ui.components.diceroll_screen.GameModeSwitcher
 import com.example.apexdiceroll.ui.components.diceroll_screen.legend_display.LegendCarousel
 import com.example.apexdiceroll.ui.components.diceroll_screen.MixtapeLoadoutDisplay
-import com.example.apexdiceroll.ui.components.diceroll_screen.RerollButton
 import com.example.apexdiceroll.ui.components.diceroll_screen.SectionTitle
 import com.example.apexdiceroll.ui.components.diceroll_screen.upgrades_area.UpgradesDisplay
 import com.example.apexdiceroll.ui.theme.ApexDiceRollTheme
@@ -44,7 +42,6 @@ fun DiceRollScreen(
     generatedLegendUpgrades: List<UpgradeSelection>,
     selectedGameMode: GameMode,
     onGameModeSwitch: (GameMode) -> Unit,
-    onReroll: () -> Unit,
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues()
 ) {
@@ -65,7 +62,7 @@ fun DiceRollScreen(
         )
     }
     val bottomPadding by remember {
-        mutableStateOf(verticalPadding + 8.dp + paddingValues.calculateBottomPadding())
+        mutableStateOf(verticalPadding + paddingValues.calculateBottomPadding())
     }
 
     Column(
@@ -101,8 +98,6 @@ fun DiceRollScreen(
                 )
             }
         }
-        Spacer(Modifier.height(32.dp))
-        RerollButton(onClick = onReroll)
     }
 }
 
@@ -117,7 +112,6 @@ fun DiceRollScreenPreview() {
                     Legend("Mad Maggie", R.drawable.mad_maggie, LegendClass.Assault),
                     Legend("Newcastle", R.drawable.newcastle, LegendClass.Support)
                 ),
-                onReroll = {},
                 selectedGameMode = GameMode.BR,
                 onGameModeSwitch = {},
                 generatedMixtapeLoadout = MixtapeLoadout.CloseQuarters,
@@ -138,7 +132,6 @@ fun DiceRollScreenPreviewDark() {
                     Legend("Mad Maggie", R.drawable.mad_maggie, LegendClass.Assault),
                     Legend("Newcastle", R.drawable.newcastle, LegendClass.Support)
                 ),
-                onReroll = {},
                 selectedGameMode = GameMode.BR,
                 onGameModeSwitch = {},
                 generatedMixtapeLoadout = MixtapeLoadout.CloseQuarters,

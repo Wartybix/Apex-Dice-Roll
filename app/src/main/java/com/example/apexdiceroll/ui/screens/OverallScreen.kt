@@ -1,9 +1,16 @@
 package com.example.apexdiceroll.ui.screens
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Sync
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.Screen
 import com.example.apexdiceroll.ui.ViewModel
 import com.example.apexdiceroll.ui.components.overall_screen.NavBar
@@ -17,6 +24,17 @@ fun OverallScreen(
 
     Scaffold(
         topBar = { TopAppBar() },
+        floatingActionButton = {
+            when (uiState.currentScreen) {
+                Screen.DiceRoll -> {
+                    FloatingActionButton(onClick = { viewModel.rollDice() }) {
+                        Icon(imageVector = Icons.Default.Sync, contentDescription = "Re-Roll")
+                    }
+                }
+                else -> {}
+            }
+
+        },
         content = { it ->
             when (uiState.currentScreen) {
                 Screen.DiceRoll -> {
@@ -24,7 +42,6 @@ fun OverallScreen(
                         generatedLegends = uiState.generatedLegends,
                         generatedMixtapeLoadout = uiState.mixtapeLoadout,
                         generatedLegendUpgrades = uiState.legendUpgrades,
-                        onReroll = { viewModel.rollDice() },
                         selectedGameMode = uiState.selectedGameMode,
                         onGameModeSwitch = {
                             viewModel.switchGameMode(it)
