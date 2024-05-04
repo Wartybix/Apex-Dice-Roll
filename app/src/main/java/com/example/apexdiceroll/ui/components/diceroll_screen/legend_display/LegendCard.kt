@@ -32,7 +32,7 @@ fun LegendCard(
     modifier: Modifier = Modifier
 ) {
     val cardColour = if (priorityNo == 1)
-        MaterialTheme.colorScheme.surfaceVariant
+        MaterialTheme.colorScheme.surfaceContainer
     else
         MaterialTheme.colorScheme.surface
 

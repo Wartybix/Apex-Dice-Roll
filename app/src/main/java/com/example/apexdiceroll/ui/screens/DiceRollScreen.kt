@@ -19,6 +19,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -31,6 +32,7 @@ import com.example.apexdiceroll.ui.components.diceroll_screen.GameModeSwitcher
 import com.example.apexdiceroll.ui.components.diceroll_screen.legend_display.LegendCarousel
 import com.example.apexdiceroll.ui.components.diceroll_screen.MixtapeLoadoutDisplay
 import com.example.apexdiceroll.ui.components.diceroll_screen.RerollButton
+import com.example.apexdiceroll.ui.components.diceroll_screen.SectionTitle
 import com.example.apexdiceroll.ui.components.diceroll_screen.upgrades_area.UpgradesDisplay
 import com.example.apexdiceroll.ui.theme.ApexDiceRollTheme
 
@@ -70,6 +72,7 @@ fun DiceRollScreen(
             .verticalScroll(rememberScrollState())
             .padding(top = topPadding, bottom = bottomPadding)
     ) {
+        SectionTitle(text = "Game Mode")
         GameModeSwitcher(
             selectedGameMode = selectedGameMode,
             onSwitch = { onGameModeSwitch(it) },
@@ -82,11 +85,13 @@ fun DiceRollScreen(
         Spacer(Modifier.size(32.dp))
         when (selectedGameMode) {
             GameMode.BR -> {
+                SectionTitle(text = "Legend Upgrades")
                 UpgradesDisplay(
                     modifier = Modifier.padding(start = startPadding, end = endPadding)
                 )
             }
             GameMode.Mixtape -> {
+                SectionTitle(text = stringResource(id = R.string.mixtape_loadout))
                 MixtapeLoadoutDisplay(
                     selectedLoadout = generatedMixtapeLoadout,
                     modifier = Modifier.padding(start = startPadding, end = endPadding)

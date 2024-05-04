@@ -34,13 +34,6 @@ fun MixtapeLoadoutDisplay(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = stringResource(R.string.mixtape_loadout),
-            style = MaterialTheme.typography.titleMedium
-        )
-
-        Spacer(modifier = Modifier.size(8.dp))
-
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = modifier.fillMaxWidth()

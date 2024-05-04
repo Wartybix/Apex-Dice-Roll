@@ -20,9 +20,6 @@ fun UpgradesDisplay(
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(text = "Legend Upgrades", style = MaterialTheme.typography.titleMedium)
-        Spacer(modifier = Modifier.height(8.dp))
-
         Surface(
             shape = MaterialTheme.shapes.large,
             color = MaterialTheme.colorScheme.surfaceContainer
