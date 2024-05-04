@@ -88,10 +88,6 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         uiState.value.generatedLegends = randomiseLegendLoadout()
     }
 
-    private fun loadSelectedLegends() {
-
-    }
-
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
     private val _legendRoster: SnapshotStateList<Legend> = getAllLegends().toMutableStateList()
