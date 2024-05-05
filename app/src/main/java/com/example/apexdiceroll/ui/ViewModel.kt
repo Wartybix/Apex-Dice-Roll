@@ -19,6 +19,15 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 class ViewModel(application: Application) : AndroidViewModel(application) {
+    companion object {
+        private const val EXTENSION = ".txt"
+
+        const val GENERATED_LEGENDS_FILE = "generated_legends$EXTENSION"
+        const val MIXTAPE_FILE = "mixtape$EXTENSION"
+        const val LEGEND_UPGRADES_FILE = "upgrades$EXTENSION"
+        const val WINS_FILE = "wins$EXTENSION"
+        const val SELECTIONS_FILE = "selections$EXTENSION"
+    }
     private fun getAllLegends(): List<Legend> {
         return listOf(
             Legend("Bloodhound", R.drawable.bloodhound, LegendClass.Recon),
