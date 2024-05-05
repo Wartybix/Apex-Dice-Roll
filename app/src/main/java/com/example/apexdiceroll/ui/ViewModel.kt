@@ -1,6 +1,7 @@
 package com.example.apexdiceroll.ui
 
 import android.app.Application
+import android.content.Context
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.AndroidViewModel
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import java.io.FileOutputStream
 
 class ViewModel(application: Application) : AndroidViewModel(application) {
     companion object {
@@ -103,6 +105,22 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun fetchLegendUpgrades() {
         uiState.value.legendUpgrades = randomiseLegendUpgrades() //TODO add IO
+    }
+
+    private fun writeByteArray(stream: FileOutputStream, data: ByteArray) {
+        stream.write(data)
+    }
+
+    private fun writeInteger(stream: FileOutputStream, data: Int) {
+        stream.write(data)
+    }
+
+    private fun saveToDisk(filename: String, writeFunction: (FileOutputStream) -> Unit) {
+        val context = getApplication<Application>().applicationContext
+
+        context.openFileOutput(filename, Context.MODE_PRIVATE).use {
+            writeFunction(it)
+        }
     }
 
     private val _uiState = MutableStateFlow(UiState())
