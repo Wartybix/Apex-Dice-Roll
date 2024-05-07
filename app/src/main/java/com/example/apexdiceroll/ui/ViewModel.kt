@@ -148,6 +148,16 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         saveToDisk(GAME_MODE_FILE) { stream -> stream.write(gameModeSerialised) }
     }
 
+    private fun saveSelections() {
+        val selectionsSerialised = legendRoster.indices.filter { legendIndex ->
+            legendRoster[legendIndex].selected
+        }.map {
+            it.toByte()
+        }.toByteArray()
+
+        saveToDisk(SELECTIONS_FILE) { stream -> stream.write(selectionsSerialised) }
+    }
+
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
     private val _legendRoster: SnapshotStateList<Legend> = getAllLegends().toMutableStateList()
