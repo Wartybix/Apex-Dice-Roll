@@ -24,6 +24,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     companion object {
         private const val EXTENSION = ".txt"
 
+        const val GAME_MODE_FILE = "game_mode$EXTENSION"
         const val GENERATED_LEGENDS_FILE = "generated_legends$EXTENSION"
         const val MIXTAPE_FILE = "mixtape$EXTENSION"
         const val LEGEND_UPGRADES_FILE = "upgrades$EXTENSION"
@@ -108,20 +109,43 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         uiState.value.legendUpgrades = randomiseLegendUpgrades() //TODO add IO
     }
 
-    private fun writeByteArray(stream: FileOutputStream, data: ByteArray) {
-        stream.write(data)
-    }
-
-    private fun writeInteger(stream: FileOutputStream, data: Int) {
-        stream.write(data)
-    }
-
     private fun saveToDisk(filename: String, writeFunction: (FileOutputStream) -> Unit) {
         val context = getApplication<Application>().applicationContext
 
         context.openFileOutput(filename, Context.MODE_PRIVATE).use {
             writeFunction(it)
         }
+    }
+
+    private fun saveDiceRoll() {
+        /*
+         Convert generated legends into a list of their respective indices in the legend roster.
+         Each index is converted to a byte.
+         Then, the whole list is converted to a ByteArray.
+         */
+        val legendsSerialised = uiState.value.generatedLegends.map { legend ->
+            legendRoster.indexOf(legend).toByte()
+        }.toByteArray()
+
+        saveToDisk(GENERATED_LEGENDS_FILE) { stream -> stream.write(legendsSerialised) }
+
+        if (uiState.value.selectedGameMode == GameMode.BR) {
+            val upgradesSerialised = uiState.value.legendUpgrades.map { upgradeSelection ->
+                upgradeSelection.ordinal.toByte()
+            }.toByteArray()
+
+            saveToDisk(LEGEND_UPGRADES_FILE) { stream -> stream.write(upgradesSerialised) }
+        } else if (uiState.value.selectedGameMode == GameMode.Mixtape) {
+            val mixtapeLoadoutSerialised = uiState.value.mixtapeLoadout.ordinal
+
+            saveToDisk(MIXTAPE_FILE) { stream -> stream.write(mixtapeLoadoutSerialised) }
+        }
+    }
+
+    private fun saveGameMode() {
+        val gameModeSerialised = uiState.value.selectedGameMode.ordinal
+
+        saveToDisk(GAME_MODE_FILE) { stream -> stream.write(gameModeSerialised) }
     }
 
     private val _uiState = MutableStateFlow(UiState())
