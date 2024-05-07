@@ -45,7 +45,8 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
             Legend("Vantage", R.drawable.vantage, LegendClass.Recon),
             Legend("Catalyst", R.drawable.catalyst, LegendClass.Controller),
             Legend("Ballistic", R.drawable.ballistic, LegendClass.Assault),
-            Legend("Conduit", R.drawable.conduit, LegendClass.Support)
+            Legend("Conduit", R.drawable.conduit, LegendClass.Support),
+            Legend("Alter", R.drawable.alter, LegendClass.Skirmisher)
         )
     }
 
