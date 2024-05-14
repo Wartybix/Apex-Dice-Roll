@@ -45,7 +45,15 @@ fun OverallScreen(
                         Icon(imageVector = Icons.Default.Sync, contentDescription = "Re-Roll")
                     }
                 }
-                else -> {}
+                Screen.WinHistory -> {
+		    ExtendedFloatingActionButton(
+			onClick = { /*TODO*/ },
+			icon = Icons.Default.Add,
+			text = "Add Win"
+		    )
+		    //TODO add fab height modifier
+		}
+		else -> {}
             }
 
         },
