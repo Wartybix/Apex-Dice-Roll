@@ -1,13 +1,13 @@
 package com.example.apexdiceroll.ui.theme
-
 import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
-import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.SideEffect
@@ -19,6 +19,11 @@ import androidx.core.view.WindowCompat
 
 @Immutable
 data class ExtendedColorScheme(
+    val assault: ColorFamily,
+    val skirmisher: ColorFamily,
+    val recon: ColorFamily,
+    val support: ColorFamily,
+    val controller: ColorFamily,
     val common: ColorFamily,
     val rare: ColorFamily,
     val epic: ColorFamily,
@@ -255,201 +260,381 @@ private val highContrastDarkColorScheme = darkColorScheme(
 )
 
 val extendedLight = ExtendedColorScheme(
-    common = ColorFamily(
-        commonLight,
-        onCommonLight,
-        commonContainerLight,
-        onCommonContainerLight,
-    ),
-    rare = ColorFamily(
-        rareLight,
-        onRareLight,
-        rareContainerLight,
-        onRareContainerLight,
-    ),
-    epic = ColorFamily(
-        epicLight,
-        onEpicLight,
-        epicContainerLight,
-        onEpicContainerLight,
-    ),
-    legendary = ColorFamily(
-        legendaryLight,
-        onLegendaryLight,
-        legendaryContainerLight,
-        onLegendaryContainerLight,
-    ),
-    mythic = ColorFamily(
-        mythicLight,
-        onMythicLight,
-        mythicContainerLight,
-        onMythicContainerLight,
-    ),
+  assault = ColorFamily(
+  assaultLight,
+  onAssaultLight,
+  assaultContainerLight,
+  onAssaultContainerLight,
+  ),
+  skirmisher = ColorFamily(
+  skirmisherLight,
+  onSkirmisherLight,
+  skirmisherContainerLight,
+  onSkirmisherContainerLight,
+  ),
+  recon = ColorFamily(
+  reconLight,
+  onReconLight,
+  reconContainerLight,
+  onReconContainerLight,
+  ),
+  support = ColorFamily(
+  supportLight,
+  onSupportLight,
+  supportContainerLight,
+  onSupportContainerLight,
+  ),
+  controller = ColorFamily(
+  controllerLight,
+  onControllerLight,
+  controllerContainerLight,
+  onControllerContainerLight,
+  ),
+  common = ColorFamily(
+  commonLight,
+  onCommonLight,
+  commonContainerLight,
+  onCommonContainerLight,
+  ),
+  rare = ColorFamily(
+  rareLight,
+  onRareLight,
+  rareContainerLight,
+  onRareContainerLight,
+  ),
+  epic = ColorFamily(
+  epicLight,
+  onEpicLight,
+  epicContainerLight,
+  onEpicContainerLight,
+  ),
+  legendary = ColorFamily(
+  legendaryLight,
+  onLegendaryLight,
+  legendaryContainerLight,
+  onLegendaryContainerLight,
+  ),
+  mythic = ColorFamily(
+  mythicLight,
+  onMythicLight,
+  mythicContainerLight,
+  onMythicContainerLight,
+  ),
 )
 
 val extendedDark = ExtendedColorScheme(
-    common = ColorFamily(
-        commonDark,
-        onCommonDark,
-        commonContainerDark,
-        onCommonContainerDark,
-    ),
-    rare = ColorFamily(
-        rareDark,
-        onRareDark,
-        rareContainerDark,
-        onRareContainerDark,
-    ),
-    epic = ColorFamily(
-        epicDark,
-        onEpicDark,
-        epicContainerDark,
-        onEpicContainerDark,
-    ),
-    legendary = ColorFamily(
-        legendaryDark,
-        onLegendaryDark,
-        legendaryContainerDark,
-        onLegendaryContainerDark,
-    ),
-    mythic = ColorFamily(
-        mythicDark,
-        onMythicDark,
-        mythicContainerDark,
-        onMythicContainerDark,
-    ),
+  assault = ColorFamily(
+  assaultDark,
+  onAssaultDark,
+  assaultContainerDark,
+  onAssaultContainerDark,
+  ),
+  skirmisher = ColorFamily(
+  skirmisherDark,
+  onSkirmisherDark,
+  skirmisherContainerDark,
+  onSkirmisherContainerDark,
+  ),
+  recon = ColorFamily(
+  reconDark,
+  onReconDark,
+  reconContainerDark,
+  onReconContainerDark,
+  ),
+  support = ColorFamily(
+  supportDark,
+  onSupportDark,
+  supportContainerDark,
+  onSupportContainerDark,
+  ),
+  controller = ColorFamily(
+  controllerDark,
+  onControllerDark,
+  controllerContainerDark,
+  onControllerContainerDark,
+  ),
+  common = ColorFamily(
+  commonDark,
+  onCommonDark,
+  commonContainerDark,
+  onCommonContainerDark,
+  ),
+  rare = ColorFamily(
+  rareDark,
+  onRareDark,
+  rareContainerDark,
+  onRareContainerDark,
+  ),
+  epic = ColorFamily(
+  epicDark,
+  onEpicDark,
+  epicContainerDark,
+  onEpicContainerDark,
+  ),
+  legendary = ColorFamily(
+  legendaryDark,
+  onLegendaryDark,
+  legendaryContainerDark,
+  onLegendaryContainerDark,
+  ),
+  mythic = ColorFamily(
+  mythicDark,
+  onMythicDark,
+  mythicContainerDark,
+  onMythicContainerDark,
+  ),
 )
 
 val extendedLightMediumContrast = ExtendedColorScheme(
-    common = ColorFamily(
-        commonLightMediumContrast,
-        onCommonLightMediumContrast,
-        commonContainerLightMediumContrast,
-        onCommonContainerLightMediumContrast,
-    ),
-    rare = ColorFamily(
-        rareLightMediumContrast,
-        onRareLightMediumContrast,
-        rareContainerLightMediumContrast,
-        onRareContainerLightMediumContrast,
-    ),
-    epic = ColorFamily(
-        epicLightMediumContrast,
-        onEpicLightMediumContrast,
-        epicContainerLightMediumContrast,
-        onEpicContainerLightMediumContrast,
-    ),
-    legendary = ColorFamily(
-        legendaryLightMediumContrast,
-        onLegendaryLightMediumContrast,
-        legendaryContainerLightMediumContrast,
-        onLegendaryContainerLightMediumContrast,
-    ),
-    mythic = ColorFamily(
-        mythicLightMediumContrast,
-        onMythicLightMediumContrast,
-        mythicContainerLightMediumContrast,
-        onMythicContainerLightMediumContrast,
-    ),
+  assault = ColorFamily(
+  assaultLightMediumContrast,
+  onAssaultLightMediumContrast,
+  assaultContainerLightMediumContrast,
+  onAssaultContainerLightMediumContrast,
+  ),
+  skirmisher = ColorFamily(
+  skirmisherLightMediumContrast,
+  onSkirmisherLightMediumContrast,
+  skirmisherContainerLightMediumContrast,
+  onSkirmisherContainerLightMediumContrast,
+  ),
+  recon = ColorFamily(
+  reconLightMediumContrast,
+  onReconLightMediumContrast,
+  reconContainerLightMediumContrast,
+  onReconContainerLightMediumContrast,
+  ),
+  support = ColorFamily(
+  supportLightMediumContrast,
+  onSupportLightMediumContrast,
+  supportContainerLightMediumContrast,
+  onSupportContainerLightMediumContrast,
+  ),
+  controller = ColorFamily(
+  controllerLightMediumContrast,
+  onControllerLightMediumContrast,
+  controllerContainerLightMediumContrast,
+  onControllerContainerLightMediumContrast,
+  ),
+  common = ColorFamily(
+  commonLightMediumContrast,
+  onCommonLightMediumContrast,
+  commonContainerLightMediumContrast,
+  onCommonContainerLightMediumContrast,
+  ),
+  rare = ColorFamily(
+  rareLightMediumContrast,
+  onRareLightMediumContrast,
+  rareContainerLightMediumContrast,
+  onRareContainerLightMediumContrast,
+  ),
+  epic = ColorFamily(
+  epicLightMediumContrast,
+  onEpicLightMediumContrast,
+  epicContainerLightMediumContrast,
+  onEpicContainerLightMediumContrast,
+  ),
+  legendary = ColorFamily(
+  legendaryLightMediumContrast,
+  onLegendaryLightMediumContrast,
+  legendaryContainerLightMediumContrast,
+  onLegendaryContainerLightMediumContrast,
+  ),
+  mythic = ColorFamily(
+  mythicLightMediumContrast,
+  onMythicLightMediumContrast,
+  mythicContainerLightMediumContrast,
+  onMythicContainerLightMediumContrast,
+  ),
 )
 
 val extendedLightHighContrast = ExtendedColorScheme(
-    common = ColorFamily(
-        commonLightHighContrast,
-        onCommonLightHighContrast,
-        commonContainerLightHighContrast,
-        onCommonContainerLightHighContrast,
-    ),
-    rare = ColorFamily(
-        rareLightHighContrast,
-        onRareLightHighContrast,
-        rareContainerLightHighContrast,
-        onRareContainerLightHighContrast,
-    ),
-    epic = ColorFamily(
-        epicLightHighContrast,
-        onEpicLightHighContrast,
-        epicContainerLightHighContrast,
-        onEpicContainerLightHighContrast,
-    ),
-    legendary = ColorFamily(
-        legendaryLightHighContrast,
-        onLegendaryLightHighContrast,
-        legendaryContainerLightHighContrast,
-        onLegendaryContainerLightHighContrast,
-    ),
-    mythic = ColorFamily(
-        mythicLightHighContrast,
-        onMythicLightHighContrast,
-        mythicContainerLightHighContrast,
-        onMythicContainerLightHighContrast,
-    ),
+  assault = ColorFamily(
+  assaultLightHighContrast,
+  onAssaultLightHighContrast,
+  assaultContainerLightHighContrast,
+  onAssaultContainerLightHighContrast,
+  ),
+  skirmisher = ColorFamily(
+  skirmisherLightHighContrast,
+  onSkirmisherLightHighContrast,
+  skirmisherContainerLightHighContrast,
+  onSkirmisherContainerLightHighContrast,
+  ),
+  recon = ColorFamily(
+  reconLightHighContrast,
+  onReconLightHighContrast,
+  reconContainerLightHighContrast,
+  onReconContainerLightHighContrast,
+  ),
+  support = ColorFamily(
+  supportLightHighContrast,
+  onSupportLightHighContrast,
+  supportContainerLightHighContrast,
+  onSupportContainerLightHighContrast,
+  ),
+  controller = ColorFamily(
+  controllerLightHighContrast,
+  onControllerLightHighContrast,
+  controllerContainerLightHighContrast,
+  onControllerContainerLightHighContrast,
+  ),
+  common = ColorFamily(
+  commonLightHighContrast,
+  onCommonLightHighContrast,
+  commonContainerLightHighContrast,
+  onCommonContainerLightHighContrast,
+  ),
+  rare = ColorFamily(
+  rareLightHighContrast,
+  onRareLightHighContrast,
+  rareContainerLightHighContrast,
+  onRareContainerLightHighContrast,
+  ),
+  epic = ColorFamily(
+  epicLightHighContrast,
+  onEpicLightHighContrast,
+  epicContainerLightHighContrast,
+  onEpicContainerLightHighContrast,
+  ),
+  legendary = ColorFamily(
+  legendaryLightHighContrast,
+  onLegendaryLightHighContrast,
+  legendaryContainerLightHighContrast,
+  onLegendaryContainerLightHighContrast,
+  ),
+  mythic = ColorFamily(
+  mythicLightHighContrast,
+  onMythicLightHighContrast,
+  mythicContainerLightHighContrast,
+  onMythicContainerLightHighContrast,
+  ),
 )
 
 val extendedDarkMediumContrast = ExtendedColorScheme(
-    common = ColorFamily(
-        commonDarkMediumContrast,
-        onCommonDarkMediumContrast,
-        commonContainerDarkMediumContrast,
-        onCommonContainerDarkMediumContrast,
-    ),
-    rare = ColorFamily(
-        rareDarkMediumContrast,
-        onRareDarkMediumContrast,
-        rareContainerDarkMediumContrast,
-        onRareContainerDarkMediumContrast,
-    ),
-    epic = ColorFamily(
-        epicDarkMediumContrast,
-        onEpicDarkMediumContrast,
-        epicContainerDarkMediumContrast,
-        onEpicContainerDarkMediumContrast,
-    ),
-    legendary = ColorFamily(
-        legendaryDarkMediumContrast,
-        onLegendaryDarkMediumContrast,
-        legendaryContainerDarkMediumContrast,
-        onLegendaryContainerDarkMediumContrast,
-    ),
-    mythic = ColorFamily(
-        mythicDarkMediumContrast,
-        onMythicDarkMediumContrast,
-        mythicContainerDarkMediumContrast,
-        onMythicContainerDarkMediumContrast,
-    ),
+  assault = ColorFamily(
+  assaultDarkMediumContrast,
+  onAssaultDarkMediumContrast,
+  assaultContainerDarkMediumContrast,
+  onAssaultContainerDarkMediumContrast,
+  ),
+  skirmisher = ColorFamily(
+  skirmisherDarkMediumContrast,
+  onSkirmisherDarkMediumContrast,
+  skirmisherContainerDarkMediumContrast,
+  onSkirmisherContainerDarkMediumContrast,
+  ),
+  recon = ColorFamily(
+  reconDarkMediumContrast,
+  onReconDarkMediumContrast,
+  reconContainerDarkMediumContrast,
+  onReconContainerDarkMediumContrast,
+  ),
+  support = ColorFamily(
+  supportDarkMediumContrast,
+  onSupportDarkMediumContrast,
+  supportContainerDarkMediumContrast,
+  onSupportContainerDarkMediumContrast,
+  ),
+  controller = ColorFamily(
+  controllerDarkMediumContrast,
+  onControllerDarkMediumContrast,
+  controllerContainerDarkMediumContrast,
+  onControllerContainerDarkMediumContrast,
+  ),
+  common = ColorFamily(
+  commonDarkMediumContrast,
+  onCommonDarkMediumContrast,
+  commonContainerDarkMediumContrast,
+  onCommonContainerDarkMediumContrast,
+  ),
+  rare = ColorFamily(
+  rareDarkMediumContrast,
+  onRareDarkMediumContrast,
+  rareContainerDarkMediumContrast,
+  onRareContainerDarkMediumContrast,
+  ),
+  epic = ColorFamily(
+  epicDarkMediumContrast,
+  onEpicDarkMediumContrast,
+  epicContainerDarkMediumContrast,
+  onEpicContainerDarkMediumContrast,
+  ),
+  legendary = ColorFamily(
+  legendaryDarkMediumContrast,
+  onLegendaryDarkMediumContrast,
+  legendaryContainerDarkMediumContrast,
+  onLegendaryContainerDarkMediumContrast,
+  ),
+  mythic = ColorFamily(
+  mythicDarkMediumContrast,
+  onMythicDarkMediumContrast,
+  mythicContainerDarkMediumContrast,
+  onMythicContainerDarkMediumContrast,
+  ),
 )
 
 val extendedDarkHighContrast = ExtendedColorScheme(
-    common = ColorFamily(
-        commonDarkHighContrast,
-        onCommonDarkHighContrast,
-        commonContainerDarkHighContrast,
-        onCommonContainerDarkHighContrast,
-    ),
-    rare = ColorFamily(
-        rareDarkHighContrast,
-        onRareDarkHighContrast,
-        rareContainerDarkHighContrast,
-        onRareContainerDarkHighContrast,
-    ),
-    epic = ColorFamily(
-        epicDarkHighContrast,
-        onEpicDarkHighContrast,
-        epicContainerDarkHighContrast,
-        onEpicContainerDarkHighContrast,
-    ),
-    legendary = ColorFamily(
-        legendaryDarkHighContrast,
-        onLegendaryDarkHighContrast,
-        legendaryContainerDarkHighContrast,
-        onLegendaryContainerDarkHighContrast,
-    ),
-    mythic = ColorFamily(
-        mythicDarkHighContrast,
-        onMythicDarkHighContrast,
-        mythicContainerDarkHighContrast,
-        onMythicContainerDarkHighContrast,
-    ),
+  assault = ColorFamily(
+  assaultDarkHighContrast,
+  onAssaultDarkHighContrast,
+  assaultContainerDarkHighContrast,
+  onAssaultContainerDarkHighContrast,
+  ),
+  skirmisher = ColorFamily(
+  skirmisherDarkHighContrast,
+  onSkirmisherDarkHighContrast,
+  skirmisherContainerDarkHighContrast,
+  onSkirmisherContainerDarkHighContrast,
+  ),
+  recon = ColorFamily(
+  reconDarkHighContrast,
+  onReconDarkHighContrast,
+  reconContainerDarkHighContrast,
+  onReconContainerDarkHighContrast,
+  ),
+  support = ColorFamily(
+  supportDarkHighContrast,
+  onSupportDarkHighContrast,
+  supportContainerDarkHighContrast,
+  onSupportContainerDarkHighContrast,
+  ),
+  controller = ColorFamily(
+  controllerDarkHighContrast,
+  onControllerDarkHighContrast,
+  controllerContainerDarkHighContrast,
+  onControllerContainerDarkHighContrast,
+  ),
+  common = ColorFamily(
+  commonDarkHighContrast,
+  onCommonDarkHighContrast,
+  commonContainerDarkHighContrast,
+  onCommonContainerDarkHighContrast,
+  ),
+  rare = ColorFamily(
+  rareDarkHighContrast,
+  onRareDarkHighContrast,
+  rareContainerDarkHighContrast,
+  onRareContainerDarkHighContrast,
+  ),
+  epic = ColorFamily(
+  epicDarkHighContrast,
+  onEpicDarkHighContrast,
+  epicContainerDarkHighContrast,
+  onEpicContainerDarkHighContrast,
+  ),
+  legendary = ColorFamily(
+  legendaryDarkHighContrast,
+  onLegendaryDarkHighContrast,
+  legendaryContainerDarkHighContrast,
+  onLegendaryContainerDarkHighContrast,
+  ),
+  mythic = ColorFamily(
+  mythicDarkHighContrast,
+  onMythicDarkHighContrast,
+  mythicContainerDarkHighContrast,
+  onMythicContainerDarkHighContrast,
+  ),
 )
 
 @Immutable
@@ -471,27 +656,27 @@ fun ApexDiceRollTheme(
     dynamicColor: Boolean = true,
     content: @Composable() () -> Unit
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> darkScheme
-        else -> lightScheme
+  val colorScheme = when {
+      dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+          val context = LocalContext.current
+          if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+      }
+      
+      darkTheme -> darkScheme
+      else -> lightScheme
+  }
+  val view = LocalView.current
+  if (!view.isInEditMode) {
+    SideEffect {
+      val window = (view.context as Activity).window
+      window.statusBarColor = Color.Transparent.toArgb()
+      WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
     }
-    val view = LocalView.current
-    if (!view.isInEditMode) {
-        SideEffect {
-            val window = (view.context as Activity).window
-            window.statusBarColor = Color.Transparent.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
-        }
-    }
+  }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = AppTypography,
-        content = content
-    )
+  MaterialTheme(
+    colorScheme = colorScheme,
+    typography = AppTypography,
+    content = content
+  )
 }
