@@ -1,15 +1,27 @@
 package com.example.apexdiceroll.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.LegendClass
@@ -31,18 +43,57 @@ fun RosterScreen(
         LazyColumn(
             modifier = modifier.weight(1f)
         ) {
-            itemsIndexed(legends) { index, legend ->
-                if (index != 0) {
-                    HorizontalDivider()
+            items(LegendClass.entries) { legendClass ->
+                Column {
+                    Surface(
+                        color = MaterialTheme.colorScheme.primary
+                    ) {
+                        Row {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(id = legendClass.icon),
+                                contentDescription = null,
+                                modifier = Modifier.size(24.dp)
+                            )
+
+                            Spacer(modifier = Modifier.size(8.dp))
+
+                            Text(text = legendClass.className, style = MaterialTheme.typography.titleMedium)
+                        }
+                    }
+
+
+                    Column {
+                        val classLegends = legends.filter { it.legendClass == legendClass }
+
+                        classLegends.forEachIndexed { index, legend ->
+                            if (index != 0) {
+                                HorizontalDivider()
+                            }
+                            LegendToggle(
+                                legendName = legend.name,
+                                legendClass = legend.legendClass,
+                                wins = legend.wins,
+                                selected = legend.selected,
+                                onToggle = { legend.selected = it }
+                            )
+                        }
+                    }
                 }
-                LegendToggle(
-                    legendName = legend.name,
-                    legendClass = legend.legendClass,
-                    wins = legend.wins,
-                    selected = legend.selected,
-                    onToggle = { legend.selected = it }
-                )
+
             }
+            
+//            itemsIndexed(legends) { index, legend ->
+//                if (index != 0) {
+//                    HorizontalDivider()
+//                }
+//                LegendToggle(
+//                    legendName = legend.name,
+//                    legendClass = legend.legendClass,
+//                    wins = legend.wins,
+//                    selected = legend.selected,
+//                    onToggle = { legend.selected = it }
+//                )
+//            }
         }
 
         HorizontalDivider()
