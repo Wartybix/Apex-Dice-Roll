@@ -65,7 +65,7 @@ fun RosterScreen(
                                 modifier = Modifier.size(24.dp)
                             )
 
-                            Spacer(modifier = Modifier.size(16.dp))
+                            Spacer(modifier = Modifier.size(8.dp))
 
                             Text(text = legendClass.className, style = MaterialTheme.typography.titleMedium)
                         }
