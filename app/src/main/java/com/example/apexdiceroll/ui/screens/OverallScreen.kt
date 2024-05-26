@@ -1,6 +1,5 @@
 package com.example.apexdiceroll.ui.screens
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Sync
@@ -11,16 +10,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.Screen
 import com.example.apexdiceroll.ui.ViewModel
 import com.example.apexdiceroll.ui.components.overall_screen.NavBar
@@ -32,8 +24,6 @@ fun OverallScreen(
 ) {
     val uiState = viewModel.uiState.collectAsState().value
 
-    val localDensity = LocalDensity.current
-
     Scaffold(
         topBar = { TopAppBar() },
         floatingActionButton = {
@@ -42,14 +32,14 @@ fun OverallScreen(
                     FloatingActionButton(
                         onClick = { viewModel.rollDice() }
                     ) {
-                        Icon(imageVector = Icons.Default.Sync, contentDescription = "Re-Roll")
+                        Icon(imageVector = Icons.Default.Sync, contentDescription = stringResource(R.string.re_roll))
                     }
                 }
                 Screen.WinHistory -> {
                     ExtendedFloatingActionButton(
                         onClick = { /*TODO*/ },
                         icon = { Icon(imageVector = Icons.Default.Add, contentDescription = null) },
-                        text = { Text("Add Win") }
+                        text = { Text(stringResource(R.string.add_win)) }
                     )
                 }
 		        else -> {}

@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -26,6 +25,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -36,8 +36,8 @@ import com.example.apexdiceroll.data.LegendClass
 import com.example.apexdiceroll.data.MixtapeLoadout
 import com.example.apexdiceroll.data.UpgradeSelection
 import com.example.apexdiceroll.ui.components.diceroll_screen.GameModeSwitcher
-import com.example.apexdiceroll.ui.components.diceroll_screen.legend_display.LegendCarousel
 import com.example.apexdiceroll.ui.components.diceroll_screen.MixtapeLoadoutDisplay
+import com.example.apexdiceroll.ui.components.diceroll_screen.legend_display.LegendCarousel
 import com.example.apexdiceroll.ui.components.diceroll_screen.upgrades_area.UpgradesDisplay
 import com.example.apexdiceroll.ui.theme.ApexDiceRollTheme
 
@@ -99,7 +99,7 @@ fun DiceRollScreen(
                     modifier = Modifier.padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Text(text = "Generated Game Mode", style = MaterialTheme.typography.titleSmall)
+                    Text(text = stringResource(R.string.generated_game_mode), style = MaterialTheme.typography.titleSmall)
 
                     Text(text = selectedGameMode.modeName, style = MaterialTheme.typography.titleLarge)
 
@@ -111,7 +111,12 @@ fun DiceRollScreen(
                         Spacer(modifier = Modifier.size(8.dp))
 
                         Text(
-                            text = "The likelihood generating ${GameMode.Mixtape.modeName} to ${GameMode.BR.modeName} is 4:1, as ${GameMode.Mixtape.modeName} currently contains four game modes.",
+                            text = stringResource(
+                                R.string.mixtape_to_br_ratio_msg,
+                                GameMode.Mixtape.modeName,
+                                GameMode.BR.modeName,
+                                GameMode.Mixtape.modeName
+                            ),
                             style = MaterialTheme.typography.bodySmall
                         )
                     }
@@ -139,8 +144,8 @@ fun DiceRollScreen(
             ) {
                 Text(
                     text = when (selectedGameMode) {
-                        GameMode.BR -> "Legend Upgrades"
-                        GameMode.Mixtape -> "Mixtape Loadout"
+                        GameMode.BR -> stringResource(R.string.legend_upgrades)
+                        GameMode.Mixtape -> stringResource(R.string.mixtape_loadout)
                     },
                     style = MaterialTheme.typography.titleSmall
                 )
