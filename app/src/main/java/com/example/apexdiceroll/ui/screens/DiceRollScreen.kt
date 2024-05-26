@@ -68,7 +68,7 @@ fun DiceRollScreen(
         )
     }
     val bottomPadding by remember {
-        mutableStateOf(32.dp + paddingValues.calculateBottomPadding())
+        mutableStateOf(24.dp + paddingValues.calculateBottomPadding())
     }
 
     Column(

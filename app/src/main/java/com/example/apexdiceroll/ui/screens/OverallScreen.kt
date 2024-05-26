@@ -33,7 +33,6 @@ fun OverallScreen(
     val uiState = viewModel.uiState.collectAsState().value
 
     val localDensity = LocalDensity.current
-    var fabHeight by remember { mutableStateOf(0.dp) }
 
     Scaffold(
         topBar = { TopAppBar() },
@@ -41,21 +40,17 @@ fun OverallScreen(
             when (uiState.currentScreen) {
                 Screen.DiceRoll -> {
                     FloatingActionButton(
-                        onClick = { viewModel.rollDice() },
-                        modifier = Modifier.onGloballyPositioned { coordinates ->
-                            fabHeight = with (localDensity) { coordinates.size.height.toDp() }
-                        }
+                        onClick = { viewModel.rollDice() }
                     ) {
                         Icon(imageVector = Icons.Default.Sync, contentDescription = "Re-Roll")
                     }
                 }
                 Screen.WinHistory -> {
                     ExtendedFloatingActionButton(
-                    onClick = { /*TODO*/ },
-                    icon = { Icon(imageVector = Icons.Default.Add, contentDescription = null) },
-                    text = { Text("Add Win") }
+                        onClick = { /*TODO*/ },
+                        icon = { Icon(imageVector = Icons.Default.Add, contentDescription = null) },
+                        text = { Text("Add Win") }
                     )
-                    //TODO add fab height modifier
                 }
 		        else -> {}
             }
@@ -73,8 +68,7 @@ fun OverallScreen(
                             viewModel.switchGameMode(it)
                             viewModel.rollDice()
                         },
-                        paddingValues = it,
-                        modifier = Modifier.padding(bottom = fabHeight)
+                        paddingValues = it
                     )
                 }
 
