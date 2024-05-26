@@ -36,7 +36,7 @@ fun Upgrade(
         color = if (currentSelection == desiredSelection) {
             matchSurfaceColour
         } else {
-            MaterialTheme.colorScheme.surfaceContainer
+            MaterialTheme.colorScheme.surfaceContainerHighest
         },
         contentColor = matchOnSurfaceColor,
         modifier = modifier.fillMaxHeight()

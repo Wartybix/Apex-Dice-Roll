@@ -1,6 +1,7 @@
 package com.example.apexdiceroll.ui.screens
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -11,7 +12,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -81,20 +84,34 @@ fun DiceRollScreen(
         Spacer(Modifier.size(32.dp))
         LegendCarousel(legendLoadout = generatedLegends)
         Spacer(Modifier.size(32.dp))
-        when (selectedGameMode) {
-            GameMode.BR -> {
-                SectionTitle(text = "Legend Upgrades")
-                UpgradesDisplay(
-                    modifier = Modifier.padding(start = startPadding, end = endPadding),
-                    data = generatedLegendUpgrades
+
+        Surface(
+            shape = MaterialTheme.shapes.large,
+            color = MaterialTheme.colorScheme.surfaceContainer,
+            modifier = Modifier
+                .padding(horizontal = horizontalPadding)
+                .fillMaxWidth()
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = when (selectedGameMode) {
+                        GameMode.BR -> "Legend Upgrades"
+                        GameMode.Mixtape -> "Mixtape Loadout"
+                    },
+                    style = MaterialTheme.typography.titleSmall
                 )
-            }
-            GameMode.Mixtape -> {
-                SectionTitle(text = stringResource(id = R.string.mixtape_loadout))
-                MixtapeLoadoutDisplay(
-                    selectedLoadout = generatedMixtapeLoadout,
-                    modifier = Modifier.padding(start = startPadding, end = endPadding)
-                )
+
+                when (selectedGameMode) {
+                    GameMode.BR -> {
+                        UpgradesDisplay(data = generatedLegendUpgrades)
+                    }
+                    GameMode.Mixtape -> {
+                        MixtapeLoadoutDisplay(selectedLoadout = generatedMixtapeLoadout)
+                    }
+                }
             }
         }
     }

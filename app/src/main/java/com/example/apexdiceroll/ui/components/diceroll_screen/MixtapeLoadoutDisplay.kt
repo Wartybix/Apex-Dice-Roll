@@ -1,5 +1,6 @@
 package com.example.apexdiceroll.ui.components.diceroll_screen
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -29,48 +30,34 @@ fun MixtapeLoadoutDisplay(
     modifier: Modifier = Modifier
 ) {
     val loadouts by remember { mutableStateOf(MixtapeLoadout.entries) }
-    val padding by remember { mutableStateOf(8.dp) }
 
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
+        Text(
+            text = selectedLoadout.loadoutName,
+            style = MaterialTheme.typography.titleLarge
+        )
+
         Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = modifier.fillMaxWidth()
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             loadouts.forEachIndexed { index, loadout ->
-                if (index != 0) {
-                    Spacer(modifier = Modifier.size(padding))
-                }
+                val colour = if (loadout == selectedLoadout)
+                    MaterialTheme.colorScheme.onSurface
+                else
+                    MaterialTheme.colorScheme.surfaceContainerHighest
 
-                if (loadout == selectedLoadout) {
-                    Surface(
-                        shape = MaterialTheme.shapes.large,
-                        color = MaterialTheme.colorScheme.surfaceVariant,
-                        modifier = Modifier.weight(1f)
-                    ) {
-                        Text(
-                            text = selectedLoadout.loadoutName,
-                            style = MaterialTheme.typography.titleMedium,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.padding(8.dp)
-                        )
-                    }
-                }
-                else {
-                    Surface(
-                        shape = CircleShape,
-                        color = MaterialTheme.colorScheme.surfaceContainer,
-                        modifier = Modifier.size(24.dp)
-                    ) {
-
-                    }
-                }
+                Surface(
+                    shape = CircleShape,
+                    color = colour,
+                    modifier = Modifier.size(8.dp),
+                    content = {}
+                )
             }
         }
     }
-
-
 }
 
 @Preview
