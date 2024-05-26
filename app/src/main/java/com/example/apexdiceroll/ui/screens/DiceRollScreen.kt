@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
@@ -12,6 +13,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -97,6 +102,21 @@ fun DiceRollScreen(
                     Text(text = "Generated Game Mode", style = MaterialTheme.typography.titleSmall)
 
                     Text(text = selectedGameMode.modeName, style = MaterialTheme.typography.titleLarge)
+
+                    Spacer(modifier = Modifier.size(8.dp))
+
+                    Row {
+                        Icon(imageVector = Icons.Outlined.Info, contentDescription = null)
+
+                        Spacer(modifier = Modifier.size(8.dp))
+
+                        Text(
+                            text = "The likelihood generating ${GameMode.Mixtape.modeName} to ${GameMode.BR.modeName} is 4:1, as ${GameMode.Mixtape.modeName} currently contains four game modes.",
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
+
+
                 }
             }
 
