@@ -1,7 +1,5 @@
 package com.example.apexdiceroll.ui.components.roster_screen
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.SelectAll
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
