@@ -82,7 +82,6 @@ fun RosterScreen(
                             }
                             LegendToggle(
                                 legendName = legend.name,
-                                legendClass = legend.legendClass,
                                 wins = legend.wins,
                                 selected = legend.selected,
                                 onToggle = { legend.selected = it }

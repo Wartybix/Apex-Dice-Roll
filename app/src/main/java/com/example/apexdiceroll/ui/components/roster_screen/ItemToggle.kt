@@ -30,7 +30,7 @@ import com.example.apexdiceroll.R
 fun ItemToggle(
     modifier: Modifier = Modifier,
     title: String,
-    icon: ImageVector,
+    icon: ImageVector?,
     iconDescription: String?,
     subtitle: String? = null,
     selected: Boolean?,
@@ -49,13 +49,15 @@ fun ItemToggle(
             .heightIn(min = 48.dp)
             .fillMaxWidth()
     ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = iconDescription,
-            modifier = Modifier.size(24.dp)
-        )
+        if (icon != null) {
+            Icon(
+                imageVector = icon,
+                contentDescription = iconDescription,
+                modifier = Modifier.size(24.dp)
+            )
 
-        Spacer(modifier = Modifier.size(16.dp))
+            Spacer(modifier = Modifier.size(16.dp))
+        }
 
         Column {
             Text(text = title, style = MaterialTheme.typography.titleMedium)

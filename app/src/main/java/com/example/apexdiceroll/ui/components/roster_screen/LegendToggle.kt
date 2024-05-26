@@ -15,7 +15,6 @@ import com.example.apexdiceroll.data.LegendClass
 @Composable
 fun LegendToggle(
     legendName: String,
-    legendClass: LegendClass,
     wins: Int,
     modifier: Modifier = Modifier,
     selected: Boolean,
@@ -26,8 +25,8 @@ fun LegendToggle(
     ItemToggle(
         title = legendName,
         subtitle = stringResource(R.string.apex_wins, wins, plural),
-        icon = ImageVector.vectorResource(legendClass.icon),
-        iconDescription = legendClass.className,
+        icon = null,
+        iconDescription = null,
         selected = selected,
         onToggle = onToggle,
         modifier = modifier
@@ -39,7 +38,6 @@ fun LegendToggle(
 fun LegendTogglePreview() {
     LegendToggle(
         legendName = "Octane",
-        legendClass = LegendClass.Skirmisher,
         wins = 8,
         selected = true,
         onToggle = {}
@@ -51,7 +49,6 @@ fun LegendTogglePreview() {
 fun LegendTogglePreviewOneWin() {
     LegendToggle(
         legendName = "Ballistic",
-        legendClass = LegendClass.Assault,
         wins = 1,
         selected = true,
         onToggle = {}

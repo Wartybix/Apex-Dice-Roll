@@ -18,7 +18,7 @@ fun SelectAllToggle(
 ) {
     ItemToggle(
         title = stringResource(id = R.string.select_all),
-        icon = Icons.Default.SelectAll,
+        icon = null,
         iconDescription = null,
         selected = selectionStatus.value,
         onToggle = onToggle,
