@@ -102,26 +102,6 @@ fun DiceRollScreen(
                     Text(text = stringResource(R.string.generated_game_mode), style = MaterialTheme.typography.titleSmall)
 
                     Text(text = selectedGameMode.modeName, style = MaterialTheme.typography.titleLarge)
-
-                    Spacer(modifier = Modifier.size(8.dp))
-
-                    Row {
-                        Icon(imageVector = Icons.Outlined.Info, contentDescription = null)
-
-                        Spacer(modifier = Modifier.size(8.dp))
-
-                        Text(
-                            text = stringResource(
-                                R.string.mixtape_to_br_ratio_msg,
-                                GameMode.Mixtape.modeName,
-                                GameMode.BR.modeName,
-                                GameMode.Mixtape.modeName
-                            ),
-                            style = MaterialTheme.typography.bodySmall
-                        )
-                    }
-
-
                 }
             }
 

@@ -99,9 +99,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun randomiseGameMode() : GameMode {
-        val generatedValue = Random.nextInt(from = 0, until = 5)
-
-        return if (generatedValue == 0) GameMode.BR else GameMode.Mixtape
+        return GameMode.entries.random()
     }
 
     private fun fetchLegendLoadout() {
