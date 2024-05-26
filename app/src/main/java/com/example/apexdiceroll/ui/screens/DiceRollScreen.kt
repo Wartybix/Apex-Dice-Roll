@@ -4,7 +4,6 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
@@ -13,9 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material3.Icon
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -89,7 +86,7 @@ fun DiceRollScreen(
 
         if (gameModeRandomised) {
             Surface(
-                shape = MaterialTheme.shapes.large,
+                shape = CardDefaults.shape,
                 color = MaterialTheme.colorScheme.surfaceContainer,
                 modifier = Modifier
                     .padding(horizontal = horizontalPadding)
@@ -112,7 +109,7 @@ fun DiceRollScreen(
         Spacer(Modifier.size(32.dp))
 
         Surface(
-            shape = MaterialTheme.shapes.large,
+            shape = CardDefaults.shape,
             color = MaterialTheme.colorScheme.surfaceContainer,
             modifier = Modifier
                 .padding(horizontal = horizontalPadding)
