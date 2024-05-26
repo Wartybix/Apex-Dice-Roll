@@ -1,8 +1,6 @@
 package com.example.apexdiceroll.ui.screens
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -12,8 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -113,19 +109,6 @@ fun RosterScreen(
                 }
 
             }
-            
-//            itemsIndexed(legends) { index, legend ->
-//                if (index != 0) {
-//                    HorizontalDivider()
-//                }
-//                LegendToggle(
-//                    legendName = legend.name,
-//                    legendClass = legend.legendClass,
-//                    wins = legend.wins,
-//                    selected = legend.selected,
-//                    onToggle = { legend.selected = it }
-//                )
-//            }
         }
 
         HorizontalDivider()
