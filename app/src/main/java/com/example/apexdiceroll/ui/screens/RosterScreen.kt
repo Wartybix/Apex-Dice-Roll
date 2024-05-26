@@ -1,6 +1,7 @@
 package com.example.apexdiceroll.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -19,6 +20,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -31,6 +35,8 @@ import com.example.apexdiceroll.data.LegendClass
 import com.example.apexdiceroll.data.LegendsSelected
 import com.example.apexdiceroll.ui.components.roster_screen.LegendToggle
 import com.example.apexdiceroll.ui.components.roster_screen.SelectAllToggle
+import com.example.apexdiceroll.ui.theme.extendedDark
+import com.example.apexdiceroll.ui.theme.extendedLight
 
 @Composable
 fun RosterScreen(
@@ -40,6 +46,9 @@ fun RosterScreen(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues()
 ) {
+    val darkTheme = isSystemInDarkTheme()
+    val colorFamily by remember { mutableStateOf(if (darkTheme) extendedDark else extendedLight) }
+
     Column(
         modifier = modifier.padding(paddingValues)
     ) {
@@ -50,10 +59,23 @@ fun RosterScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Column {
+                    val classColour by remember {
+                        mutableStateOf(
+                            when (legendClass) {
+                                LegendClass.Assault -> colorFamily.assault
+                                LegendClass.Skirmisher -> colorFamily.skirmisher
+                                LegendClass.Recon -> colorFamily.recon
+                                LegendClass.Support -> colorFamily.support
+                                LegendClass.Controller -> colorFamily.controller
+                            }
+                        )
+                    }
+
                     Surface(
-                        color = MaterialTheme.colorScheme.primaryContainer,
+                        color = classColour.colorContainer,
+                        contentColor = classColour.onColorContainer,
                         modifier = Modifier.padding(start = 24.dp),
-                        shape = MaterialTheme.shapes.medium
+                        shape = MaterialTheme.shapes.large
                     ) {
                         Row(
                             modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
@@ -62,12 +84,12 @@ fun RosterScreen(
                             Icon(
                                 imageVector = ImageVector.vectorResource(id = legendClass.icon),
                                 contentDescription = null,
-                                modifier = Modifier.size(24.dp)
+                                modifier = Modifier.size(16.dp)
                             )
 
                             Spacer(modifier = Modifier.size(8.dp))
 
-                            Text(text = legendClass.className, style = MaterialTheme.typography.titleMedium)
+                            Text(text = legendClass.className, style = MaterialTheme.typography.titleSmall)
                         }
                     }
 
