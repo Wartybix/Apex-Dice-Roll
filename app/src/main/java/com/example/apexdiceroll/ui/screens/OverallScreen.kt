@@ -68,6 +68,7 @@ fun OverallScreen(
                         generatedMixtapeLoadout = uiState.mixtapeLoadout,
                         generatedLegendUpgrades = uiState.legendUpgrades,
                         selectedGameMode = uiState.selectedGameMode,
+                        gameModeRandomised = uiState.gameModeRandomised,
                         onGameModeSwitch = {
                             viewModel.switchGameMode(it)
                             viewModel.rollDice()

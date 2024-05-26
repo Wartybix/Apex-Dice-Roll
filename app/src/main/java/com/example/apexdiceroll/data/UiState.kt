@@ -5,5 +5,6 @@ data class UiState(
     var mixtapeLoadout: MixtapeLoadout = MixtapeLoadout.CloseQuarters,
     var legendUpgrades: List<UpgradeSelection> = emptyList(),
     var currentScreen: Screen = Screen.DiceRoll,
-    var selectedGameMode: GameMode = GameMode.BR
+    var selectedGameMode: GameMode = GameMode.BR,
+    var gameModeRandomised: Boolean = false,
 )

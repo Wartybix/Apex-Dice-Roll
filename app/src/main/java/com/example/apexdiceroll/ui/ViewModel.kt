@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import java.io.FileOutputStream
+import kotlin.random.Random
 
 class ViewModel(application: Application) : AndroidViewModel(application) {
     companion object {
@@ -95,6 +96,12 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         }
 
         return legendUpgrades.toList()
+    }
+
+    private fun randomiseGameMode() : GameMode {
+        val generatedValue = Random.nextInt(from = 0, until = 5)
+
+        return if (generatedValue == 0) GameMode.BR else GameMode.Mixtape
     }
 
     private fun fetchLegendLoadout() {
@@ -179,22 +186,41 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun switchGameMode(newGameMode: GameMode) {
+    fun switchGameMode(requestedGameMode: GameMode?) {
+        val newGameMode = requestedGameMode ?: randomiseGameMode()
+        val isRandomised = requestedGameMode == null
+
         _uiState.update { currentState ->
             currentState.copy(
-                selectedGameMode = newGameMode
+                selectedGameMode = newGameMode,
+                gameModeRandomised = isRandomised
             )
         }
     }
 
     fun rollDice() {
+        val currentGameMode = uiState.value.selectedGameMode
+
+        val newGameMode = if (uiState.value.gameModeRandomised)
+            randomiseGameMode()
+        else
+            currentGameMode
+
         val generatedLegends = randomiseLegendLoadout()
-        val mixtapeLoadout = randomiseMixtapeLoadout()
-        val legendUpgrades = randomiseLegendUpgrades()
-        //TODO ensure only processing for selected game mode is done.
+
+        val mixtapeLoadout = if (currentGameMode == GameMode.Mixtape)
+            randomiseMixtapeLoadout()
+        else
+            uiState.value.mixtapeLoadout
+
+        val legendUpgrades = if (currentGameMode == GameMode.BR)
+            randomiseLegendUpgrades()
+        else
+            uiState.value.legendUpgrades
 
         _uiState.update { currentState ->
             currentState.copy(
+                selectedGameMode = newGameMode,
                 generatedLegends = generatedLegends,
                 mixtapeLoadout = mixtapeLoadout,
                 legendUpgrades = legendUpgrades

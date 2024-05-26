@@ -25,7 +25,8 @@ import com.example.apexdiceroll.data.GameMode
 @Composable
 fun GameModeSwitcher(
     selectedGameMode: GameMode,
-    onSwitch: (GameMode) -> Unit,
+    randomGameMode: Boolean,
+    onSwitch: (GameMode?) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -39,16 +40,28 @@ fun GameModeSwitcher(
         ) {
             gameModes.forEachIndexed { index, gameMode ->
                 SegmentedButton(
-                    selected = gameMode == selectedGameMode,
+                    selected = !randomGameMode && gameMode == selectedGameMode,
                     onClick = {
-                        if (gameMode != selectedGameMode) {
+                        if (randomGameMode || gameMode != selectedGameMode) {
                             onSwitch(gameMode)
                         }
                     },
-                    shape = SegmentedButtonDefaults.itemShape(index = index, count = gameModes.size)
+                    shape = SegmentedButtonDefaults.itemShape(index = index, count = gameModes.size + 1)
                 ) {
                     Text(text = gameMode.modeName)
                 }
+            }
+
+            SegmentedButton(
+                selected = randomGameMode,
+                onClick = {
+                    if (!randomGameMode) {
+                        onSwitch(null)
+                    }
+                },
+                shape = SegmentedButtonDefaults.itemShape(index = gameModes.size, count = gameModes.size + 1)
+            ) {
+                Text(text = "Random")
             }
         }
     }
@@ -58,7 +71,7 @@ fun GameModeSwitcher(
 @Composable
 fun GameModeSwitcherPreviewBR() {
     Surface {
-        GameModeSwitcher(selectedGameMode = GameMode.BR, onSwitch = {})
+        GameModeSwitcher(selectedGameMode = GameMode.BR, randomGameMode = true, onSwitch = {})
     }
 
 }
@@ -67,6 +80,6 @@ fun GameModeSwitcherPreviewBR() {
 @Composable
 fun GameModeSwitcherPreviewMixtape() {
     Surface {
-        GameModeSwitcher(selectedGameMode = GameMode.Mixtape, onSwitch = {})
+        GameModeSwitcher(selectedGameMode = GameMode.Mixtape, randomGameMode = false, onSwitch = {})
     }
 }

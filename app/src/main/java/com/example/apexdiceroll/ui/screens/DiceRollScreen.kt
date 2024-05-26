@@ -42,7 +42,8 @@ fun DiceRollScreen(
     generatedMixtapeLoadout: MixtapeLoadout,
     generatedLegendUpgrades: List<UpgradeSelection>,
     selectedGameMode: GameMode,
-    onGameModeSwitch: (GameMode) -> Unit,
+    gameModeRandomised: Boolean,
+    onGameModeSwitch: (GameMode?) -> Unit,
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues()
 ) {
@@ -74,11 +75,34 @@ fun DiceRollScreen(
         GameModeSwitcher(
             selectedGameMode = selectedGameMode,
             onSwitch = { onGameModeSwitch(it) },
+            randomGameMode = gameModeRandomised,
             modifier = Modifier
                 .padding(start = startPadding, end = endPadding)
                 .fillMaxWidth()
         )
         Spacer(Modifier.size(32.dp))
+
+        if (gameModeRandomised) {
+            Surface(
+                shape = MaterialTheme.shapes.large,
+                color = MaterialTheme.colorScheme.surfaceContainer,
+                modifier = Modifier
+                    .padding(horizontal = horizontalPadding)
+                    .fillMaxWidth()
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(text = "Generated Game Mode", style = MaterialTheme.typography.titleSmall)
+
+                    Text(text = selectedGameMode.modeName, style = MaterialTheme.typography.titleLarge)
+                }
+            }
+
+            Spacer(modifier = Modifier.size(32.dp))
+        }
+
         LegendCarousel(legendLoadout = generatedLegends)
         Spacer(Modifier.size(32.dp))
 
@@ -126,6 +150,7 @@ fun DiceRollScreenPreview() {
                     Legend("Newcastle", R.drawable.newcastle, LegendClass.Support)
                 ),
                 selectedGameMode = GameMode.BR,
+                gameModeRandomised = false,
                 onGameModeSwitch = {},
                 generatedMixtapeLoadout = MixtapeLoadout.CloseQuarters,
                 generatedLegendUpgrades = listOf(UpgradeSelection.RIGHT, UpgradeSelection.LEFT)
@@ -145,7 +170,8 @@ fun DiceRollScreenPreviewDark() {
                     Legend("Mad Maggie", R.drawable.mad_maggie, LegendClass.Assault),
                     Legend("Newcastle", R.drawable.newcastle, LegendClass.Support)
                 ),
-                selectedGameMode = GameMode.BR,
+                selectedGameMode = GameMode.Mixtape,
+                gameModeRandomised = true,
                 onGameModeSwitch = {},
                 generatedMixtapeLoadout = MixtapeLoadout.CloseQuarters,
                 generatedLegendUpgrades = listOf(UpgradeSelection.RIGHT, UpgradeSelection.LEFT)
