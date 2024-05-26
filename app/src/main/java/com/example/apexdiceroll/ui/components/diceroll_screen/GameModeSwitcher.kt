@@ -48,7 +48,7 @@ fun GameModeSwitcher(
                     },
                     shape = SegmentedButtonDefaults.itemShape(index = index, count = gameModes.size + 1)
                 ) {
-                    Text(text = gameMode.modeName)
+                    Text(text = gameMode.shortName)
                 }
             }
 
