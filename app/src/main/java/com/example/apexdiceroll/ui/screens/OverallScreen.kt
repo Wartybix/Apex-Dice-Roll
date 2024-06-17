@@ -70,7 +70,9 @@ fun OverallScreen(
                         paddingValues = it)
                 }
 
-                Screen.WinHistory -> { /*TODO*/ }
+                Screen.WinHistory -> {
+                    WinsScreen(wins = listOf() /*TODO change*/)
+                }
             }
         },
         bottomBar = {
