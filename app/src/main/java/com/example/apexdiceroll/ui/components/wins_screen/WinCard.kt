@@ -67,7 +67,7 @@ fun WinCard(winnerName: String, winnerClass: LegendClass, winDate: Date) {
                 Spacer(modifier = Modifier.size(16.dp))
 
 
-                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(text = winnerName, style = MaterialTheme.typography.titleLarge)
                     Text(text = winDate.toLocaleString(), style = MaterialTheme.typography.bodyLarge)
                 }
@@ -79,7 +79,13 @@ fun WinCard(winnerName: String, winnerClass: LegendClass, winDate: Date) {
 
             Spacer(modifier = Modifier.size(16.dp))
 
-            Button(onClick = { /*TODO*/ }) {
+            Button(
+                onClick = { /*TODO*/ },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.error,
+                    contentColor = MaterialTheme.colorScheme.onError
+                )
+            ) {
                 Icon(
                     imageVector = Icons.Outlined.Delete,
                     contentDescription = null,
