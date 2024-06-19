@@ -9,6 +9,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -39,7 +40,9 @@ fun WinsScreen(
                             pagerState.animateScrollToPage(index)
                         }
                     },
-                    text = { Text(text = tabName) }
+                    text = { Text(text = tabName) },
+                    selectedContentColor = TabRowDefaults.primaryContentColor,
+                    unselectedContentColor = TabRowDefaults.secondaryContentColor
                 )
             }
         }
