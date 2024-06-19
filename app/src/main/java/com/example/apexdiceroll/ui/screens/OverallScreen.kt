@@ -71,7 +71,7 @@ fun OverallScreen(
                 }
 
                 Screen.WinHistory -> {
-                    WinsScreen(wins = listOf() /*TODO change*/)
+                    WinsScreen(wins = listOf(), paddingValues = it /*TODO change*/)
                 }
             }
         },

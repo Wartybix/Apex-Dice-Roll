@@ -1,6 +1,9 @@
 package com.example.apexdiceroll.ui.screens
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -15,24 +18,26 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun WinsScreen(
-    modifier: Modifier = Modifier,
-    wins: List<Win>
+    wins: List<Win>,
+    paddingValues: PaddingValues = PaddingValues()
 ) {
     val pagerState = rememberPagerState(pageCount = { 2 })
     val tabNames = listOf("History", "Edit")
     val scope = rememberCoroutineScope()
 
-    TabRow(selectedTabIndex = pagerState.currentPage) {
-        tabNames.forEachIndexed { index, tabName ->
-            Tab(
-                selected = pagerState.currentPage == index,
-                onClick = {
-                    scope.launch {
-                        pagerState.animateScrollToPage(index)
-                    }
-                },
-                text = { Text(text = tabName) }
-            )
+    Column(modifier = Modifier.padding(paddingValues)) {
+        TabRow(selectedTabIndex = pagerState.currentPage) {
+            tabNames.forEachIndexed { index, tabName ->
+                Tab(
+                    selected = pagerState.currentPage == index,
+                    onClick = {
+                        scope.launch {
+                            pagerState.animateScrollToPage(index)
+                        }
+                    },
+                    text = { Text(text = tabName) }
+                )
+            }
         }
     }
 }
