@@ -56,7 +56,12 @@ fun WinEditEntry(
             singleLine = true,
             modifier = Modifier.width(98.dp),
             onValueChange = { value ->
-                onEdit(value.filter { char -> char.isDigit() }.toInt()) // Only accept integers
+                onEdit(
+                    if (value == "") // If textbox empty, set wins to 0
+                        0
+                    else // Otherwise set wins to textbox value -- only if it's an integer
+                        value.filter { char -> char.isDigit() }.toInt()
+                )
             },
             label = { Text(text = stringResource(id = R.string.wins)) }
         )
