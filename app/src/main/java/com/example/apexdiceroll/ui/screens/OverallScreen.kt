@@ -71,7 +71,7 @@ fun OverallScreen(
                 }
 
                 Screen.WinHistory -> {
-                    WinsScreen(wins = listOf(), paddingValues = it /*TODO change*/)
+                    WinsScreen(wins = listOf(), legends = viewModel.legendRoster, paddingValues = it /*TODO change*/)
                 }
             }
         },

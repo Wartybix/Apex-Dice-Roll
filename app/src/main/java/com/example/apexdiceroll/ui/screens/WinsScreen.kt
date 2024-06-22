@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.Win
 import com.example.apexdiceroll.ui.components.wins_screen.EditWinsTab
 import com.example.apexdiceroll.ui.components.wins_screen.WinHistoryTab
@@ -24,6 +25,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun WinsScreen(
     wins: List<Win>,
+    legends: List<Legend>,
     paddingValues: PaddingValues = PaddingValues()
 ) {
     val pagerState = rememberPagerState(pageCount = { 2 })
@@ -50,7 +52,7 @@ fun WinsScreen(
         HorizontalPager(state = pagerState, modifier = Modifier.fillMaxSize()) { index ->
             when (index) {
                 0 -> { WinHistoryTab(wins = wins) }
-                1 -> { EditWinsTab() }
+                1 -> { EditWinsTab(legends = legends) }
             }
         }
     }
@@ -59,5 +61,5 @@ fun WinsScreen(
 @Preview
 @Composable
 fun WinsScreenPreview() {
-    WinsScreen(wins = listOf())
+    WinsScreen(wins = listOf(), legends = listOf())
 }
