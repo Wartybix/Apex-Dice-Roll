@@ -1,6 +1,5 @@
 package com.example.apexdiceroll.ui.components.wins_screen
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,7 +33,7 @@ fun WinEditEntry(
 ) {
     Row(
         modifier = modifier
-            .padding(horizontal = 24.dp, vertical = 12.dp)
+            .padding(start = 24.dp, end = 16.dp, top = 12.dp, bottom = 12.dp)
             .heightIn(min = 48.dp)
             .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
@@ -42,6 +41,15 @@ fun WinEditEntry(
         Text(text = legendName, style = MaterialTheme.typography.titleMedium)
 
         Spacer(modifier = Modifier.weight(1f))
+
+        IconButton(onClick = { onEdit(wins - 1) }) {
+            Icon(
+                imageVector = Icons.Default.KeyboardArrowDown,
+                contentDescription = "Decrement wins to ${wins - 1}"
+            )
+        }
+
+        Spacer(Modifier.size(8.dp))
 
         TextField(
             value = wins.toString(),
@@ -55,21 +63,12 @@ fun WinEditEntry(
 
         Spacer(Modifier.size(8.dp))
 
-        Column {
-            IconButton(onClick = { onEdit(wins + 1) }) {
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowUp,
-                    contentDescription = "Increment wins to ${wins + 1}"
-                )
-            }
-            IconButton(onClick = { onEdit(wins - 1) }) {
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowDown,
-                    contentDescription = "Decrement wins to ${wins - 1}"
-                )
-            }
+        IconButton(onClick = { onEdit(wins + 1) }) {
+            Icon(
+                imageVector = Icons.Default.KeyboardArrowUp,
+                contentDescription = "Increment wins to ${wins + 1}"
+            )
         }
-
     }
 }
 
