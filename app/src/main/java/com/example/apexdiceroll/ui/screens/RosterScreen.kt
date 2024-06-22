@@ -40,9 +40,9 @@ fun RosterScreen(
                     )
                 }
 
-                val classLegends = legends.filter { it.legendClass == legendClass }
+                val classMembers = legends.filter { it.legendClass == legendClass }
 
-                classLegends.forEachIndexed { index, legend ->
+                classMembers.forEachIndexed { index, legend ->
                     item {
                         if (index != 0)
                             HorizontalDivider()
