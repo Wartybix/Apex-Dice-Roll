@@ -32,7 +32,11 @@ fun EditWinsTab(modifier: Modifier = Modifier, legends: List<Legend>) {
                 }
 
                 item {
-                    WinEditEntry(legendName = legend.name, wins = legend.wins)
+                    WinEditEntry(
+                        legendName = legend.name,
+                        wins = legend.wins,
+                        onEdit = { legend.wins = it }
+                    )
                 }
             }
         }
