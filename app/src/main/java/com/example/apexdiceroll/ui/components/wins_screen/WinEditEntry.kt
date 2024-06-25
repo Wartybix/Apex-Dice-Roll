@@ -18,6 +18,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -53,6 +57,10 @@ fun WinEditEntry(
 
         Spacer(Modifier.size(8.dp))
 
+        var oldInput by remember {
+            mutableIntStateOf(wins)
+        }
+
         TextField(
             value = if (wins == 0) "" else wins.toString(),
             singleLine = true,
@@ -67,7 +75,9 @@ fun WinEditEntry(
                     else {
                         /* Otherwise set wins to textbox value -- only if it's an integer
                         AND doesn't overflow */
-                        digitsEntered.toIntOrNull() ?: Int.MAX_VALUE
+                        val sanitisedInteger = digitsEntered.toIntOrNull() ?: oldInput
+                        oldInput = sanitisedInteger
+                        sanitisedInteger
                     }
 
 
