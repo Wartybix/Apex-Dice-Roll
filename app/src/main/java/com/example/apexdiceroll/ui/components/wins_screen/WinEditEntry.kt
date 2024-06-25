@@ -52,7 +52,7 @@ fun WinEditEntry(
         Spacer(Modifier.size(8.dp))
 
         TextField(
-            value = wins.toString(),
+            value = if (wins == 0) "" else wins.toString(),
             singleLine = true,
             modifier = Modifier.width(98.dp),
             onValueChange = { value ->
