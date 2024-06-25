@@ -58,15 +58,16 @@ fun WinEditEntry(
             singleLine = true,
             modifier = Modifier.width(98.dp),
             onValueChange = { value ->
+                val digitsEntered = value.filter { char -> char.isDigit() }
                 onEdit(
-                    if (value == "") {
+                    if (digitsEntered == "") {
                         // If textbox empty, set wins to 0
                         0
                     }
                     else {
                         /* Otherwise set wins to textbox value -- only if it's an integer
                         AND doesn't overflow */
-                        value.filter { char -> char.isDigit() }.toIntOrNull() ?: Int.MAX_VALUE
+                        digitsEntered.toIntOrNull() ?: Int.MAX_VALUE
                     }
 
 
