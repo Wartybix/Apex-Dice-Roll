@@ -9,8 +9,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.filled.PlusOne
+import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -50,7 +53,7 @@ fun WinEditEntry(
 
         IconButton(onClick = { onEdit(wins - 1) }) {
             Icon(
-                imageVector = Icons.Default.KeyboardArrowDown,
+                imageVector = Icons.Default.Remove,
                 contentDescription = "Decrement wins to ${wins - 1}"
             )
         }
@@ -91,7 +94,7 @@ fun WinEditEntry(
 
         IconButton(onClick = { onEdit(wins + 1) }) {
             Icon(
-                imageVector = Icons.Default.KeyboardArrowUp,
+                imageVector = Icons.Default.Add,
                 contentDescription = "Increment wins to ${wins + 1}"
             )
         }
