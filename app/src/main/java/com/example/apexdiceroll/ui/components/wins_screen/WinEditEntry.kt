@@ -90,7 +90,7 @@ fun WinEditEntry(
                 IconButton(onClick = { onEdit(wins - 1) }) {
                     Icon(
                         imageVector = Icons.Default.Remove,
-                        contentDescription = "Decrement wins to ${wins - 1}"
+                        contentDescription = stringResource(R.string.decrement_win)
                     )
                 }
             },
@@ -98,7 +98,7 @@ fun WinEditEntry(
                 IconButton(onClick = { onEdit(wins + 1) }) {
                     Icon(
                         imageVector = Icons.Default.Add,
-                        contentDescription = "Increment wins to ${wins + 1}"
+                        contentDescription = stringResource(R.string.increment_win)
                     )
                 }
             }
