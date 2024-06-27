@@ -87,7 +87,10 @@ fun WinEditEntry(
             placeholder = { Text(text = stringResource(R.string.zero)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             leadingIcon = {
-                IconButton(onClick = { onEdit(wins - 1) }) {
+                IconButton(
+                    onClick = { onEdit(wins - 1) },
+                    enabled = wins > 0
+                ) {
                     Icon(
                         imageVector = Icons.Default.Remove,
                         contentDescription = stringResource(R.string.decrement_win)
@@ -95,7 +98,10 @@ fun WinEditEntry(
                 }
             },
             trailingIcon = {
-                IconButton(onClick = { onEdit(wins + 1) }) {
+                IconButton(
+                    onClick = { onEdit(wins + 1) },
+                    enabled = wins < Int.MAX_VALUE
+                ) {
                     Icon(
                         imageVector = Icons.Default.Add,
                         contentDescription = stringResource(R.string.increment_win)
