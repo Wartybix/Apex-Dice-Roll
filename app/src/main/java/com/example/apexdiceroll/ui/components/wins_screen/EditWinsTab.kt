@@ -26,11 +26,7 @@ fun EditWinsTab(modifier: Modifier = Modifier, legends: List<Legend>) {
 
             val classMembers = legends.filter { it.legendClass == legendClass }
 
-            classMembers.forEachIndexed { index, legend ->
-                if (index != 0) {
-                    item { HorizontalDivider() }
-                }
-
+            classMembers.forEach { legend ->
                 item {
                     WinEditEntry(
                         legendName = legend.name,
