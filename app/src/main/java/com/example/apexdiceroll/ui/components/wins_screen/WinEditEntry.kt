@@ -1,12 +1,16 @@
 package com.example.apexdiceroll.ui.components.wins_screen
 
+import androidx.compose.animation.core.VisibilityThreshold
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -20,6 +24,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -30,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.apexdiceroll.R
 
@@ -42,7 +48,7 @@ fun WinEditEntry(
 ) {
     Row(
         modifier = modifier
-            .padding(start = 24.dp, end = 16.dp, top = 12.dp, bottom = 12.dp)
+            .padding(horizontal = 24.dp, vertical = 16.dp)
             .heightIn(min = 48.dp)
             .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
@@ -51,15 +57,6 @@ fun WinEditEntry(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        IconButton(onClick = { onEdit(wins - 1) }) {
-            Icon(
-                imageVector = Icons.Default.Remove,
-                contentDescription = "Decrement wins to ${wins - 1}"
-            )
-        }
-
-        Spacer(Modifier.size(8.dp))
-
         var oldInput by remember {
             mutableIntStateOf(wins)
         }
@@ -67,7 +64,7 @@ fun WinEditEntry(
         TextField(
             value = if (wins == 0) "" else wins.toString(),
             singleLine = true,
-            modifier = Modifier.width(98.dp),
+            modifier = Modifier.width(176.dp),
             onValueChange = { value ->
                 val digitsEntered = value.filter { char -> char.isDigit() }
                 onEdit(
@@ -87,17 +84,24 @@ fun WinEditEntry(
                 )
             },
             label = { Text(text = stringResource(id = R.string.wins)) },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            leadingIcon = {
+                IconButton(onClick = { onEdit(wins - 1) }) {
+                    Icon(
+                        imageVector = Icons.Default.Remove,
+                        contentDescription = "Decrement wins to ${wins - 1}"
+                    )
+                }
+            },
+            trailingIcon = {
+                IconButton(onClick = { onEdit(wins + 1) }) {
+                    Icon(
+                        imageVector = Icons.Default.Add,
+                        contentDescription = "Increment wins to ${wins + 1}"
+                    )
+                }
+            }
         )
-
-        Spacer(Modifier.size(8.dp))
-
-        IconButton(onClick = { onEdit(wins + 1) }) {
-            Icon(
-                imageVector = Icons.Default.Add,
-                contentDescription = "Increment wins to ${wins + 1}"
-            )
-        }
     }
 }
 
