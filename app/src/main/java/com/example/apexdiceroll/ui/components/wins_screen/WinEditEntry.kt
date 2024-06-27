@@ -64,7 +64,7 @@ fun WinEditEntry(
         TextField(
             value = if (wins == 0) "" else wins.toString(),
             singleLine = true,
-            modifier = Modifier.width(176.dp),
+            modifier = Modifier.width(192.dp),
             onValueChange = { value ->
                 val digitsEntered = value.filter { char -> char.isDigit() }
                 onEdit(
@@ -83,7 +83,8 @@ fun WinEditEntry(
 
                 )
             },
-            label = { Text(text = stringResource(id = R.string.wins)) },
+            label = { Text(text = stringResource(R.string.apex_wins_label)) },
+            placeholder = { Text(text = stringResource(R.string.zero)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             leadingIcon = {
                 IconButton(onClick = { onEdit(wins - 1) }) {
