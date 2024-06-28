@@ -52,6 +52,7 @@ fun DiceRollScreen(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues()
 ) {
+    //TODO remove use of Legend class
     val horizontalPadding by remember { mutableStateOf(24.dp) }
 
     val startPadding by remember {
