@@ -1,7 +1,6 @@
 package com.example.apexdiceroll.ui.screens
 
 import android.content.res.Configuration
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -15,7 +14,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Balance
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -40,6 +38,7 @@ import com.example.apexdiceroll.ui.components.diceroll_screen.GameModeSwitcher
 import com.example.apexdiceroll.ui.components.diceroll_screen.MixtapeLoadoutDisplay
 import com.example.apexdiceroll.ui.components.diceroll_screen.legend_display.LegendCarousel
 import com.example.apexdiceroll.ui.components.diceroll_screen.upgrades_area.UpgradesDisplay
+import com.example.apexdiceroll.ui.components.shared.Section
 import com.example.apexdiceroll.ui.theme.ApexDiceRollTheme
 
 @Composable
@@ -96,23 +95,9 @@ fun DiceRollScreen(
         Spacer(Modifier.size(32.dp))
 
         if (gameModeRandomised) {
-            Surface(
-                shape = CardDefaults.shape,
-                color = MaterialTheme.colorScheme.surfaceContainer,
-                modifier = Modifier
-                    .padding(horizontal = horizontalPadding)
-                    .fillMaxWidth()
-            ) {
-                Column(
-                    modifier = Modifier.padding(16.dp)
-                ) {
-                    Text(
-                        text = stringResource(R.string.generated_game_mode),
-                        style = MaterialTheme.typography.titleSmall
-                    )
-
-                    Spacer(modifier = Modifier.size(8.dp))
-
+            Section(
+                title = stringResource(id = R.string.generated_game_mode),
+                content = {
                     Text(
                         text = selectedGameModeName,
                         style = MaterialTheme.typography.titleLarge
@@ -137,8 +122,11 @@ fun DiceRollScreen(
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
-                }
-            }
+                },
+                modifier = Modifier
+                    .padding(horizontal = horizontalPadding)
+                    .fillMaxWidth()
+            )
 
             Spacer(modifier = Modifier.size(32.dp))
         }
@@ -146,25 +134,12 @@ fun DiceRollScreen(
         LegendCarousel(legendLoadout = generatedLegends)
         Spacer(Modifier.size(32.dp))
 
-        Surface(
-            shape = CardDefaults.shape,
-            color = MaterialTheme.colorScheme.surfaceContainer,
-            modifier = Modifier
-                .padding(horizontal = horizontalPadding)
-                .fillMaxWidth()
-        ) {
-            Column(
-                modifier = Modifier.padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Text(
-                    text = when (selectedGameModeCategory) {
-                        GameModeCategory.BR -> stringResource(R.string.legend_upgrades)
-                        GameModeCategory.MIXTAPE -> stringResource(R.string.mixtape_loadout)
-                    },
-                    style = MaterialTheme.typography.titleSmall
-                )
-
+        Section(
+            title = when (selectedGameModeCategory) {
+                GameModeCategory.BR -> stringResource(R.string.legend_upgrades)
+                GameModeCategory.MIXTAPE -> stringResource(R.string.mixtape_loadout)
+            },
+            content = {
                 when (selectedGameModeCategory) {
                     GameModeCategory.BR -> {
                         UpgradesDisplay(data = generatedLegendUpgrades)
@@ -173,8 +148,11 @@ fun DiceRollScreen(
                         MixtapeLoadoutDisplay(selectedLoadout = generatedMixtapeLoadout)
                     }
                 }
-            }
-        }
+            },
+            modifier = Modifier
+                .padding(horizontal = horizontalPadding)
+                .fillMaxWidth()
+        )
     }
 }
 
