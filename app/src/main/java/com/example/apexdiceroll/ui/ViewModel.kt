@@ -36,32 +36,136 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun getAllLegends(): List<Legend> {
         return listOf(
-            Legend(context.getString(R.string.bloodhound), R.drawable.bloodhound, LegendClass.Recon),
-            Legend(context.getString(R.string.gibraltar), R.drawable.gibraltar, LegendClass.Support),
-            Legend(context.getString(R.string.lifeline), R.drawable.lifeline, LegendClass.Support),
-            Legend(context.getString(R.string.pathfinder), R.drawable.pathfinder, LegendClass.Skirmisher),
-            Legend(context.getString(R.string.wraith), R.drawable.wraith, LegendClass.Skirmisher),
-            Legend(context.getString(R.string.bangalore), R.drawable.bangalore, LegendClass.Assault),
-            Legend(context.getString(R.string.caustic), R.drawable.caustic, LegendClass.Controller),
-            Legend(context.getString(R.string.mirage), R.drawable.mirage, LegendClass.Support),
-            Legend(context.getString(R.string.octane), R.drawable.octane, LegendClass.Skirmisher),
-            Legend(context.getString(R.string.wattson), R.drawable.wattson, LegendClass.Controller),
-            Legend(context.getString(R.string.crypto), R.drawable.crypto, LegendClass.Recon),
-            Legend(context.getString(R.string.revenant), R.drawable.revenant, LegendClass.Skirmisher),
-            Legend(context.getString(R.string.loba), R.drawable.loba, LegendClass.Support),
-            Legend(context.getString(R.string.rampart), R.drawable.rampart, LegendClass.Controller),
-            Legend(context.getString(R.string.horizon), R.drawable.horizon, LegendClass.Skirmisher),
-            Legend(context.getString(R.string.fuse), R.drawable.fuse, LegendClass.Assault),
-            Legend(context.getString(R.string.valkyrie), R.drawable.valk, LegendClass.Skirmisher),
-            Legend(context.getString(R.string.seer), R.drawable.seer, LegendClass.Recon),
-            Legend(context.getString(R.string.ash), R.drawable.ash, LegendClass.Assault),
-            Legend(context.getString(R.string.mad_maggie), R.drawable.mad_maggie, LegendClass.Assault),
-            Legend(context.getString(R.string.newcastle), R.drawable.newcastle, LegendClass.Support),
-            Legend(context.getString(R.string.vantage), R.drawable.vantage, LegendClass.Recon),
-            Legend(context.getString(R.string.catalyst), R.drawable.catalyst, LegendClass.Controller),
-            Legend(context.getString(R.string.ballistic), R.drawable.ballistic, LegendClass.Assault),
-            Legend(context.getString(R.string.conduit), R.drawable.conduit, LegendClass.Support),
-            Legend(context.getString(R.string.alter), R.drawable.alter, LegendClass.Skirmisher)
+            Legend(
+                name = context.getString(R.string.bloodhound),
+                icon = R.drawable.bloodhound,
+                legendClass = LegendClass.Recon
+            ),
+            Legend(
+                name = context.getString(R.string.gibraltar),
+                icon = R.drawable.gibraltar,
+                legendClass = LegendClass.Support
+            ),
+            Legend(
+                name = context.getString(R.string.lifeline),
+                icon = R.drawable.lifeline,
+                legendClass = LegendClass.Support
+            ),
+            Legend(
+                name = context.getString(R.string.pathfinder),
+                icon = R.drawable.pathfinder,
+                legendClass = LegendClass.Skirmisher
+            ),
+            Legend(
+                name = context.getString(R.string.wraith),
+                icon = R.drawable.wraith,
+                legendClass = LegendClass.Skirmisher
+            ),
+            Legend(
+                name = context.getString(R.string.bangalore),
+                icon = R.drawable.bangalore,
+                legendClass = LegendClass.Assault
+            ),
+            Legend(
+                name = context.getString(R.string.caustic),
+                icon = R.drawable.caustic,
+                legendClass = LegendClass.Controller
+            ),
+            Legend(
+                name = context.getString(R.string.mirage),
+                icon = R.drawable.mirage,
+                legendClass = LegendClass.Support
+            ),
+            Legend(
+                name = context.getString(R.string.octane),
+                icon = R.drawable.octane,
+                legendClass = LegendClass.Skirmisher
+            ),
+            Legend(
+                name = context.getString(R.string.wattson),
+                icon = R.drawable.wattson,
+                legendClass = LegendClass.Controller
+            ),
+            Legend(
+                name = context.getString(R.string.crypto),
+                icon = R.drawable.crypto,
+                legendClass = LegendClass.Recon
+            ),
+            Legend(
+                name = context.getString(R.string.revenant),
+                icon = R.drawable.revenant,
+                legendClass = LegendClass.Skirmisher
+            ),
+            Legend(
+                name = context.getString(R.string.loba),
+                icon = R.drawable.loba,
+                legendClass = LegendClass.Support
+            ),
+            Legend(
+                name = context.getString(R.string.rampart),
+                icon = R.drawable.rampart,
+                legendClass = LegendClass.Controller
+            ),
+            Legend(
+                name = context.getString(R.string.horizon),
+                icon = R.drawable.horizon,
+                legendClass = LegendClass.Skirmisher
+            ),
+            Legend(
+                name = context.getString(R.string.fuse),
+                icon = R.drawable.fuse,
+                legendClass = LegendClass.Assault
+            ),
+            Legend(
+                name = context.getString(R.string.valkyrie),
+                icon = R.drawable.valk,
+                legendClass = LegendClass.Skirmisher
+            ),
+            Legend(
+                name = context.getString(R.string.seer),
+                icon = R.drawable.seer,
+                legendClass = LegendClass.Recon
+            ),
+            Legend(
+                name = context.getString(R.string.ash),
+                icon = R.drawable.ash,
+                legendClass = LegendClass.Assault
+            ),
+            Legend(
+                name = context.getString(R.string.mad_maggie),
+                icon = R.drawable.mad_maggie,
+                legendClass = LegendClass.Assault
+            ),
+            Legend(
+                name = context.getString(R.string.newcastle),
+                icon = R.drawable.newcastle,
+                legendClass = LegendClass.Support
+            ),
+            Legend(
+                name = context.getString(R.string.vantage),
+                icon = R.drawable.vantage,
+                legendClass = LegendClass.Recon
+            ),
+            Legend(
+                name = context.getString(R.string.catalyst),
+                icon = R.drawable.catalyst,
+                legendClass = LegendClass.Controller
+            ),
+            Legend(
+                name = context.getString(R.string.ballistic),
+                icon = R.drawable.ballistic,
+                legendClass = LegendClass.Assault
+            ),
+            Legend(
+                name = context.getString(R.string.conduit),
+                icon = R.drawable.conduit,
+                legendClass = LegendClass.Support
+            ),
+            Legend(
+                name = context.getString(R.string.alter),
+                icon = R.drawable.alter,
+                legendClass = LegendClass.Skirmisher
+            )
         )
     }
 
