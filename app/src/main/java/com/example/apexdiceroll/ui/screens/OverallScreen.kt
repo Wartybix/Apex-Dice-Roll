@@ -54,7 +54,7 @@ fun OverallScreen(
                         generatedLegends = uiState.generatedLegends,
                         generatedMixtapeLoadout = uiState.mixtapeLoadout,
                         generatedLegendUpgrades = uiState.legendUpgrades,
-                        gameModeIdentifiers = viewModel.gameModes.map { it.modeName },
+                        gameModeIdentifiers = viewModel.gameModes.map { it.shortName },
                         selectedGameModeIndex = uiState.selectedGameModeIndex,
                         selectedGameModeName = selectedGameMode.modeName,
                         selectedGameModeCategory = selectedGameMode.category,

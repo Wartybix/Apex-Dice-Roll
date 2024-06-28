@@ -12,6 +12,9 @@ import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,7 +54,14 @@ fun WinsScreen(
 
         HorizontalPager(state = pagerState, modifier = Modifier.fillMaxSize()) { index ->
             when (index) {
-                0 -> { WinHistoryTab(wins = wins) }
+                0 -> {
+                    val lifetimeWins by remember {
+                        mutableIntStateOf(
+                            legends.sumOf { it.wins }
+                        )
+                    }
+                    WinHistoryTab(wins = wins, lifetimeWins = lifetimeWins)
+                }
                 1 -> { EditWinsTab(legends = legends) }
             }
         }

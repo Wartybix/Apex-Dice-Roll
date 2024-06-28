@@ -1,14 +1,18 @@
 package com.example.apexdiceroll.ui.components.wins_screen
 
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.apexdiceroll.data.Win
 
 @Composable
-fun WinHistoryTab(modifier: Modifier = Modifier, wins: List<Win>) {
+fun WinHistoryTab(modifier: Modifier = Modifier, wins: List<Win>, lifetimeWins: Int) {
     LazyColumn(modifier = modifier) {
+        item {
+            Text(text = lifetimeWins.toString())
+        }
         wins.forEach { win ->
             item {
                 WinCard(
@@ -24,5 +28,5 @@ fun WinHistoryTab(modifier: Modifier = Modifier, wins: List<Win>) {
 @Preview
 @Composable
 fun WinHistoryTabPreview() {
-    WinHistoryTab(wins = listOf())
+    WinHistoryTab(wins = listOf(), lifetimeWins = 50)
 }
