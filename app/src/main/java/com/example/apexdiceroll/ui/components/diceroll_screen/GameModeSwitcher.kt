@@ -9,44 +9,42 @@ import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.apexdiceroll.R
-import com.example.apexdiceroll.data.GameMode
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GameModeSwitcher(
-    selectedGameMode: GameMode,
+    gameModeIdentifiers: List<String>,
+    selectedGameMode: Int,
     randomGameMode: Boolean,
-    onSwitch: (GameMode?) -> Unit,
+    onSwitch: (Int?) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val gameModes by remember { mutableStateOf(GameMode.entries) }
-
         SingleChoiceSegmentedButtonRow(
             modifier = Modifier.fillMaxWidth()
         ) {
-            gameModes.forEachIndexed { index, gameMode ->
+            gameModeIdentifiers.forEachIndexed { index, identifier ->
                 SegmentedButton(
-                    selected = !randomGameMode && gameMode == selectedGameMode,
+                    selected = !randomGameMode && index == selectedGameMode,
                     onClick = {
-                        if (randomGameMode || gameMode != selectedGameMode) {
-                            onSwitch(gameMode)
+                        if (randomGameMode || index != selectedGameMode) {
+                            onSwitch(index)
                         }
                     },
-                    shape = SegmentedButtonDefaults.itemShape(index = index, count = gameModes.size + 1)
+                    shape = SegmentedButtonDefaults.itemShape(
+                        index = index,
+                        count = gameModeIdentifiers.size + 1
+                    )
                 ) {
-                    Text(text = gameMode.shortName)
+                    Text(text = identifier)
                 }
             }
 
@@ -57,7 +55,10 @@ fun GameModeSwitcher(
                         onSwitch(null)
                     }
                 },
-                shape = SegmentedButtonDefaults.itemShape(index = gameModes.size, count = gameModes.size + 1)
+                shape = SegmentedButtonDefaults.itemShape(
+                    index = gameModeIdentifiers.size,
+                    count = gameModeIdentifiers.size + 1
+                )
             ) {
                 Text(text = stringResource(R.string.random))
             }
@@ -67,17 +68,14 @@ fun GameModeSwitcher(
 
 @Preview
 @Composable
-fun GameModeSwitcherPreviewBR() {
+fun GameModeSwitcherPreview() {
     Surface {
-        GameModeSwitcher(selectedGameMode = GameMode.BR, randomGameMode = true, onSwitch = {})
+        GameModeSwitcher(
+            gameModeIdentifiers = listOf("Pigeon", "Hello"),
+            selectedGameMode = 1,
+            randomGameMode = true,
+            onSwitch = {}
+        )
     }
 
-}
-
-@Preview
-@Composable
-fun GameModeSwitcherPreviewMixtape() {
-    Surface {
-        GameModeSwitcher(selectedGameMode = GameMode.Mixtape, randomGameMode = false, onSwitch = {})
-    }
 }

@@ -45,4 +45,8 @@
     <string name="ballistic">Ballistic</string>
     <string name="conduit">Conduit</string>
     <string name="alter">Alter</string>
+    <string name="br_with_team_size">Battle Royale (%1$s)</string>
+    <string name="trios">Trios</string>
+    <string name="quads">Quads</string>
+    <string name="mixtape">Mixtape</string>
 </resources>

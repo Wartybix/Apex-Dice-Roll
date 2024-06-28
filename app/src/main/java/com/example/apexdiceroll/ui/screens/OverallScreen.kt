@@ -48,11 +48,16 @@ fun OverallScreen(
         content = { it ->
             when (uiState.currentScreen) {
                 Screen.DiceRoll -> {
+                    val selectedGameMode = viewModel.gameModes[uiState.selectedGameModeIndex]
+
                     DiceRollScreen(
                         generatedLegends = uiState.generatedLegends,
                         generatedMixtapeLoadout = uiState.mixtapeLoadout,
                         generatedLegendUpgrades = uiState.legendUpgrades,
-                        selectedGameMode = uiState.selectedGameMode,
+                        gameModeIdentifiers = viewModel.gameModes.map { it.modeName },
+                        selectedGameModeIndex = uiState.selectedGameModeIndex,
+                        selectedGameModeName = selectedGameMode.modeName,
+                        selectedGameModeCategory = selectedGameMode.category,
                         gameModeRandomised = uiState.gameModeRandomised,
                         onGameModeSwitch = {
                             viewModel.switchGameMode(it)

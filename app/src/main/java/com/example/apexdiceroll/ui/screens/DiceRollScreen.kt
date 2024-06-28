@@ -27,7 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.example.apexdiceroll.R
-import com.example.apexdiceroll.data.GameMode
+import com.example.apexdiceroll.data.GameModeCategory
 import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.LegendClass
 import com.example.apexdiceroll.data.MixtapeLoadout
@@ -43,9 +43,12 @@ fun DiceRollScreen(
     generatedLegends: List<Legend>,
     generatedMixtapeLoadout: MixtapeLoadout,
     generatedLegendUpgrades: List<UpgradeSelection>,
-    selectedGameMode: GameMode,
+    gameModeIdentifiers: List<String>,
+    selectedGameModeIndex: Int,
+    selectedGameModeName: String,
+    selectedGameModeCategory: GameModeCategory,
     gameModeRandomised: Boolean,
-    onGameModeSwitch: (GameMode?) -> Unit,
+    onGameModeSwitch: (Int?) -> Unit,
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues()
 ) {
@@ -75,8 +78,11 @@ fun DiceRollScreen(
             .padding(top = topPadding, bottom = bottomPadding)
     ) {
         GameModeSwitcher(
-            selectedGameMode = selectedGameMode,
-            onSwitch = { onGameModeSwitch(it) },
+            gameModeIdentifiers = gameModeIdentifiers,
+            selectedGameMode = selectedGameModeIndex,
+            onSwitch = { newIndex ->
+                onGameModeSwitch(newIndex)
+            },
             randomGameMode = gameModeRandomised,
             modifier = Modifier
                 .padding(start = startPadding, end = endPadding)
@@ -96,9 +102,15 @@ fun DiceRollScreen(
                     modifier = Modifier.padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Text(text = stringResource(R.string.generated_game_mode), style = MaterialTheme.typography.titleSmall)
+                    Text(
+                        text = stringResource(R.string.generated_game_mode),
+                        style = MaterialTheme.typography.titleSmall
+                    )
 
-                    Text(text = selectedGameMode.modeName, style = MaterialTheme.typography.titleLarge)
+                    Text(
+                        text = selectedGameModeName,
+                        style = MaterialTheme.typography.titleLarge
+                    )
                 }
             }
 
@@ -120,18 +132,18 @@ fun DiceRollScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(
-                    text = when (selectedGameMode) {
-                        GameMode.BR -> stringResource(R.string.legend_upgrades)
-                        GameMode.Mixtape -> stringResource(R.string.mixtape_loadout)
+                    text = when (selectedGameModeCategory) {
+                        GameModeCategory.BR -> stringResource(R.string.legend_upgrades)
+                        GameModeCategory.MIXTAPE -> stringResource(R.string.mixtape_loadout)
                     },
                     style = MaterialTheme.typography.titleSmall
                 )
 
-                when (selectedGameMode) {
-                    GameMode.BR -> {
+                when (selectedGameModeCategory) {
+                    GameModeCategory.BR -> {
                         UpgradesDisplay(data = generatedLegendUpgrades)
                     }
-                    GameMode.Mixtape -> {
+                    GameModeCategory.MIXTAPE -> {
                         MixtapeLoadoutDisplay(selectedLoadout = generatedMixtapeLoadout)
                     }
                 }
@@ -151,7 +163,10 @@ fun DiceRollScreenPreview() {
                     Legend("Mad Maggie", R.drawable.mad_maggie, LegendClass.Assault),
                     Legend("Newcastle", R.drawable.newcastle, LegendClass.Support)
                 ),
-                selectedGameMode = GameMode.BR,
+                gameModeIdentifiers = listOf("Yay", "Ok", "Yeah"),
+                selectedGameModeIndex = 1,
+                selectedGameModeName = "Yay Wow",
+                selectedGameModeCategory = GameModeCategory.BR,
                 gameModeRandomised = false,
                 onGameModeSwitch = {},
                 generatedMixtapeLoadout = MixtapeLoadout.CloseQuarters,
@@ -163,7 +178,7 @@ fun DiceRollScreenPreview() {
 
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun DiceRollScreenPreviewDark() {
+fun DiceRollScreenPreviewNightRandomised() {
     ApexDiceRollTheme {
         Surface {
             DiceRollScreen(
@@ -172,7 +187,10 @@ fun DiceRollScreenPreviewDark() {
                     Legend("Mad Maggie", R.drawable.mad_maggie, LegendClass.Assault),
                     Legend("Newcastle", R.drawable.newcastle, LegendClass.Support)
                 ),
-                selectedGameMode = GameMode.Mixtape,
+                gameModeIdentifiers = listOf("Yay", "Ok", "Yeah"),
+                selectedGameModeIndex = 0,
+                selectedGameModeName = "Yay Wow",
+                selectedGameModeCategory = GameModeCategory.MIXTAPE,
                 gameModeRandomised = true,
                 onGameModeSwitch = {},
                 generatedMixtapeLoadout = MixtapeLoadout.CloseQuarters,

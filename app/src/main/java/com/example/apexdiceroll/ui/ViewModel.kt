@@ -7,6 +7,7 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.lifecycle.AndroidViewModel
 import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.GameMode
+import com.example.apexdiceroll.data.GameModeCategory
 import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.LegendClass
 import com.example.apexdiceroll.data.LegendsSelected
@@ -33,6 +34,30 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private val context = getApplication<Application>().applicationContext
+
+    private fun getAllGameModes(): List<GameMode> {
+        return listOf(
+            GameMode(
+                modeName = context.getString(R.string.br_with_team_size,
+                    context.getString(R.string.trios)),
+                shortName = context.getString(R.string.trios),
+                category = GameModeCategory.BR,
+                teamSize = 3
+            ),
+            GameMode(
+                modeName = context.getString(R.string.br_with_team_size,
+                    context.getString(R.string.quads)),
+                shortName = context.getString(R.string.quads),
+                category = GameModeCategory.BR,
+                teamSize = 4
+            ),
+            GameMode(
+                modeName = context.getString(R.string.mixtape),
+                category = GameModeCategory.MIXTAPE,
+                teamSize = 3
+            )
+        )
+    }
 
     private fun getAllLegends(): List<Legend> {
         return listOf(
@@ -204,8 +229,8 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         return legendUpgrades.toList()
     }
 
-    private fun randomiseGameMode() : GameMode {
-        return GameMode.entries.random()
+    private fun randomiseGameMode() : Int {
+        return gameModes.indices.random()
     }
 
     private fun fetchLegendLoadout() {
@@ -240,13 +265,15 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
 
         saveToDisk(GENERATED_LEGENDS_FILE) { stream -> stream.write(legendsSerialised) }
 
-        if (uiState.value.selectedGameMode == GameMode.BR) {
+        val selectedGameMode = gameModes[uiState.value.selectedGameModeIndex]
+
+        if (selectedGameMode.category == GameModeCategory.BR) {
             val upgradesSerialised = uiState.value.legendUpgrades.map { upgradeSelection ->
                 upgradeSelection.ordinal.toByte()
             }.toByteArray()
 
             saveToDisk(LEGEND_UPGRADES_FILE) { stream -> stream.write(upgradesSerialised) }
-        } else if (uiState.value.selectedGameMode == GameMode.Mixtape) {
+        } else if (selectedGameMode.category == GameModeCategory.MIXTAPE) {
             val mixtapeLoadoutSerialised = uiState.value.mixtapeLoadout.ordinal
 
             saveToDisk(MIXTAPE_FILE) { stream -> stream.write(mixtapeLoadoutSerialised) }
@@ -254,7 +281,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun saveGameMode() {
-        val gameModeSerialised = uiState.value.selectedGameMode.ordinal
+        val gameModeSerialised = uiState.value.selectedGameModeIndex
 
         saveToDisk(GAME_MODE_FILE) { stream -> stream.write(gameModeSerialised) }
     }
@@ -274,6 +301,9 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     private val _legendRoster: SnapshotStateList<Legend> = getAllLegends().toMutableStateList()
     val legendRoster: List<Legend>
         get() = _legendRoster
+    private val _gameModes: SnapshotStateList<GameMode> = getAllGameModes().toMutableStateList()
+    val gameModes: List<GameMode>
+        get() = _gameModes
 
     init {
         fetchLegendLoadout()
@@ -290,41 +320,50 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun switchGameMode(requestedGameMode: GameMode?) {
+    fun switchGameMode(requestedGameMode: Int?) {
         val newGameMode = requestedGameMode ?: randomiseGameMode()
         val isRandomised = requestedGameMode == null
 
         _uiState.update { currentState ->
             currentState.copy(
-                selectedGameMode = newGameMode,
+                selectedGameModeIndex = newGameMode,
                 gameModeRandomised = isRandomised
             )
         }
     }
 
     fun rollDice() {
-        val currentGameMode = uiState.value.selectedGameMode
+        val currentGameModeIndex = uiState.value.selectedGameModeIndex
 
-        val newGameMode = if (uiState.value.gameModeRandomised)
+        val newGameModeIndex = if (uiState.value.gameModeRandomised)
             randomiseGameMode()
         else
-            currentGameMode
+            currentGameModeIndex
+
+        val newGameMode = gameModes[newGameModeIndex]
 
         val generatedLegends = randomiseLegendLoadout()
 
-        val mixtapeLoadout = if (currentGameMode == GameMode.Mixtape)
+        val mixtapeLoadout = if (
+            newGameMode.category == GameModeCategory.MIXTAPE
+        ) {
             randomiseMixtapeLoadout()
-        else
+        } else {
             uiState.value.mixtapeLoadout
+        }
 
-        val legendUpgrades = if (currentGameMode == GameMode.BR)
+        val legendUpgrades = if (
+            newGameMode.category == GameModeCategory.BR
+        ) {
             randomiseLegendUpgrades()
-        else
+        }
+        else {
             uiState.value.legendUpgrades
+        }
 
         _uiState.update { currentState ->
             currentState.copy(
-                selectedGameMode = newGameMode,
+                selectedGameModeIndex = newGameModeIndex,
                 generatedLegends = generatedLegends,
                 mixtapeLoadout = mixtapeLoadout,
                 legendUpgrades = legendUpgrades
