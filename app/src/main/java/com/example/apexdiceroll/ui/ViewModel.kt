@@ -232,7 +232,10 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun randomiseGameMode() : Int {
-        return gameModes.indices.random()
+        val generatedCategory = GameModeCategory.entries.random()
+        val gameModePool = gameModes.indices.filter { gameModes[it].category == generatedCategory }
+
+        return gameModePool.random()
     }
 
     private fun fetchLegendLoadout() {

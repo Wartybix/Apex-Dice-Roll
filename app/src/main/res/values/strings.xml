@@ -9,7 +9,6 @@
     <string name="apex_wins">%1$s Apex win%2$s</string>
     <string name="wins">Wins</string>
     <string name="generated_game_mode">Generated Game Mode</string>
-    <string name="mixtape_to_br_ratio_msg">The likelihood generating %1$s to %2$s is 4:1, as %3$s currently contains four game modes.</string>
     <string name="legend_upgrades">Legend Upgrades</string>
     <string name="random">Random</string>
     <string name="re_roll">Re-Roll</string>
@@ -49,4 +48,5 @@
     <string name="trios">Trios</string>
     <string name="quads">Quads</string>
     <string name="mixtape">Mixtape</string>
+    <string name="gamemode_category_equal_likelihood_message">BR and non-BR game modes have an equal likelihood of being suggested.</string>
 </resources>
