@@ -196,10 +196,10 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         )
     }
 
-    private fun randomiseLegendLoadout() : List<Legend> {
+    private fun randomiseLegendLoadout(teamSize: Int) : List<Legend> {
         val legendLoadout = mutableListOf<Legend>()
 
-        for (priority in 0..3) {
+        for (priority in 0..<teamSize) {
             val availableLegends = legendRoster.filterNot { it in legendLoadout }
             val availableSelectedLegends = availableLegends.filter { it.selected }
 
@@ -239,7 +239,8 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun fetchLegendLoadout() {
-        uiState.value.generatedLegends = randomiseLegendLoadout() //TODO add IO
+        val selectedGameMode = gameModes[uiState.value.selectedGameModeIndex]
+        uiState.value.generatedLegends = randomiseLegendLoadout(selectedGameMode.teamSize) //TODO add IO
     }
 
     private fun fetchMixtapeLoadout() {
@@ -347,7 +348,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
 
         val newGameMode = gameModes[newGameModeIndex]
 
-        val generatedLegends = randomiseLegendLoadout()
+        val generatedLegends = randomiseLegendLoadout(teamSize = newGameMode.teamSize)
 
         val mixtapeLoadout = if (
             newGameMode.category == GameModeCategory.MIXTAPE
