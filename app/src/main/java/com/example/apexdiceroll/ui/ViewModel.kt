@@ -31,34 +31,37 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         const val WINS_FILE = "wins$EXTENSION"
         const val SELECTIONS_FILE = "selections$EXTENSION"
     }
+
+    private val context = getApplication<Application>().applicationContext
+
     private fun getAllLegends(): List<Legend> {
         return listOf(
-            Legend("Bloodhound", R.drawable.bloodhound, LegendClass.Recon),
-            Legend("Gibraltar", R.drawable.gibraltar, LegendClass.Support),
-            Legend("Lifeline", R.drawable.lifeline, LegendClass.Support),
-            Legend("Pathfinder", R.drawable.pathfinder, LegendClass.Skirmisher),
-            Legend("Wraith", R.drawable.wraith, LegendClass.Skirmisher),
-            Legend("Bangalore", R.drawable.bangalore, LegendClass.Assault),
-            Legend("Caustic", R.drawable.caustic, LegendClass.Controller),
-            Legend("Mirage", R.drawable.mirage, LegendClass.Support),
-            Legend("Octane", R.drawable.octane, LegendClass.Skirmisher),
-            Legend("Wattson", R.drawable.wattson, LegendClass.Controller),
-            Legend("Crypto", R.drawable.crypto, LegendClass.Recon),
-            Legend("Revenant", R.drawable.revenant, LegendClass.Skirmisher),
-            Legend("Loba", R.drawable.loba, LegendClass.Support),
-            Legend("Rampart", R.drawable.rampart, LegendClass.Controller),
-            Legend("Horizon", R.drawable.horizon, LegendClass.Skirmisher),
-            Legend("Fuse", R.drawable.fuse, LegendClass.Assault),
-            Legend("Valkyrie", R.drawable.valk, LegendClass.Skirmisher),
-            Legend("Seer", R.drawable.seer, LegendClass.Recon),
-            Legend("Ash", R.drawable.ash, LegendClass.Assault),
-            Legend("Mad Maggie", R.drawable.mad_maggie, LegendClass.Assault),
-            Legend("Newcastle", R.drawable.newcastle, LegendClass.Support),
-            Legend("Vantage", R.drawable.vantage, LegendClass.Recon),
-            Legend("Catalyst", R.drawable.catalyst, LegendClass.Controller),
-            Legend("Ballistic", R.drawable.ballistic, LegendClass.Assault),
-            Legend("Conduit", R.drawable.conduit, LegendClass.Support),
-            Legend("Alter", R.drawable.alter, LegendClass.Skirmisher)
+            Legend(context.getString(R.string.bloodhound), R.drawable.bloodhound, LegendClass.Recon),
+            Legend(context.getString(R.string.gibraltar), R.drawable.gibraltar, LegendClass.Support),
+            Legend(context.getString(R.string.lifeline), R.drawable.lifeline, LegendClass.Support),
+            Legend(context.getString(R.string.pathfinder), R.drawable.pathfinder, LegendClass.Skirmisher),
+            Legend(context.getString(R.string.wraith), R.drawable.wraith, LegendClass.Skirmisher),
+            Legend(context.getString(R.string.bangalore), R.drawable.bangalore, LegendClass.Assault),
+            Legend(context.getString(R.string.caustic), R.drawable.caustic, LegendClass.Controller),
+            Legend(context.getString(R.string.mirage), R.drawable.mirage, LegendClass.Support),
+            Legend(context.getString(R.string.octane), R.drawable.octane, LegendClass.Skirmisher),
+            Legend(context.getString(R.string.wattson), R.drawable.wattson, LegendClass.Controller),
+            Legend(context.getString(R.string.crypto), R.drawable.crypto, LegendClass.Recon),
+            Legend(context.getString(R.string.revenant), R.drawable.revenant, LegendClass.Skirmisher),
+            Legend(context.getString(R.string.loba), R.drawable.loba, LegendClass.Support),
+            Legend(context.getString(R.string.rampart), R.drawable.rampart, LegendClass.Controller),
+            Legend(context.getString(R.string.horizon), R.drawable.horizon, LegendClass.Skirmisher),
+            Legend(context.getString(R.string.fuse), R.drawable.fuse, LegendClass.Assault),
+            Legend(context.getString(R.string.valkyrie), R.drawable.valk, LegendClass.Skirmisher),
+            Legend(context.getString(R.string.seer), R.drawable.seer, LegendClass.Recon),
+            Legend(context.getString(R.string.ash), R.drawable.ash, LegendClass.Assault),
+            Legend(context.getString(R.string.mad_maggie), R.drawable.mad_maggie, LegendClass.Assault),
+            Legend(context.getString(R.string.newcastle), R.drawable.newcastle, LegendClass.Support),
+            Legend(context.getString(R.string.vantage), R.drawable.vantage, LegendClass.Recon),
+            Legend(context.getString(R.string.catalyst), R.drawable.catalyst, LegendClass.Controller),
+            Legend(context.getString(R.string.ballistic), R.drawable.ballistic, LegendClass.Assault),
+            Legend(context.getString(R.string.conduit), R.drawable.conduit, LegendClass.Support),
+            Legend(context.getString(R.string.alter), R.drawable.alter, LegendClass.Skirmisher)
         )
     }
 
