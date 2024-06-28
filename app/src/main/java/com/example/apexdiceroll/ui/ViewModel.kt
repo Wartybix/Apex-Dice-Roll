@@ -33,9 +33,9 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         const val SELECTIONS_FILE = "selections$EXTENSION"
     }
 
-    private val context = getApplication<Application>().applicationContext
-
     private fun getAllGameModes(): List<GameMode> {
+        val context = getApplication<Application>().applicationContext
+
         return listOf(
             GameMode(
                 modeName = context.getString(R.string.br_with_team_size,
@@ -60,6 +60,8 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun getAllLegends(): List<Legend> {
+        val context = getApplication<Application>().applicationContext
+
         return listOf(
             Legend(
                 name = context.getString(R.string.bloodhound),
