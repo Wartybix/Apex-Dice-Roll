@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import java.io.FileOutputStream
-import kotlin.random.Random
 
 class ViewModel(application: Application) : AndroidViewModel(application) {
     companion object {
@@ -66,7 +65,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     private fun randomiseLegendLoadout() : List<Legend> {
         val legendLoadout = mutableListOf<Legend>()
 
-        for (priority in 0..2) {
+        for (priority in 0..3) {
             val availableLegends = legendRoster.filterNot { it in legendLoadout }
             val availableSelectedLegends = availableLegends.filter { it.selected }
 
