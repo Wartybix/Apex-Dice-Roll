@@ -38,9 +38,9 @@ fun WinPieChart(
         mutableStateOf(classWins.sortedByDescending { it.second })
     }
 
-    Box(contentAlignment = Alignment.Center) {
+    Box(contentAlignment = Alignment.Center, modifier = modifier.size(192.dp)) {
         Canvas(
-            modifier = modifier,
+            modifier = Modifier.size(192.dp - strokeWidth),
             onDraw = {
                 var startAngle = -90f
                 val GAP_ANGLE = 12f
@@ -95,7 +95,6 @@ fun WinPieChartPreview() {
             Pair(LegendClass.Recon, 6),
             Pair(LegendClass.Assault, 3)
         ),
-        modifier = Modifier.size(200.dp),
-        strokeWidth = 16.dp
+        strokeWidth = 16.dp,
     )
 }
