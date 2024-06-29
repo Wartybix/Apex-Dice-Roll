@@ -6,18 +6,23 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.QueryStats
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.LegendClass
+import com.example.apexdiceroll.ui.components.shared.ContentUnavailableMessage
 import com.example.apexdiceroll.ui.components.shared.Section
 import com.example.apexdiceroll.ui.theme.extendedDark
 import com.example.apexdiceroll.ui.theme.extendedLight
@@ -27,9 +32,6 @@ fun WinStatsTab(
     modifier: Modifier = Modifier,
     legends: List<Legend>
 ) {
-    val darkTheme = isSystemInDarkTheme()
-    val colorFamily by remember { mutableStateOf(if (darkTheme) extendedDark else extendedLight) }
-
     val legendClasses by remember {
         mutableStateOf(
             legends
@@ -43,49 +45,66 @@ fun WinStatsTab(
 
     val lifetimeWins = legendClasses.sumOf { it.second }
 
-    LazyColumn(
-        modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(horizontal = 24.dp, vertical = 16.dp)
-    ) {
-        item {
-            Section(
-                modifier = Modifier.fillMaxWidth(),
-                content = {
-                    WinPieChart(
-                        classWins = legendClasses,
-                        strokeWidth = 16.dp,
-                        modifier = Modifier.fillMaxWidth(),
-                    )
+    val paddingValues by remember {
+        mutableStateOf(PaddingValues(horizontal = 24.dp, vertical = 16.dp))
+    }
 
-                    Spacer(modifier = Modifier.size(32.dp))
+    if (lifetimeWins > 0) {
+        val darkTheme = isSystemInDarkTheme()
+        val colorFamily by remember {
+            mutableStateOf(if (darkTheme) extendedDark else extendedLight)
+        }
 
-                    Column {
-                        legendClasses.forEachIndexed { index, legendClass ->
-                            val classColour = when (legendClass.first) {
-                                LegendClass.Assault -> colorFamily.assault
-                                LegendClass.Skirmisher -> colorFamily.skirmisher
-                                LegendClass.Recon -> colorFamily.recon
-                                LegendClass.Support -> colorFamily.support
-                                LegendClass.Controller -> colorFamily.controller
+        LazyColumn(
+            modifier = modifier.fillMaxSize(),
+            contentPadding = paddingValues
+        ) {
+            item {
+                Section(
+                    modifier = Modifier.fillMaxWidth(),
+                    content = {
+                        WinPieChart(
+                            classWins = legendClasses,
+                            strokeWidth = 16.dp,
+                            modifier = Modifier.fillMaxWidth(),
+                        )
+
+                        Spacer(modifier = Modifier.size(32.dp))
+
+                        Column {
+                            legendClasses.forEachIndexed { index, legendClass ->
+                                val classColour = when (legendClass.first) {
+                                    LegendClass.Assault -> colorFamily.assault
+                                    LegendClass.Skirmisher -> colorFamily.skirmisher
+                                    LegendClass.Recon -> colorFamily.recon
+                                    LegendClass.Support -> colorFamily.support
+                                    LegendClass.Controller -> colorFamily.controller
+                                }
+
+                                if (index > 0) {
+                                    Spacer(modifier = Modifier.size(8.dp))
+                                }
+
+                                LegendClassWinsStat(
+                                    legendClassName = legendClass.first.className,
+                                    legendClassWins = legendClass.second,
+                                    lifetimeWins = lifetimeWins,
+                                    legendClassIcon = legendClass.first.icon,
+                                    legendClassOnColor = classColour.onColor,
+                                    legendClassColor = classColour.color
+                                )
                             }
-
-                            if (index > 0) {
-                                Spacer(modifier = Modifier.size(8.dp))
-                            }
-
-                            LegendClassWinsStat(
-                                legendClassName = legendClass.first.className,
-                                legendClassWins = legendClass.second,
-                                lifetimeWins = lifetimeWins,
-                                legendClassIcon = legendClass.first.icon,
-                                legendClassOnColor = classColour.onColor,
-                                legendClassColor = classColour.color
-                            )
                         }
                     }
-                }
-            )
+                )
+            }
         }
+    } else {
+        ContentUnavailableMessage(
+            imageVector = Icons.Outlined.QueryStats,
+            text = stringResource(R.string.stats_will_show_here),
+            modifier = Modifier.padding(paddingValues)
+        )
     }
 }
 
@@ -136,4 +155,10 @@ fun WinStatsTabPreview() {
             legend5
         )
     )
+}
+
+@Preview
+@Composable
+fun WinStatsTabPreviewNoWins() {
+    WinStatsTab(legends = listOf())
 }
