@@ -2,10 +2,12 @@ package com.example.apexdiceroll.ui.components.shared
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -21,7 +23,8 @@ import androidx.compose.ui.unit.dp
 fun ContentUnavailableMessage(
     modifier: Modifier = Modifier,
     imageVector: ImageVector,
-    text: String
+    text: String,
+    hintMessage: String = ""
 ) {
     Column(
         modifier = modifier,
@@ -31,8 +34,20 @@ fun ContentUnavailableMessage(
         Icon(imageVector = imageVector, contentDescription = null, modifier = Modifier.size(64.dp))
         
         Spacer(modifier = Modifier.size(16.dp))
-        
+
         Text(text = text, style = MaterialTheme.typography.bodyLarge, textAlign = TextAlign.Center)
+
+        if (hintMessage != "") {
+            Spacer(modifier = Modifier.size(16.dp))
+
+            Section(content = {
+                Row {
+                    Icon(imageVector = Icons.Outlined.Lightbulb, contentDescription = null)
+                    Spacer(modifier = Modifier.size(16.dp))
+                    Text(text = hintMessage, style = MaterialTheme.typography.bodySmall)
+                }
+            })
+        }
     }
 }
 
@@ -42,5 +57,15 @@ fun ContentUnavailableMessagePreview() {
     ContentUnavailableMessage(
         imageVector = Icons.Outlined.Info,
         text = "Content is unavailable"
+    )
+}
+
+@Preview
+@Composable
+fun ContentUnavailableMessagePreviewWithHint() {
+    ContentUnavailableMessage(
+        imageVector = Icons.Outlined.Info,
+        text = "Content is unavailable",
+        hintMessage = "This is a hint."
     )
 }
