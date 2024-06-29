@@ -34,16 +34,19 @@ fun WinPieChart(
     val darkTheme = isSystemInDarkTheme()
     val colorFamily by remember { mutableStateOf(if (darkTheme) extendedDark else extendedLight) }
     var totalWins by remember { mutableIntStateOf(classWins.sumOf { it.second }) }
+    var sortedWins by remember {
+        mutableStateOf(classWins.sortedByDescending { it.second })
+    }
 
     Box(contentAlignment = Alignment.Center) {
         Canvas(
             modifier = modifier,
             onDraw = {
-                var startAngle = 0f
+                var startAngle = -90f
                 val GAP_ANGLE = 12f
                 val filledCircleAngle = 360f - (classWins.size * GAP_ANGLE)
 
-                classWins.forEachIndexed { index, pieSegment ->
+                sortedWins.forEachIndexed { index, pieSegment ->
                     val legendClass = pieSegment.first
 
                     val classColour = when (legendClass) {
