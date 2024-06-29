@@ -1,6 +1,7 @@
 package com.example.apexdiceroll.ui.components.wins_screen
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -11,10 +12,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.QueryStats
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -57,7 +60,8 @@ fun WinStatsTab(
 
         LazyColumn(
             modifier = modifier.fillMaxSize(),
-            contentPadding = paddingValues
+            contentPadding = paddingValues,
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
                 Section(
@@ -96,6 +100,22 @@ fun WinStatsTab(
                             }
                         }
                     }
+                )
+            }
+            item {
+                val noOfEntries = 5
+                Section(
+                    title = "Most Played Legends",
+                    content = {
+                        var legendsSorted by remember {
+                            mutableStateOf(legends.sortedByDescending { it.wins }.take(noOfEntries))
+                        }
+
+                        legendsSorted.forEachIndexed { index, legend ->
+                            Text(text = legend.name)
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
         }
