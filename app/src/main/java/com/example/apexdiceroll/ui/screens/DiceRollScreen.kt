@@ -111,7 +111,7 @@ fun DiceRollScreen(
                             contentDescription = null
                         )
 
-                        Spacer(modifier = Modifier.size(8.dp))
+                        Spacer(modifier = Modifier.size(16.dp))
 
                         Text(
                             text = stringResource(
