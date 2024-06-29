@@ -54,7 +54,8 @@ fun LegendClassWinsStat(
                     legendClassWins,
                     if (legendClassWins == 1) "" else "s"
                     //TODO make win and wins more translatable
-                )
+                ),
+                style = MaterialTheme.typography.bodyMedium
             )
         }
 
