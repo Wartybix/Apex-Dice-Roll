@@ -93,7 +93,11 @@ fun EditWinsTab(modifier: Modifier = Modifier, legends: List<Legend>) {
 fun EditWinsTabPreview() {
     Surface {
         EditWinsTab(legends = listOf(
-            Legend(name = "Alter", icon = R.drawable.alter, legendClass = LegendClass.Skirmisher)
+            Legend(
+                name = "Alter",
+                icon = R.drawable.alter,
+                legendClass = LegendClass.Skirmisher
+            )
         ))
     }
 

@@ -30,12 +30,16 @@ fun WinStatsTab(
     val darkTheme = isSystemInDarkTheme()
     val colorFamily by remember { mutableStateOf(if (darkTheme) extendedDark else extendedLight) }
 
-    val legendClasses = legends
-        .groupBy { legend -> legend.legendClass }
-        .map { classGroup ->
-            Pair(classGroup.key, classGroup.value.sumOf { legend -> legend.wins })
-        }
-        .sortedByDescending { classWinsPair -> classWinsPair.second }
+    val legendClasses by remember {
+        mutableStateOf(
+            legends
+                .groupBy { legend -> legend.legendClass }
+                .map { classGroup ->
+                    Pair(classGroup.key, classGroup.value.sumOf { legend -> legend.wins })
+                }
+                .sortedByDescending { classWinsPair -> classWinsPair.second }
+        )
+    }
 
     val lifetimeWins = legendClasses.sumOf { it.second }
 
@@ -88,19 +92,39 @@ fun WinStatsTab(
 @Preview
 @Composable
 fun WinStatsTabPreview() {
-    val legend1 = Legend(name = "Yeah", icon = R.drawable.ballistic, legendClass = LegendClass.Assault)
+    val legend1 = Legend(
+        name = "Yeah",
+        icon = R.drawable.ballistic,
+        legendClass = LegendClass.Assault
+    )
     legend1.wins = 10
 
-    val legend2 = Legend(name = "Pigeon", icon = R.drawable.bloodhound, legendClass = LegendClass.Recon)
+    val legend2 = Legend(
+        name = "Pigeon",
+        icon = R.drawable.bloodhound,
+        legendClass = LegendClass.Recon
+    )
     legend2.wins = 5
 
-    val legend3 = Legend(name = "Wow", icon = R.drawable.ash, legendClass = LegendClass.Controller)
+    val legend3 = Legend(
+        name = "Wow",
+        icon = R.drawable.ash,
+        legendClass = LegendClass.Controller
+    )
     legend3.wins = 0
 
-    val legend4 = Legend(name = "Chicken", icon = R.drawable.mirage, legendClass = LegendClass.Controller)
+    val legend4 = Legend(
+        name = "Chicken",
+        icon = R.drawable.mirage,
+        legendClass = LegendClass.Controller
+    )
     legend4.wins = 2
 
-    val legend5 = Legend(name = "Crow", icon = R.drawable.bloodhound, legendClass = LegendClass.Support)
+    val legend5 = Legend(
+        name = "Crow",
+        icon = R.drawable.bloodhound,
+        legendClass = LegendClass.Support
+    )
     legend5.wins = 1
 
     WinStatsTab(

@@ -9,15 +9,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.LegendClass
 import com.example.apexdiceroll.ui.theme.extendedDark
 import com.example.apexdiceroll.ui.theme.extendedLight
@@ -30,8 +33,8 @@ fun WinPieChart(
 ) {
     val darkTheme = isSystemInDarkTheme()
     val colorFamily by remember { mutableStateOf(if (darkTheme) extendedDark else extendedLight) }
-    val classesWithWins = classWins.filter { it.second > 0 }
-    var totalWins = classesWithWins.sumOf { it.second }
+    val classesWithWins by remember { mutableStateOf(classWins.filter { it.second > 0 }) }
+    val totalWins by remember { mutableIntStateOf(classesWithWins.sumOf { it.second }) }
 
     Box(contentAlignment = Alignment.Center, modifier = modifier.size(192.dp)) {
         Canvas(
@@ -56,7 +59,7 @@ fun WinPieChart(
                         LegendClass.Controller -> colorFamily.controller
                     }
 
-                    var sweepAngle = (pieSegment.second.toFloat() / totalWins) * filledCircleAngle
+                    val sweepAngle = (pieSegment.second.toFloat() / totalWins) * filledCircleAngle
 
                     drawArc(
                         color = classColour.color,
@@ -75,7 +78,10 @@ fun WinPieChart(
         )
 
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "Lifetime wins", style = MaterialTheme.typography.labelLarge)
+            Text(
+                text = stringResource(R.string.lifetime_wins),
+                style = MaterialTheme.typography.titleSmall
+            )
             Text(text = totalWins.toString(), style = MaterialTheme.typography.titleLarge)
         }
     }
