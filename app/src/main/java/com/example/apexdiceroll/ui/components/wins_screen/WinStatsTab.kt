@@ -103,6 +103,7 @@ fun WinStatsTab(
         ContentUnavailableMessage(
             imageVector = Icons.Outlined.QueryStats,
             text = stringResource(R.string.stats_will_show_here),
+            hintMessage = "You can enter your existing wins in the ‘${stringResource(id = R.string.edit)}’ tab.",
             modifier = Modifier.padding(paddingValues)
         )
     }
