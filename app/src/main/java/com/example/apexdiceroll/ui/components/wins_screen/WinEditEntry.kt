@@ -2,9 +2,7 @@ package com.example.apexdiceroll.ui.components.wins_screen
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -37,10 +35,7 @@ fun WinEditEntry(
     onEdit: (Int) -> Unit = {}
 ) {
     Row(
-        modifier = modifier
-            .padding(horizontal = 24.dp, vertical = 16.dp)
-            .heightIn(min = 48.dp)
-            .fillMaxWidth(),
+        modifier = modifier.heightIn(min = 48.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(text = legendName, style = MaterialTheme.typography.titleMedium)
