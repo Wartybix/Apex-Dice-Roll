@@ -71,12 +71,14 @@ fun LegendClassWinsStat(
 @Preview
 @Composable
 fun LegendClassWinsStatPreview() {
-    LegendClassWinsStat(
-        legendClassName = "Assault",
-        legendClassWins = 10,
-        lifetimeWins = 15,
-        legendClassIcon = R.drawable.class_assault,
-        legendClassOnColor = MaterialTheme.colorScheme.onPrimary,
-        legendClassColor = MaterialTheme.colorScheme.primary
-    )
+    Surface {
+        LegendClassWinsStat(
+            legendClassName = "Assault",
+            legendClassWins = 10,
+            lifetimeWins = 15,
+            legendClassIcon = R.drawable.class_assault,
+            legendClassOnColor = MaterialTheme.colorScheme.onPrimary,
+            legendClassColor = MaterialTheme.colorScheme.primary
+        )
+    }
 }

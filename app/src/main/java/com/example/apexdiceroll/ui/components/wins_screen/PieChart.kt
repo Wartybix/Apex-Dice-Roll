@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -91,14 +92,16 @@ fun WinPieChart(
 @Preview
 @Composable
 fun WinPieChartPreview() {
-    WinPieChart(
-        classWins = listOf(
-            Pair(LegendClass.Controller, 0),
-            Pair(LegendClass.Skirmisher, 10),
-            Pair(LegendClass.Support, 5),
-            Pair(LegendClass.Recon, 6),
-            Pair(LegendClass.Assault, 3)
-        ),
-        strokeWidth = 16.dp,
-    )
+    Surface {
+        WinPieChart(
+            classWins = listOf(
+                Pair(LegendClass.Controller, 0),
+                Pair(LegendClass.Skirmisher, 10),
+                Pair(LegendClass.Support, 5),
+                Pair(LegendClass.Recon, 6),
+                Pair(LegendClass.Assault, 3)
+            ),
+            strokeWidth = 16.dp,
+        )
+    }
 }

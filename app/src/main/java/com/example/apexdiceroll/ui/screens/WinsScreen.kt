@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults
@@ -79,5 +80,7 @@ fun WinsScreen(
 @Preview
 @Composable
 fun WinsScreenPreview() {
-    WinsScreen(wins = listOf(), legends = listOf())
+    Surface {
+        WinsScreen(wins = listOf(), legends = listOf())
+    }
 }

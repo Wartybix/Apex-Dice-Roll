@@ -10,6 +10,7 @@ import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Lightbulb
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -56,18 +57,22 @@ fun ContentUnavailableMessage(
 @Preview
 @Composable
 fun ContentUnavailableMessagePreview() {
-    ContentUnavailableMessage(
-        imageVector = Icons.Outlined.Info,
-        text = "Content is unavailable"
-    )
+    Surface {
+        ContentUnavailableMessage(
+            imageVector = Icons.Outlined.Info,
+            text = "Content is unavailable"
+        )
+    }
 }
 
 @Preview
 @Composable
 fun ContentUnavailableMessagePreviewWithHint() {
-    ContentUnavailableMessage(
-        imageVector = Icons.Outlined.Info,
-        text = "Content is unavailable",
-        hintMessage = "This is a hint."
-    )
+    Surface {
+        ContentUnavailableMessage(
+            imageVector = Icons.Outlined.Info,
+            text = "Content is unavailable",
+            hintMessage = "This is a hint."
+        )
+    }
 }

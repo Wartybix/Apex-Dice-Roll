@@ -214,19 +214,23 @@ fun WinStatsTabPreview() {
     )
     legend5.wins = 1
 
-    WinStatsTab(
-        legends = listOf(
-            legend1,
-            legend2,
-            legend3,
-            legend4,
-            legend5
+    Surface {
+        WinStatsTab(
+            legends = listOf(
+                legend1,
+                legend2,
+                legend3,
+                legend4,
+                legend5
+            )
         )
-    )
+    }
 }
 
 @Preview
 @Composable
 fun WinStatsTabPreviewNoWins() {
-    WinStatsTab(legends = listOf())
+    Surface {
+        WinStatsTab(legends = listOf())
+    }
 }
