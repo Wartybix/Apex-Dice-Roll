@@ -10,6 +10,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -32,8 +34,10 @@ fun WinPieChart(
         modifier = modifier,
         onDraw = {
             var startAngle = 0f
+            val GAP_ANGLE = 12f
+            val filledCircleAngle = 360f - (classWins.size * GAP_ANGLE)
 
-            classWins.forEach { pieSegment ->
+            classWins.forEachIndexed { index, pieSegment ->
                 val legendClass = pieSegment.first
 
                 val classColour = when (legendClass) {
@@ -44,7 +48,7 @@ fun WinPieChart(
                     LegendClass.Controller -> colorFamily.controller
                 }
 
-                var sweepAngle = (pieSegment.second.toFloat() / totalWins) * 360
+                var sweepAngle = (pieSegment.second.toFloat() / totalWins) * filledCircleAngle
 
                 drawArc(
                     color = classColour.color,
@@ -52,11 +56,13 @@ fun WinPieChart(
                     sweepAngle = sweepAngle,
                     useCenter = false,
                     style = Stroke(
-                        width = strokeWidth.toPx()
+                        width = strokeWidth.toPx(),
+                        cap = StrokeCap.Round,
+                        join = StrokeJoin.Round
                     )
                 )
 
-                startAngle += sweepAngle
+                startAngle += sweepAngle + (GAP_ANGLE)
             }
         }
     )
@@ -74,6 +80,6 @@ fun WinPieChartPreview() {
             Pair(LegendClass.Assault, 3)
         ),
         modifier = Modifier.size(200.dp),
-        strokeWidth = 24.dp
+        strokeWidth = 16.dp
     )
 }
