@@ -27,7 +27,7 @@ import com.example.apexdiceroll.ui.components.shared.Section
 fun EditWinsTab(modifier: Modifier = Modifier, legends: List<Legend>) {
     LazyColumn(
         modifier = modifier,
-        contentPadding = PaddingValues(horizontal = 24.dp, vertical = 16.dp)
+        contentPadding = PaddingValues(24.dp)
     ) {
         item {
             Text(
@@ -57,13 +57,16 @@ fun EditWinsTab(modifier: Modifier = Modifier, legends: List<Legend>) {
             )
         }
         item {
-            Spacer(Modifier.size(16.dp))
+            Spacer(modifier = Modifier.size(24.dp))
         }
-        LegendClass.entries.forEach { legendClass ->
+        LegendClass.entries.forEachIndexed { index, legendClass ->
+            if (index > 0) {
+                item { Spacer(modifier = Modifier.size(16.dp)) }
+            }
             item {
                 LegendClassHeading(
                     legendClass = legendClass,
-                    modifier = Modifier.padding(top = 32.dp, bottom = 16.dp)
+                    modifier = Modifier.padding(bottom = 8.dp)
                 )
             }
 

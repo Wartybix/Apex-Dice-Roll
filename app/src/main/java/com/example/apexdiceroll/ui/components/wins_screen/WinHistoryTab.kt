@@ -25,7 +25,7 @@ import java.util.Date
 @Composable
 fun WinHistoryTab(modifier: Modifier = Modifier, wins: List<Win>, lifetimeWins: Int) {
     val paddingValues by remember {
-        mutableStateOf(PaddingValues(vertical = 16.dp, horizontal = 24.dp))
+        mutableStateOf(PaddingValues(24.dp))
     }
 
     if (wins.isNotEmpty()) {

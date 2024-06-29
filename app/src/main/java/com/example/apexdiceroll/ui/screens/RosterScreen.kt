@@ -2,7 +2,9 @@ package com.example.apexdiceroll.ui.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -39,14 +41,17 @@ fun RosterScreen(
                 Text(
                     text = stringResource(R.string.uncheck_legends_tutorial),
                     style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp)
+                    modifier = Modifier.padding(24.dp)
                 )
             }
-            LegendClass.entries.forEach { legendClass ->
+            LegendClass.entries.forEachIndexed { index, legendClass ->
+                if (index > 0) {
+                    item { Spacer(modifier = Modifier.size(16.dp)) }
+                }
                 item {
                     LegendClassHeading(
                         legendClass = legendClass,
-                        modifier = Modifier.padding(start = 24.dp, top = 16.dp, bottom = 8.dp)
+                        modifier = Modifier.padding(start = 24.dp, bottom = 8.dp)
                     )
                 }
 

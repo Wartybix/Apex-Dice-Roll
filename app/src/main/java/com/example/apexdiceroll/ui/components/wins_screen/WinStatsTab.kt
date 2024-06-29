@@ -52,7 +52,7 @@ fun WinStatsTab(
     val lifetimeWins = legendClasses.sumOf { it.second }
 
     val paddingValues by remember {
-        mutableStateOf(PaddingValues(horizontal = 24.dp, vertical = 16.dp))
+        mutableStateOf(PaddingValues(24.dp))
     }
 
     if (lifetimeWins > 0) {
@@ -64,7 +64,7 @@ fun WinStatsTab(
         LazyColumn(
             modifier = modifier.fillMaxSize(),
             contentPadding = paddingValues,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(24.dp)
         ) {
             item {
                 Section(

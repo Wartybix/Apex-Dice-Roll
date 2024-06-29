@@ -1,6 +1,7 @@
 package com.example.apexdiceroll.ui.screens
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -79,7 +80,8 @@ fun DiceRollScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
             .verticalScroll(rememberScrollState())
-            .padding(top = topPadding, bottom = bottomPadding)
+            .padding(top = topPadding, bottom = bottomPadding),
+        verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
         GameModeSwitcher(
             gameModeIdentifiers = gameModeIdentifiers,
@@ -92,7 +94,6 @@ fun DiceRollScreen(
                 .padding(start = startPadding, end = endPadding)
                 .fillMaxWidth()
         )
-        Spacer(Modifier.size(32.dp))
 
         if (gameModeRandomised) {
             Section(
@@ -125,12 +126,9 @@ fun DiceRollScreen(
                     .padding(horizontal = horizontalPadding)
                     .fillMaxWidth()
             )
-
-            Spacer(modifier = Modifier.size(32.dp))
         }
 
         LegendCarousel(legendLoadout = generatedLegends)
-        Spacer(Modifier.size(32.dp))
 
         Section(
             title = when (selectedGameModeCategory) {
