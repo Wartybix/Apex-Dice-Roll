@@ -55,7 +55,7 @@
     <string name="uncheck_legends_tutorial">Uncheck legends from the roster to exclude them being suggested in dice rolls.</string>
     <string name="manually_added_win_warning">Wins manually added here do not get added to your win history. To add an individual win, click the ‘%1$s’ button.</string>
     <string name="how_to_find_legend_wins_tutorial">Your wins for each legend can be found in Apex Legends by navigating to the respective legend’s badges, and hovering over the ‘Apex [legend name]’ badge.</string>
-    <string name="lifetime_wins">Lifetime wins</string>
+    <string name="lifetime_wins">Lifetime Wins</string>
     <string name="wins_added_will_show_here">Wins added with the ‘%1$s’ button will show here.</string>
     <string name="stats_will_show_here">Stats about your wins will show here once you have added some.</string>
 </resources>
