@@ -46,7 +46,6 @@ fun WinStatsTab(
         item {
             Section(
                 modifier = Modifier.fillMaxWidth(),
-                title = "Wins by legend class",
                 content = {
                     WinPieChart(
                         classWins = legendClasses,
