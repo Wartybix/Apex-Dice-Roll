@@ -38,7 +38,8 @@ fun WinHistoryTab(modifier: Modifier = Modifier, wins: List<Win>, lifetimeWins: 
 
     if (wins.isNotEmpty()) {
         LazyColumn(
-            contentPadding = paddingValues
+            contentPadding = paddingValues,
+            modifier = modifier
         ) {
             wins.forEach { win ->
                 item {
@@ -53,7 +54,7 @@ fun WinHistoryTab(modifier: Modifier = Modifier, wins: List<Win>, lifetimeWins: 
         }
     } else {
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .padding(paddingValues)
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
