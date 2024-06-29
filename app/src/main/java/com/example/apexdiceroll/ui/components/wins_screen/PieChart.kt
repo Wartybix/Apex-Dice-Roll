@@ -2,13 +2,18 @@ package com.example.apexdiceroll.ui.components.wins_screen
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.StrokeJoin
@@ -30,42 +35,50 @@ fun WinPieChart(
     val colorFamily by remember { mutableStateOf(if (darkTheme) extendedDark else extendedLight) }
     var totalWins by remember { mutableIntStateOf(classWins.sumOf { it.second }) }
 
-    Canvas(
-        modifier = modifier,
-        onDraw = {
-            var startAngle = 0f
-            val GAP_ANGLE = 12f
-            val filledCircleAngle = 360f - (classWins.size * GAP_ANGLE)
+    Box(contentAlignment = Alignment.Center) {
+        Canvas(
+            modifier = modifier,
+            onDraw = {
+                var startAngle = 0f
+                val GAP_ANGLE = 12f
+                val filledCircleAngle = 360f - (classWins.size * GAP_ANGLE)
 
-            classWins.forEachIndexed { index, pieSegment ->
-                val legendClass = pieSegment.first
+                classWins.forEachIndexed { index, pieSegment ->
+                    val legendClass = pieSegment.first
 
-                val classColour = when (legendClass) {
-                    LegendClass.Assault -> colorFamily.assault
-                    LegendClass.Skirmisher -> colorFamily.skirmisher
-                    LegendClass.Recon -> colorFamily.recon
-                    LegendClass.Support -> colorFamily.support
-                    LegendClass.Controller -> colorFamily.controller
-                }
+                    val classColour = when (legendClass) {
+                        LegendClass.Assault -> colorFamily.assault
+                        LegendClass.Skirmisher -> colorFamily.skirmisher
+                        LegendClass.Recon -> colorFamily.recon
+                        LegendClass.Support -> colorFamily.support
+                        LegendClass.Controller -> colorFamily.controller
+                    }
 
-                var sweepAngle = (pieSegment.second.toFloat() / totalWins) * filledCircleAngle
+                    var sweepAngle = (pieSegment.second.toFloat() / totalWins) * filledCircleAngle
 
-                drawArc(
-                    color = classColour.color,
-                    startAngle = startAngle,
-                    sweepAngle = sweepAngle,
-                    useCenter = false,
-                    style = Stroke(
-                        width = strokeWidth.toPx(),
-                        cap = StrokeCap.Round,
-                        join = StrokeJoin.Round
+                    drawArc(
+                        color = classColour.color,
+                        startAngle = startAngle,
+                        sweepAngle = sweepAngle,
+                        useCenter = false,
+                        style = Stroke(
+                            width = strokeWidth.toPx(),
+                            cap = StrokeCap.Round,
+                            join = StrokeJoin.Round
+                        )
                     )
-                )
 
-                startAngle += sweepAngle + (GAP_ANGLE)
+                    startAngle += sweepAngle + (GAP_ANGLE)
+                }
             }
+        )
+
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(text = "Lifetime wins", style = MaterialTheme.typography.labelLarge)
+            Text(text = totalWins.toString(), style = MaterialTheme.typography.titleLarge)
         }
-    )
+    }
+
 }
 
 @Preview
