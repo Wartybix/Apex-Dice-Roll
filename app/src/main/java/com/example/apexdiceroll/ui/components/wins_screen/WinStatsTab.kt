@@ -44,10 +44,14 @@ fun WinStatsTabPreview() {
     val legend2 = Legend(name = "Pigeon", icon = R.drawable.bloodhound, legendClass = LegendClass.Recon)
     legend2.wins = 5
 
+    val legend3 = Legend(name = "Wow", icon = R.drawable.ash, legendClass = LegendClass.Controller)
+    legend3.wins = 0
+
     WinStatsTab(
         legends = listOf(
             legend1,
-            legend2
+            legend2,
+            legend3
         )
     )
 }

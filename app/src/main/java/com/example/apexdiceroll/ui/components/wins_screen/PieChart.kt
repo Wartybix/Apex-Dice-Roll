@@ -9,10 +9,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
@@ -33,10 +31,8 @@ fun WinPieChart(
 ) {
     val darkTheme = isSystemInDarkTheme()
     val colorFamily by remember { mutableStateOf(if (darkTheme) extendedDark else extendedLight) }
-    var totalWins by remember { mutableIntStateOf(classWins.sumOf { it.second }) }
-    var sortedWins by remember {
-        mutableStateOf(classWins.sortedByDescending { it.second })
-    }
+    var totalWins = classWins.sumOf { it.second }
+    var sortedWins = classWins.filter { it.second > 0 }.sortedByDescending { it.second }
 
     Box(contentAlignment = Alignment.Center, modifier = modifier.size(192.dp)) {
         Canvas(
@@ -44,7 +40,7 @@ fun WinPieChart(
             onDraw = {
                 var startAngle = -90f
                 val GAP_ANGLE = 12f
-                val filledCircleAngle = 360f - (classWins.size * GAP_ANGLE)
+                val filledCircleAngle = 360f - (sortedWins.size * GAP_ANGLE)
 
                 sortedWins.forEachIndexed { index, pieSegment ->
                     val legendClass = pieSegment.first
@@ -89,7 +85,7 @@ fun WinPieChart(
 fun WinPieChartPreview() {
     WinPieChart(
         classWins = listOf(
-            Pair(LegendClass.Controller, 2),
+            Pair(LegendClass.Controller, 0),
             Pair(LegendClass.Skirmisher, 10),
             Pair(LegendClass.Support, 5),
             Pair(LegendClass.Recon, 6),
