@@ -21,7 +21,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -114,7 +113,7 @@ fun WinStatsTab(
                 Section(
                     title = "Most Played Legends",
                     content = {
-                        var legendsSorted by remember {
+                        val legendsSorted by remember {
                             mutableStateOf(legends.sortedByDescending { it.wins }.take(noOfEntries))
                         }
 
