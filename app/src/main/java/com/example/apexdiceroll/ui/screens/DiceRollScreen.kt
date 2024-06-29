@@ -24,7 +24,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
@@ -106,25 +105,20 @@ fun DiceRollScreen(
 
                     Spacer(modifier = Modifier.size(16.dp))
 
-                    Surface(
-                        color = Color.Transparent,
-                        contentColor = MaterialTheme.colorScheme.onSurfaceVariant)
-                    {
-                        Row {
-                            Icon(
-                                imageVector = Icons.Default.Balance,
-                                contentDescription = null
-                            )
+                    Row {
+                        Icon(
+                            imageVector = Icons.Default.Balance,
+                            contentDescription = null
+                        )
 
-                            Spacer(modifier = Modifier.size(8.dp))
+                        Spacer(modifier = Modifier.size(8.dp))
 
-                            Text(
-                                text = stringResource(
-                                    R.string.gamemode_category_equal_likelihood_message
-                                ),
-                                style = MaterialTheme.typography.bodySmall
-                            )
-                        }
+                        Text(
+                            text = stringResource(
+                                R.string.gamemode_category_equal_likelihood_message
+                            ),
+                            style = MaterialTheme.typography.bodySmall
+                        )
                     }
                 },
                 modifier = Modifier
