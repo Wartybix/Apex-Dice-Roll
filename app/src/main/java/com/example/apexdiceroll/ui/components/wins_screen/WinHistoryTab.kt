@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,6 +15,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -26,64 +28,52 @@ import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.LegendClass
 import com.example.apexdiceroll.data.Win
-import com.example.apexdiceroll.ui.components.shared.Section
 import java.util.Date
 
 @Composable
 fun WinHistoryTab(modifier: Modifier = Modifier, wins: List<Win>, lifetimeWins: Int) {
-    Column(modifier = modifier.fillMaxSize()) {
-        LazyColumn(
-            contentPadding = PaddingValues(16.dp)
-        ) {
-            item {
-                Section(
-                    title = "Lifetime Wins",
-                    content = {
-                        Text(lifetimeWins.toString(), style = MaterialTheme.typography.titleLarge)
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                )
-            }
-            if (wins.isNotEmpty()) {
-                item {
-                    Spacer(modifier = Modifier.size(32.dp))
-                }
-                wins.forEach { win ->
-                    item {
-                        WinCard(
-                            winnerName = win.legend.name,
-                            winnerClass = win.legend.legendClass,
-                            winDate = win.date
-                        )
-                    }
-                }
-            }
-
-        }
-
-        if (wins.isEmpty()) {
-            Column(
-                modifier = Modifier.padding(16.dp).fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Icon(
-                    imageVector = Icons.Default.History,
-                    contentDescription = null,
-                    modifier = Modifier.size(64.dp),
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                Spacer(modifier = Modifier.size(16.dp))
-                Text(
-                    text = "Wins added with the '${stringResource(id = R.string.add_win)}' button will show here.",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
+    val paddingValues by remember {
+        mutableStateOf(PaddingValues(vertical = 16.dp, horizontal = 24.dp))
     }
 
+    if (wins.isNotEmpty()) {
+        LazyColumn(
+            contentPadding = paddingValues
+        ) {
+            wins.forEach { win ->
+                item {
+                    WinCard(
+                        winnerName = win.legend.name,
+                        winnerClass = win.legend.legendClass,
+                        winDate = win.date
+                    )
+                }
+            }
+
+        }
+    } else {
+        Column(
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Icon(
+                imageVector = Icons.Default.History,
+                contentDescription = null,
+                modifier = Modifier.size(64.dp),
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Spacer(modifier = Modifier.size(16.dp))
+            Text(
+                text = "Wins added with the '${stringResource(id = R.string.add_win)}' button will show here.",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center
+            )
+        }
+    }
 }
 
 @Preview

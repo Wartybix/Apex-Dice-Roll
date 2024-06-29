@@ -17,11 +17,14 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.Win
 import com.example.apexdiceroll.ui.components.wins_screen.EditWinsTab
 import com.example.apexdiceroll.ui.components.wins_screen.WinHistoryTab
+import com.example.apexdiceroll.ui.components.wins_screen.WinStatsTab
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -31,8 +34,12 @@ fun WinsScreen(
     legends: List<Legend>,
     paddingValues: PaddingValues = PaddingValues()
 ) {
-    val pagerState = rememberPagerState(pageCount = { 2 })
-    val tabNames = listOf("History", "Edit")
+    val tabNames = listOf(
+        stringResource(R.string.history),
+        stringResource(R.string.statistics),
+        stringResource(R.string.edit)
+    )
+    val pagerState = rememberPagerState(pageCount = { tabNames.size })
     val scope = rememberCoroutineScope()
 
     Column(modifier = Modifier.padding(paddingValues)) {
@@ -62,7 +69,8 @@ fun WinsScreen(
                     }
                     WinHistoryTab(wins = wins, lifetimeWins = lifetimeWins)
                 }
-                1 -> { EditWinsTab(legends = legends) }
+                1 -> { WinStatsTab(legends = legends) }
+                2 -> { EditWinsTab(legends = legends) }
             }
         }
     }

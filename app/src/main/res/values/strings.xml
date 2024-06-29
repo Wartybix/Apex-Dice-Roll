@@ -49,4 +49,7 @@
     <string name="quads">Quads</string>
     <string name="mixtape">Mixtape</string>
     <string name="gamemode_category_equal_likelihood_message">BR and non-BR game modes have an equal likelihood of being suggested.</string>
+    <string name="history">History</string>
+    <string name="statistics">Statistics</string>
+    <string name="edit">Edit</string>
 </resources>
