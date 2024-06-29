@@ -1,5 +1,6 @@
 package com.example.apexdiceroll.ui.components.wins_screen
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,17 +19,31 @@ fun WinStatsTab(
     modifier: Modifier = Modifier,
     legends: List<Legend>
 ) {
-    LazyColumn(modifier = modifier.fillMaxSize(), contentPadding = PaddingValues(horizontal = 24.dp, vertical = 16.dp)) {
+    val legendClasses = legends
+        .groupBy { legend -> legend.legendClass }
+        .map { classGroup ->
+            Pair(classGroup.key, classGroup.value.sumOf { legend -> legend.wins })
+        }
+        .sortedByDescending { classWinsPair -> classWinsPair.second }
+
+    LazyColumn(
+        modifier = modifier.fillMaxSize(),
+        contentPadding = PaddingValues(horizontal = 24.dp, vertical = 16.dp)
+    ) {
         item {
             Section(
                 modifier = Modifier.fillMaxWidth(),
                 title = "Wins by legend class",
                 content = {
                     WinPieChart(
-                        classWins = legends.map { legend -> Pair(legend.legendClass, legend.wins) },
+                        classWins = legendClasses,
                         strokeWidth = 16.dp,
                         modifier = Modifier.fillMaxWidth(),
                     )
+
+                    Column {
+
+                    }
                 }
             )
         }
@@ -47,11 +62,19 @@ fun WinStatsTabPreview() {
     val legend3 = Legend(name = "Wow", icon = R.drawable.ash, legendClass = LegendClass.Controller)
     legend3.wins = 0
 
+    val legend4 = Legend(name = "Chicken", icon = R.drawable.mirage, legendClass = LegendClass.Controller)
+    legend4.wins = 2
+
+    val legend5 = Legend(name = "Crow", icon = R.drawable.bloodhound, legendClass = LegendClass.Support)
+    legend5.wins = 1
+
     WinStatsTab(
         legends = listOf(
             legend1,
             legend2,
-            legend3
+            legend3,
+            legend4,
+            legend5
         )
     )
 }
