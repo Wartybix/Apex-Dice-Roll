@@ -14,16 +14,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Section(title: String, content: @Composable () -> Unit, modifier: Modifier = Modifier) {
+fun Section(title: String = "", content: @Composable () -> Unit, modifier: Modifier = Modifier) {
     Surface(
         shape = CardDefaults.shape,
         color = MaterialTheme.colorScheme.surfaceContainer,
         modifier = modifier
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = title, style = MaterialTheme.typography.titleSmall)
+            if (title != "") {
+                Text(text = title, style = MaterialTheme.typography.titleSmall)
 
-            Spacer(modifier = Modifier.size(8.dp))
+                Spacer(modifier = Modifier.size(8.dp))
+            }
 
             content()
         }
@@ -38,4 +40,12 @@ fun SectionPreview() {
             Text("Hi there", style = MaterialTheme.typography.titleLarge)
         }
     )
+}
+
+@Preview
+@Composable
+fun SectionPreviewNoTitle() {
+    Section(content = {
+        Text(text = "Yep")
+    })
 }
