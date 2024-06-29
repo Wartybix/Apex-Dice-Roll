@@ -109,7 +109,8 @@ fun WinStatsTab(
                 )
             }
             item {
-                val noOfEntries = 5
+                val noOfEntries = 3
+
                 Section(
                     title = "Most Played Legends",
                     content = {
