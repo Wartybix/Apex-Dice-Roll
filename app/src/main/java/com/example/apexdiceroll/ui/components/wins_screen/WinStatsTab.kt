@@ -148,6 +148,32 @@ fun WinStatsTab(
                             ),
                             style = MaterialTheme.typography.bodySmall
                         )
+
+                        val selectedLegends by remember {
+                            mutableStateOf(legends.filter { legend -> legend.selected })
+                        }
+
+                        val leastPlayedLegends by remember {
+                            mutableStateOf(
+                                legends.filter { legend ->
+                                    legend.wins == selectedLegends.minOfOrNull { it.wins }
+                                }
+                            )
+
+                        }
+
+                        Column {
+                            leastPlayedLegends.forEach { legend ->
+                                Spacer(modifier = Modifier.size(16.dp))
+
+                                WinStat(
+                                    title = legend.name,
+                                    icon = ImageVector.vectorResource(id = legend.legendClass.icon),
+                                    iconContentDescription = legend.legendClass.className,
+                                    wins = legend.wins
+                                )
+                            }
+                        }
                     },
                     modifier = Modifier.fillMaxWidth()
                 )
