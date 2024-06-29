@@ -40,13 +40,15 @@ fun ContentUnavailableMessage(
         if (hintMessage != "") {
             Spacer(modifier = Modifier.size(16.dp))
 
-            Section(content = {
-                Row {
-                    Icon(imageVector = Icons.Outlined.Lightbulb, contentDescription = null)
-                    Spacer(modifier = Modifier.size(16.dp))
-                    Text(text = hintMessage, style = MaterialTheme.typography.bodySmall)
+            Section(
+                content = {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(imageVector = Icons.Outlined.Lightbulb, contentDescription = null)
+                        Spacer(modifier = Modifier.size(16.dp))
+                        Text(text = hintMessage, style = MaterialTheme.typography.bodySmall)
+                    }
                 }
-            })
+            )
         }
     }
 }
