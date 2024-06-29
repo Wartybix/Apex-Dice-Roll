@@ -14,12 +14,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.QueryStats
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -116,20 +118,30 @@ fun WinStatsTab(
                         }
 
                         legendsSorted.forEachIndexed { index, legend ->
-                            Row {
+                            if (index > 0) {
+                                Spacer(modifier = Modifier.size(8.dp))
+                            }
+
+                            Row(verticalAlignment = Alignment.CenterVertically) {
                                 Icon(
                                     imageVector = ImageVector.vectorResource(
                                         id = legend.legendClass.icon
                                     ),
+                                    modifier = Modifier.size(24.dp),
                                     contentDescription = legend.legendClass.className
                                 )
+                                Spacer(modifier = Modifier.size(16.dp))
                                 Column {
-                                    Text(text = legend.name)
+                                    Text(
+                                        text = legend.name,
+                                        style = MaterialTheme.typography.titleMedium
+                                    )
                                     Text(
                                         text = stringResource(
                                             id = R.string.apex_wins, legend.wins,
                                             if (legend.wins == 1) "" else "s"
-                                        )
+                                        ),
+                                        style = MaterialTheme.typography.bodyMedium
                                     )
                                 }
                             }
