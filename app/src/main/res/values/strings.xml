@@ -56,4 +56,5 @@
     <string name="manually_added_win_warning">Wins manually added here do not get added to your win history. To add an individual win, click the ‘%1$s’ button.</string>
     <string name="how_to_find_legend_wins_tutorial">Your wins for each legend can be found in Apex Legends by navigating to the respective legend’s badges, and hovering over the ‘Apex [legend name]’ badge.</string>
     <string name="lifetime_wins">Lifetime wins</string>
+    <string name="wins_added_will_show_here">Wins added with the \'%1$s\' button will show here.</string>
 </resources>
