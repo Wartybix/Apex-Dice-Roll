@@ -165,6 +165,22 @@ fun WinStatsTab(
                     modifier = Modifier.fillMaxWidth()
                 )
             }
+            item {
+                Section(
+                    title = "Least Played Legends",
+                    content = {
+                        Text(
+                            text = stringResource(
+                                R.string.least_played_legends_description, stringResource(
+                                    id = R.string.roster
+                                )
+                            ),
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
     } else {
         ContentUnavailableMessage(

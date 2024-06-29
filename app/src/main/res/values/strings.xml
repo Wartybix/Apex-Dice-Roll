@@ -58,4 +58,5 @@
     <string name="lifetime_wins">Lifetime Wins</string>
     <string name="wins_added_will_show_here">Wins added with the ‘%1$s’ button will show here.</string>
     <string name="stats_will_show_here">Stats about your wins will show here once you have added some.</string>
+    <string name="least_played_legends_description">These legends are twice as likely to be suggested in dice rolls. Only legends selected in the ‘%1$s’ section are eligible.</string>
 </resources>
