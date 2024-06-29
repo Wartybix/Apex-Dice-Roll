@@ -14,7 +14,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -40,7 +39,11 @@ fun WinPieChart(
             onDraw = {
                 var startAngle = -90f
                 val GAP_ANGLE = 12f
-                val filledCircleAngle = 360f - (sortedWins.size * GAP_ANGLE)
+                val emptyCircleAngle = if (sortedWins.size == 1)
+                    0f
+                else
+                    sortedWins.size * GAP_ANGLE
+                val filledCircleAngle = 360f - emptyCircleAngle
 
                 sortedWins.forEachIndexed { index, pieSegment ->
                     val legendClass = pieSegment.first
@@ -62,8 +65,7 @@ fun WinPieChart(
                         useCenter = false,
                         style = Stroke(
                             width = strokeWidth.toPx(),
-                            cap = StrokeCap.Round,
-                            join = StrokeJoin.Round
+                            cap = StrokeCap.Round
                         )
                     )
 
