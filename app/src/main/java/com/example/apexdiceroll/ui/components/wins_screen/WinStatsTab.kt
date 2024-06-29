@@ -89,7 +89,7 @@ fun WinStatsTab(
                                 }
 
                                 if (index > 0) {
-                                    Spacer(modifier = Modifier.size(8.dp))
+                                    Spacer(modifier = Modifier.size(16.dp))
                                 }
 
                                 LegendClassWinsStat(
@@ -119,7 +119,7 @@ fun WinStatsTab(
 
                         legendsSorted.forEachIndexed { index, legend ->
                             if (index > 0) {
-                                Spacer(modifier = Modifier.size(8.dp))
+                                Spacer(modifier = Modifier.size(16.dp))
                             }
 
                             WinStat(
