@@ -124,29 +124,40 @@ fun WinStatsTab(
 
                         var winGroupIndex = 0
 
-                        while (mostPlayedLegends.size < noOfEntries) {
+                        while (
+                            mostPlayedLegends.size < noOfEntries &&
+                            winGroupIndex < winGroups.lastIndex
+                        ) {
                             winGroups[winGroupIndex].value.forEach {
                                 mostPlayedLegends += Pair(winGroupIndex + 1, it)
                             }
                             winGroupIndex++
                         }
 
-                        mostPlayedLegends.forEachIndexed { index, legendRanking ->
-                            if (index > 0) {
-                                Spacer(modifier = Modifier.size(16.dp))
-                            }
-
-                            WinStat(
-                                title = legendRanking.second.name,
-                                icon = ImageVector.vectorResource(
-                                    id = legendRanking.second.legendClass.icon
-                                ),
-                                iconContentDescription = legendRanking.second.legendClass.className,
-                                wins = legendRanking.second.wins,
-                                rankingMessage = "#${legendRanking.first}",
-                                rankingBorder = true
+                        if (mostPlayedLegends.isEmpty()) {
+                            Text(
+                                text = stringResource(R.string.no_data),
+                                style = MaterialTheme.typography.bodyMedium
                             )
+                        } else {
+                            mostPlayedLegends.forEachIndexed { index, legendRanking ->
+                                if (index > 0) {
+                                    Spacer(modifier = Modifier.size(16.dp))
+                                }
 
+                                WinStat(
+                                    title = legendRanking.second.name,
+                                    icon = ImageVector.vectorResource(
+                                        id = legendRanking.second.legendClass.icon
+                                    ),
+                                    iconContentDescription = legendRanking.second.legendClass
+                                        .className,
+                                    wins = legendRanking.second.wins,
+                                    rankingMessage = "#${legendRanking.first}",
+                                    rankingBorder = true
+                                )
+
+                            }
                         }
                     },
                     modifier = Modifier.fillMaxWidth()
