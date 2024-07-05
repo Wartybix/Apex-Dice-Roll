@@ -113,21 +113,37 @@ fun WinStatsTab(
                 Section(
                     title = "Most Played Legends",
                     content = {
-                        val legendsSorted by remember {
-                            mutableStateOf(legends.sortedByDescending { it.wins }.take(noOfEntries))
+                        val winGroups by remember {
+                            mutableStateOf(
+                                legends.groupBy { it.wins }.entries.sortedByDescending { it.key }
+                            )
                         }
 
-                        legendsSorted.forEachIndexed { index, legend ->
+                        val mostPlayedLegends = mutableListOf<Pair<Int, Legend>>()
+                        // Int is for ranking variable
+
+                        var winGroupIndex = 0
+
+                        while (mostPlayedLegends.size < noOfEntries) {
+                            winGroups[winGroupIndex].value.forEach {
+                                mostPlayedLegends += Pair(winGroupIndex + 1, it)
+                            }
+                            winGroupIndex++
+                        }
+
+                        mostPlayedLegends.forEachIndexed { index, legendRanking ->
                             if (index > 0) {
                                 Spacer(modifier = Modifier.size(16.dp))
                             }
 
                             WinStat(
-                                title = legend.name,
-                                icon = ImageVector.vectorResource(id = legend.legendClass.icon),
-                                iconContentDescription = legend.legendClass.className,
-                                wins = legend.wins,
-                                rankingMessage = "#${index + 1}",
+                                title = legendRanking.second.name,
+                                icon = ImageVector.vectorResource(
+                                    id = legendRanking.second.legendClass.icon
+                                ),
+                                iconContentDescription = legendRanking.second.legendClass.className,
+                                wins = legendRanking.second.wins,
+                                rankingMessage = "#${legendRanking.first}",
                                 rankingBorder = true
                             )
 
