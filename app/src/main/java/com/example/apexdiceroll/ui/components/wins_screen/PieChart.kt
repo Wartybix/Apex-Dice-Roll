@@ -41,8 +41,8 @@ fun WinPieChart(
         Canvas(
             modifier = Modifier.size(192.dp - strokeWidth),
             onDraw = {
-                var startAngle = -90f
                 val gapAngle = 14f
+                var startAngle = -90f + gapAngle / 2
                 val emptyCircleAngle = if (classesWithWins.size == 1)
                     0f
                 else
