@@ -44,13 +44,13 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
                 category = GameModeCategory.BR,
                 teamSize = 3
             ),
-//            GameMode(
-//                modeName = context.getString(R.string.br_with_team_size,
-//                    context.getString(R.string.quads)),
-//                shortName = context.getString(R.string.quads),
-//                category = GameModeCategory.BR,
-//                teamSize = 4
-//            ),
+            GameMode(
+                modeName = context.getString(R.string.br_with_team_size,
+                    context.getString(R.string.quads)),
+                shortName = context.getString(R.string.quads),
+                category = GameModeCategory.BR,
+                teamSize = 4
+            ),
             GameMode(
                 modeName = context.getString(R.string.mixtape),
                 category = GameModeCategory.MIXTAPE,
