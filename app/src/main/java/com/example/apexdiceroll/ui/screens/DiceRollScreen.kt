@@ -113,23 +113,23 @@ fun DiceRollScreen(
                         style = MaterialTheme.typography.titleLarge
                     )
 
-                    Spacer(modifier = Modifier.size(16.dp))
-
-                    Row {
-                        Icon(
-                            imageVector = Icons.Default.Balance,
-                            contentDescription = null
-                        )
-
-                        Spacer(modifier = Modifier.size(16.dp))
-
-                        Text(
-                            text = stringResource(
-                                R.string.gamemode_category_equal_likelihood_message
-                            ),
-                            style = MaterialTheme.typography.bodySmall
-                        )
-                    }
+//                    Spacer(modifier = Modifier.size(16.dp))
+//
+//                    Row {
+//                        Icon(
+//                            imageVector = Icons.Default.Balance,
+//                            contentDescription = null
+//                        )
+//
+//                        Spacer(modifier = Modifier.size(16.dp))
+//
+//                        Text(
+//                            text = stringResource(
+//                                R.string.gamemode_category_equal_likelihood_message
+//                            ),
+//                            style = MaterialTheme.typography.bodySmall
+//                        )
+//                    }
                 },
                 modifier = Modifier
                     .padding(horizontal = horizontalPadding)
