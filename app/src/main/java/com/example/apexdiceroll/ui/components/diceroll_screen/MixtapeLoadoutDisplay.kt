@@ -13,34 +13,37 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.apexdiceroll.data.MixtapeLoadout
+import com.example.apexdiceroll.ui.theme.extendedLight
 
 @Composable
 fun MixtapeLoadoutDisplay(
-    selectedLoadout: MixtapeLoadout,
+    selectedLoadout: String,
+    loadoutRoster: List<String>,
+    selectedColor: Color,
+    unselectedColor: Color,
     modifier: Modifier = Modifier
 ) {
-    val loadouts by remember { mutableStateOf(MixtapeLoadout.entries) }
-
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
-            text = selectedLoadout.loadoutName,
+            text = selectedLoadout,
             style = MaterialTheme.typography.titleLarge
         )
 
         Row(
             horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
-            loadouts.forEachIndexed { index, loadout ->
+            loadoutRoster.forEachIndexed { index, loadout ->
                 val colour = if (loadout == selectedLoadout)
-                    MaterialTheme.colorScheme.onSurface
+                    selectedColor
                 else
-                    MaterialTheme.colorScheme.surfaceContainerHighest
+                    unselectedColor
 
                 Surface(
                     shape = CircleShape,
@@ -57,7 +60,12 @@ fun MixtapeLoadoutDisplay(
 @Composable
 fun MixtapeLoadoutDisplayPreviewSpecialist() {
     Surface {
-        MixtapeLoadoutDisplay(MixtapeLoadout.Specialist)
+        MixtapeLoadoutDisplay(
+            selectedLoadout = "Specialist",
+            loadoutRoster = listOf("CQ", "Specialist", "Long-Range"),
+            selectedColor = MaterialTheme.colorScheme.onSurface,
+            unselectedColor = MaterialTheme.colorScheme.surfaceContainerHighest
+        )
     }
 }
 
@@ -65,6 +73,11 @@ fun MixtapeLoadoutDisplayPreviewSpecialist() {
 @Composable
 fun MixtapeLoadoutDisplayPreviewCQ() {
     Surface {
-        MixtapeLoadoutDisplay(MixtapeLoadout.CloseQuarters)
+        MixtapeLoadoutDisplay(
+            selectedLoadout = "CQ",
+            loadoutRoster = listOf("CQ", "Specialist", "Long-Range"),
+            selectedColor = extendedLight.legendary.onColorContainer,
+            unselectedColor = extendedLight.legendary.onColor
+        )
     }
 }

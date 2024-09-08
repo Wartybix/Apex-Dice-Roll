@@ -53,6 +53,7 @@ fun OverallScreen(
                     DiceRollScreen(
                         generatedLegends = uiState.generatedLegends,
                         generatedMixtapeLoadout = uiState.mixtapeLoadout,
+                        generatedLTMLoadout = uiState.ltmLoadout,
                         generatedLegendUpgrades = uiState.legendUpgrades,
                         gameModeIdentifiers = viewModel.gameModes.map { it.shortName },
                         selectedGameModeIndex = uiState.selectedGameModeIndex,

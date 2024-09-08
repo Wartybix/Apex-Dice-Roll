@@ -20,10 +20,12 @@ fun Section(
     content: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     color: Color = MaterialTheme.colorScheme.surfaceContainer,
+    contentColor: Color = MaterialTheme.colorScheme.onSurface
 ) {
     Surface(
         shape = CardDefaults.shape,
         color = color,
+        contentColor = contentColor,
         modifier = modifier
     ) {
         Column(modifier = Modifier.padding(16.dp)) {

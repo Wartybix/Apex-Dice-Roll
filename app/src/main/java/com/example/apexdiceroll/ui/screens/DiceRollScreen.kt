@@ -1,6 +1,7 @@
 package com.example.apexdiceroll.ui.screens
 
 import android.content.res.Configuration
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -31,6 +32,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.GameModeCategory
+import com.example.apexdiceroll.data.LTMLoadout
 import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.LegendClass
 import com.example.apexdiceroll.data.MixtapeLoadout
@@ -41,11 +43,14 @@ import com.example.apexdiceroll.ui.components.diceroll_screen.legend_display.Leg
 import com.example.apexdiceroll.ui.components.diceroll_screen.upgrades_area.UpgradesDisplay
 import com.example.apexdiceroll.ui.components.shared.Section
 import com.example.apexdiceroll.ui.theme.ApexDiceRollTheme
+import com.example.apexdiceroll.ui.theme.extendedDark
+import com.example.apexdiceroll.ui.theme.extendedLight
 
 @Composable
 fun DiceRollScreen(
     generatedLegends: List<Legend>,
     generatedMixtapeLoadout: MixtapeLoadout,
+    generatedLTMLoadout: LTMLoadout,
     generatedLegendUpgrades: List<UpgradeSelection>,
     gameModeIdentifiers: List<String>,
     selectedGameModeIndex: Int,
@@ -75,6 +80,10 @@ fun DiceRollScreen(
     val bottomPadding by remember {
         mutableStateOf(24.dp + paddingValues.calculateBottomPadding())
     }
+
+    val darkMode = isSystemInDarkTheme()
+
+    val colorFamily = if (darkMode) extendedDark else extendedLight
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -130,25 +139,50 @@ fun DiceRollScreen(
 
         LegendCarousel(legendLoadout = generatedLegends)
 
-        Section(
-            title = when (selectedGameModeCategory) {
-                GameModeCategory.BR -> stringResource(R.string.legend_upgrades)
-                GameModeCategory.MIXTAPE -> stringResource(R.string.mixtape_loadout)
-            },
-            content = {
-                when (selectedGameModeCategory) {
-                    GameModeCategory.BR -> {
-                        UpgradesDisplay(data = generatedLegendUpgrades)
-                    }
-                    GameModeCategory.MIXTAPE -> {
-                        MixtapeLoadoutDisplay(selectedLoadout = generatedMixtapeLoadout)
-                    }
-                }
-            },
+        Row(
             modifier = Modifier
                 .padding(horizontal = horizontalPadding)
-                .fillMaxWidth()
-        )
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            when (selectedGameModeCategory) {
+                GameModeCategory.BR ->
+                    Section(
+                        title = stringResource(R.string.legend_upgrades),
+                        content = {
+                            UpgradesDisplay(data = generatedLegendUpgrades)
+                        }
+                    )
+                GameModeCategory.MIXTAPE -> {
+                    Section(
+                        title = stringResource(R.string.mixtape_loadout),
+                        content = {
+                            MixtapeLoadoutDisplay(
+                                selectedLoadout = generatedMixtapeLoadout.loadoutName,
+                                loadoutRoster = MixtapeLoadout.entries.map { it.loadoutName },
+                                selectedColor = MaterialTheme.colorScheme.onSurface,
+                                unselectedColor = MaterialTheme.colorScheme.surfaceContainerHighest
+                            )
+                        },
+                        modifier = Modifier.weight(1f)
+                    )
+                    Section(
+                        title = "LTM Loadout",
+                        content = {
+                            MixtapeLoadoutDisplay(
+                                selectedLoadout = generatedLTMLoadout.loadoutName,
+                                loadoutRoster = LTMLoadout.entries.map { it.loadoutName },
+                                selectedColor = colorFamily.legendary.onColorContainer,
+                                unselectedColor = colorFamily.legendary.onColor
+                            )
+                        },
+                        color = colorFamily.legendary.colorContainer,
+                        contentColor = colorFamily.legendary.onColorContainer,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+            }
+        }
     }
 }
 
@@ -170,6 +204,7 @@ fun DiceRollScreenPreview() {
                 gameModeRandomised = false,
                 onGameModeSwitch = {},
                 generatedMixtapeLoadout = MixtapeLoadout.CloseQuarters,
+                generatedLTMLoadout = LTMLoadout.Assault,
                 generatedLegendUpgrades = listOf(UpgradeSelection.RIGHT, UpgradeSelection.LEFT)
             )
         }
@@ -194,6 +229,7 @@ fun DiceRollScreenPreviewNightRandomised() {
                 gameModeRandomised = true,
                 onGameModeSwitch = {},
                 generatedMixtapeLoadout = MixtapeLoadout.CloseQuarters,
+                generatedLTMLoadout = LTMLoadout.Assault,
                 generatedLegendUpgrades = listOf(UpgradeSelection.RIGHT, UpgradeSelection.LEFT)
             )
         }

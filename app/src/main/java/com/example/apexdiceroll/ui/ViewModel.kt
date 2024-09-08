@@ -9,6 +9,7 @@ import androidx.lifecycle.AndroidViewModel
 import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.GameMode
 import com.example.apexdiceroll.data.GameModeCategory
+import com.example.apexdiceroll.data.LTMLoadout
 import com.example.apexdiceroll.data.Legend
 import com.example.apexdiceroll.data.LegendClass
 import com.example.apexdiceroll.data.LegendsSelected
@@ -214,6 +215,10 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         return MixtapeLoadout.entries.random()
     }
 
+    private fun randomiseLTMLoadout() : LTMLoadout {
+        return LTMLoadout.entries.random()
+    }
+
     private fun randomiseLegendUpgrades() : List<UpgradeSelection> {
         val legendUpgrades = mutableListOf<UpgradeSelection>()
 
@@ -351,6 +356,14 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
             uiState.value.mixtapeLoadout
         }
 
+        val ltmLoadout = if (
+            newGameMode.category == GameModeCategory.MIXTAPE
+        ) {
+            randomiseLTMLoadout()
+        } else {
+            uiState.value.ltmLoadout
+        }
+
         val legendUpgrades = if (
             newGameMode.category == GameModeCategory.BR
         ) {
@@ -365,6 +378,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
                 selectedGameModeIndex = newGameModeIndex,
                 generatedLegends = generatedLegends,
                 mixtapeLoadout = mixtapeLoadout,
+                ltmLoadout = ltmLoadout,
                 legendUpgrades = legendUpgrades
             )
         }
