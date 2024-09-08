@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.AndroidViewModel
 import com.example.apexdiceroll.R
 import com.example.apexdiceroll.data.GameMode
@@ -38,16 +39,8 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
 
         return listOf(
             GameMode(
-                modeName = context.getString(R.string.br_with_team_size,
-                    context.getString(R.string.trios)),
-                shortName = context.getString(R.string.trios),
-                category = GameModeCategory.BR,
-                teamSize = 3
-            ),
-            GameMode(
-                modeName = context.getString(R.string.br_with_team_size,
-                    context.getString(R.string.quads)),
-                shortName = context.getString(R.string.quads),
+                modeName = context.getString(R.string.battle_royale),
+                shortName = context.getString(R.string.br),
                 category = GameModeCategory.BR,
                 teamSize = 4
             ),
