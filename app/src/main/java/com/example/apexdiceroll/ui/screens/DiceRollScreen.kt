@@ -166,7 +166,7 @@ fun DiceRollScreen(
                         },
                         modifier = Modifier.weight(1f)
                     )
-                    Section(
+/*                    Section(
                         title = "LTM Loadout",
                         content = {
                             MixtapeLoadoutDisplay(
@@ -179,7 +179,7 @@ fun DiceRollScreen(
                         color = colorFamily.legendary.colorContainer,
                         contentColor = colorFamily.legendary.onColorContainer,
                         modifier = Modifier.weight(1f)
-                    )
+                    )*/
                 }
             }
         }
