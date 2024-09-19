@@ -43,7 +43,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
                 modeName = context.getString(R.string.battle_royale),
                 shortName = context.getString(R.string.br),
                 category = GameModeCategory.BR,
-                teamSize = 4
+                teamSize = 3
             ),
             GameMode(
                 modeName = context.getString(R.string.mixtape),
